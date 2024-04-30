@@ -30,6 +30,7 @@
             <Label fx:id="employeeEffectHoursLbl" layoutX="63.0" layoutY="319.0" text="Annual Effective Working Hours" />
             <Label fx:id="employeeUtilizationLbl" layoutX="62.0" layoutY="357.0" text="Utilization Percentage" />
             <Label fx:id="employeeBooleanLbl" layoutX="65.0" layoutY="401.0" text="Boolean" />
+            <Button layoutX="166.0" layoutY="458.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
          </children>
       </AnchorPane>
       <Button layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />

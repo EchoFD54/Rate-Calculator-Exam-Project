@@ -3,6 +3,7 @@ package GUI.controller;
 import BE.Employee;
 import BLL.EmployeeManager;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 public class AddEmployeeController {
     public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empCountryField, empTeamField, empWorkHoursField, empUtilizationField;
     public ChoiceBox OverheadChoiceBox;
+    public Button addEmployeeBtn;
 
     private MainWindowController mainWindowController;
     private Stage stage;

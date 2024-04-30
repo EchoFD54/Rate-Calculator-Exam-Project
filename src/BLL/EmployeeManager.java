@@ -13,6 +13,12 @@ public class EmployeeManager {
         return employeeDAO.createEmployee(e);
     }
 
+    public void updateEmployee(Employee e) throws SQLException {
+        employeeDAO.updateEmployee(e);
+    }
+
+
+
     public void deleteEmployee(int employeeId) throws SQLException {
         employeeDAO.deleteEmployee(employeeId);
     }

@@ -55,7 +55,29 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee(Employee employee) throws SQLException {
+        String sql = "UPDATE Employee SET name = ?, annualSalary = ?, overheadMultPercent = ?, fixedAnnualAmount = ?, country = ?, employeeTeam = ?, annualWorkingHours = ?, utilizationPercentage = ?, isOverHeadCost = ? WHERE id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, employee.getName());
+            preparedStatement.setInt(2, employee.getAnnualSalary());
+            preparedStatement.setInt(3, employee.getOverheadMultPercent());
+            preparedStatement.setInt(4, employee.getFixedAnnualAmount());
+            preparedStatement.setString(5, employee.getCountry());
+            preparedStatement.setString(6, employee.getEmployeeTeam());
+            preparedStatement.setInt(7, employee.getAnnualWorkingHours());
+            preparedStatement.setInt(8, employee.getUtilizationPercentage());
+            preparedStatement.setBoolean(9, employee.isOverHeadCost());
+            preparedStatement.setInt(10, employee.getId());
 
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating employee failed, no rows affected.");
+            }
+
+            System.out.println("Employee with ID " + employee.getId() + " updated successfully.");
+        } catch (SQLException e) {
+            throw new SQLException("Error updating employee: " + e.getMessage(), e);
+        }
     }
 
     // Method to delete an employee from the database
@@ -90,7 +112,7 @@ public class EmployeeDAO {
                String overheadMultPercent = String.valueOf(resultSet.getInt("overheadMultPercent"));
                String fixedAnnualAmount = String.valueOf(resultSet.getInt("fixedAnnualAmount"));
                String country = resultSet.getString("country");
-               String employeeTeam = String.valueOf(resultSet.getInt("employeeTeam"));
+               String employeeTeam = String.valueOf(resultSet.getString("employeeTeam"));
                String annualWorkingHours = String.valueOf(resultSet.getInt("annualWorkingHours"));
                String utilizationPercentage = String.valueOf(resultSet.getInt("utilizationPercentage"));
                boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");

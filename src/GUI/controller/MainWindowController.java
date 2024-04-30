@@ -97,7 +97,19 @@ public class MainWindowController {
         //update employee
         for (Employee employee : employeeTableView.getItems()){
             if (employee.getName().equals(name)){
+                existingEmployee = employee;
+                existingEmployee.setName(name);
+                existingEmployee.setAnnualSalary(Integer.parseInt(annSalary));
+                existingEmployee.setOverheadMultPercent(Integer.parseInt(multPer));
+                existingEmployee.setFixedAnnualAmount(Integer.parseInt(fixedAnnAmt));
+                existingEmployee.setEmployeeTeam(team);
+                existingEmployee.setAnnualWorkingHours(Integer.parseInt(workHours));
+                existingEmployee.setUtilizationPercentage(Integer.parseInt(utilization));
+                existingEmployee.setOverHeadCost(isOverHeadCost);
+                //db update
+                employeeManager.updateEmployee(existingEmployee);
               employeeExists = true;
+              break;
             }
         }
 
@@ -139,6 +151,46 @@ public class MainWindowController {
         }
 
 
+    public void openEditEmployee(ActionEvent actionEvent) {
+        Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                AddEmployeeController addEmployeeController = loader.getController();
+                addEmployeeController.setMainWindowController(this);
+
+                //set employee properties
+                addEmployeeController.empNameField.setText(selectedEmployee.getName());
+                addEmployeeController.empAnnSalaryField.setText(selectedEmployee.getAnnualSalary() + "");
+                addEmployeeController.empMultPerField.setText(selectedEmployee.getOverheadMultPercent() + "");
+                addEmployeeController.empFixedAnnAmtField.setText(selectedEmployee.getFixedAnnualAmount() + "");
+                addEmployeeController.empCountryField.setText(selectedEmployee.getCountry());
+                addEmployeeController.empTeamField.setText(selectedEmployee.getEmployeeTeam());
+                addEmployeeController.empWorkHoursField.setText(selectedEmployee.getAnnualWorkingHours() + "");
+                addEmployeeController.empUtilizationField.setText(selectedEmployee.getUtilizationPercentage() + "");
+
+                //create stage
+                Stage stage = new Stage();
+                stage.setTitle("Edit Employee");
+                stage.setScene(new Scene(root));
+                stage.show();
+                addEmployeeController.addEmployeeBtn.setText("Edit Employee");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Employee Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an employee to edit.");
+            alert.showAndWait();
+        }
 
     }
+
+
+}
 
