@@ -18,9 +18,8 @@ public class MainWindowController {
     public TableView<Employee> employeeTableView;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl;
 
-    private int employeeIndex;
     private EmployeeManager employeeManager = new EmployeeManager();
-    private Employee selectedEmployee;
+
 
     @FXML
     private void initialize() throws SQLException {
