@@ -1,0 +1,16 @@
+.alert {
+    -fx-background-color: transparent;
+}
+
+.alert .alert-dialog {
+    -fx-background-color: #4caf50;
+}
+
+.alert .header-panel {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+}
+
+.alert .content {
+    -fx-text-fill: #000000;
+}

@@ -1,0 +1,52 @@
+.root {
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 20;
+    -fx-padding: 8 16;
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+}
+
+#employeeNameLbl {
+    -fx-font-size: 40px; 
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e7f3e7);
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+}
+
+.table-column {
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+}
+
+.anchor-pane {
+    -fx-background-color: #e7f3e7;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}

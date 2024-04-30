@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainWindowController">
    <children>
       <Button layoutX="52.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
-      <TableView fx:id="employeeTableView" layoutX="52.0" layoutY="58.0" prefHeight="520.0" prefWidth="304.0">
+      <TableView fx:id="employeeTableView" layoutX="52.0" layoutY="58.0" prefHeight="520.0" prefWidth="308.0">
         <columns>
           <TableColumn fx:id="employeeNameColumn" prefWidth="167.0" text="Name" />
-          <TableColumn fx:id="employeeTeamColumn" prefWidth="136.0" text="Team" />
+          <TableColumn fx:id="employeeTeamColumn" prefWidth="140.0" text="Team" />
         </columns>
       </TableView>
       <AnchorPane layoutX="407.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">

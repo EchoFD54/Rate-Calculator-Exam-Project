@@ -71,9 +71,7 @@ public class MainWindowController {
         } else {
             employeeBooleanLbl.setText("Production Resource");
         }
-
     }
-
 
     public void openAddEmployee(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
@@ -106,7 +104,7 @@ public class MainWindowController {
                 existingEmployee.setAnnualWorkingHours(Integer.parseInt(workHours));
                 existingEmployee.setUtilizationPercentage(Integer.parseInt(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
-                //db update
+                //update employee on database (cant edit name for now)
                 employeeManager.updateEmployee(existingEmployee);
               employeeExists = true;
               break;
@@ -130,6 +128,7 @@ public class MainWindowController {
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this employee?");
             alert.setContentText("This action cannot be undone.");
+           loadAlertStyle(alert);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     int selectedIndex = employeeTableView.getSelectionModel().getSelectedIndex();
@@ -146,6 +145,7 @@ public class MainWindowController {
             alert.setTitle("No Employee Selected");
             alert.setHeaderText(null);
             alert.setContentText("Please select an employee to delete.");
+            loadAlertStyle(alert);
             alert.showAndWait();
         }
         }
@@ -153,7 +153,6 @@ public class MainWindowController {
 
     public void openEditEmployee(ActionEvent actionEvent) {
         Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-
         if (selectedEmployee != null){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
             Parent root;
@@ -172,7 +171,6 @@ public class MainWindowController {
                 addEmployeeController.empWorkHoursField.setText(selectedEmployee.getAnnualWorkingHours() + "");
                 addEmployeeController.empUtilizationField.setText(selectedEmployee.getUtilizationPercentage() + "");
 
-                //create stage
                 Stage stage = new Stage();
                 stage.setTitle("Edit Employee");
                 stage.setScene(new Scene(root));
@@ -189,6 +187,12 @@ public class MainWindowController {
             alert.showAndWait();
         }
 
+    }
+
+    private void loadAlertStyle(Alert alert){
+        String alertStylesheet = "GUI/view/Styles/alert.css";
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(alertStylesheet);
     }
 
 
