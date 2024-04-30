@@ -4,6 +4,7 @@ import BE.Employee;
 import DAL.EmployeeDAO;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeManager {
     EmployeeDAO employeeDAO = new EmployeeDAO();
@@ -14,5 +15,9 @@ public class EmployeeManager {
 
     public void deleteEmployee(int employeeId) throws SQLException {
         employeeDAO.deleteEmployee(employeeId);
+    }
+
+    public List<Employee> getAllEmployees() throws SQLException {
+        return employeeDAO.getEmployeeList();
     }
 }

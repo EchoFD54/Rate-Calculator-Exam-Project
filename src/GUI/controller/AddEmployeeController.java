@@ -29,10 +29,10 @@ public class AddEmployeeController {
         String utilization = empUtilizationField.getText();
 
 
-        //add employee to database, this is just for testing
-        Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization);
-        int employeeID = employeeManager.createEmployee(newEmployee);
-        newEmployee.setId(employeeID);
+        //add employee to database and tableview
+       mainWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization);
+
+        ((Stage) empNameField.getScene().getWindow()).close();
 
 
 

@@ -24,6 +24,20 @@ public class Employee {
         this.isOverHeadCost = false;
     }
 
+    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost){
+        this.id = employeeId;
+        this.name = name;
+        this.annualSalary = Integer.parseInt(annSalary);
+        this.overheadMultPercent = Integer.parseInt(multPer);
+        this.fixedAnnualAmount = Integer.parseInt(fixedAnnAmt);
+        this.country = country;
+        this.employeeTeam = team;
+        this.annualWorkingHours = Integer.parseInt(workHours);
+        this.utilizationPercentage = Integer.parseInt(utilization);
+        this.isOverHeadCost = isOverHeadCost;
+    }
+
+
     public int getId() {
         return id;
     }

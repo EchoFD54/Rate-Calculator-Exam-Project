@@ -1,11 +1,16 @@
 package DAL;
 
 import BE.Employee;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.fxml.FXML;
 
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAO {
     private final ConnectionManager connectionManager;
@@ -13,6 +18,8 @@ public class EmployeeDAO {
     public EmployeeDAO() {
         this.connectionManager = new ConnectionManager();
     }
+
+
 
     public int createEmployee(Employee employee) throws SQLException {
         String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, employeeTeam, annualWorkingHours, utilizationPercentage, isOverHeadCost) " +
@@ -68,6 +75,32 @@ public class EmployeeDAO {
         } catch (SQLException e) {
             throw new SQLException("Error deleting employee: " + e.getMessage());
         }
+    }
+
+    public List<Employee> getEmployeeList() throws SQLServerException {
+        List<Employee> employeeList = new ArrayList<>();
+        String sql = "SELECT * FROM Employee";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+               int employeeId = resultSet.getInt("id");
+               String name = resultSet.getString("name");
+               String annualSalary = String.valueOf(resultSet.getInt("annualSalary"));
+               String overheadMultPercent = String.valueOf(resultSet.getInt("overheadMultPercent"));
+               String fixedAnnualAmount = String.valueOf(resultSet.getInt("fixedAnnualAmount"));
+               String country = resultSet.getString("country");
+               String employeeTeam = String.valueOf(resultSet.getInt("employeeTeam"));
+               String annualWorkingHours = String.valueOf(resultSet.getInt("annualWorkingHours"));
+               String utilizationPercentage = String.valueOf(resultSet.getInt("utilizationPercentage"));
+               boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
+               Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, employeeTeam, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+                employeeList.add(employee);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving employee list: " + e.getMessage(), e);
+        }
+        return employeeList;
     }
 
 
