@@ -2,9 +2,6 @@ package DAL;
 
 import BE.Employee;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import javafx.fxml.FXML;
-
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
