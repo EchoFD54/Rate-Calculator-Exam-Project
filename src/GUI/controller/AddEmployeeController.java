@@ -27,10 +27,16 @@ public class AddEmployeeController {
         String team = empTeamField.getText();
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
+        Boolean isOverheadCost;
+        if (OverheadChoiceBox.getSelectionModel().getSelectedItem().equals("Overhead Cost")) {
+            isOverheadCost = true;
+        } else {
+            isOverheadCost = false;
+        }
 
 
         //add employee to database and tableview
-       mainWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization);
+       mainWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverheadCost);
 
         ((Stage) empNameField.getScene().getWindow()).close();
 

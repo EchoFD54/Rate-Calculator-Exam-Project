@@ -22,7 +22,14 @@
                <font>
                   <Font size="40.0" />
                </font></Label>
-            <Label fx:id="employeeCountryLbl" layoutX="201.0" layoutY="153.0" text="Country" />
+            <Label fx:id="employeeCountryLbl" layoutX="65.0" layoutY="130.0" text="Country" />
+            <Label fx:id="employeeAnnSalLbl" layoutX="65.0" layoutY="201.0" text="Annual Salary" />
+            <Label fx:id="employeOverMultLbl" layoutX="62.0" layoutY="239.0" text="Overhead Multiplier Percent" />
+            <Label fx:id="employeeFixAmtLbl" layoutX="63.0" layoutY="279.0" text="Fixed Annual Amount" />
+            <Label fx:id="employeeTeamLbl" layoutX="62.0" layoutY="167.0" text="Team" />
+            <Label fx:id="employeeEffectHoursLbl" layoutX="63.0" layoutY="319.0" text="Annual Effective Working Hours" />
+            <Label fx:id="employeeUtilizationLbl" layoutX="62.0" layoutY="357.0" text="Utilization Percentage" />
+            <Label fx:id="employeeBooleanLbl" layoutX="65.0" layoutY="401.0" text="Boolean" />
          </children>
       </AnchorPane>
       <Button layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />

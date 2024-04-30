@@ -12,7 +12,7 @@ public class Employee {
     private int utilizationPercentage;
     private boolean isOverHeadCost;
 
-    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization) {
+    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost) {
         this.name = name;
         this.annualSalary = Integer.parseInt(annSalary);
         this.overheadMultPercent = Integer.parseInt(multPer);
@@ -21,7 +21,7 @@ public class Employee {
         this.employeeTeam = team;
         this.annualWorkingHours = Integer.parseInt(workHours);
         this.utilizationPercentage = Integer.parseInt(utilization);
-        this.isOverHeadCost = false;
+        this.isOverHeadCost = isOverHeadCost;
     }
 
     public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost){

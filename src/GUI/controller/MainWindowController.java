@@ -16,15 +16,17 @@ import java.sql.SQLException;
 
 public class MainWindowController {
     public TableView<Employee> employeeTableView;
-    public Label employeeNameLbl, employeeCountryLbl;
+    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl;
 
+    private int employeeIndex;
     private EmployeeManager employeeManager = new EmployeeManager();
+    private Employee selectedEmployee;
 
     @FXML
     private void initialize() throws SQLException {
         setEmployeeTableView();
         setDataBase();
-
+        setEmployeeTab();
     }
 
     private void setEmployeeTableView(){
@@ -33,7 +35,6 @@ public class MainWindowController {
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Employee, String> employeeTeamColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(1);
         employeeTeamColumn.setCellValueFactory(new PropertyValueFactory<>("employeeTeam"));
-
     }
 
     private void setDataBase() throws SQLException {
@@ -46,6 +47,33 @@ public class MainWindowController {
         }
 
     }
+
+    private void setEmployeeTab() {
+        // Add listener to the TableView's selection model
+        employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                updateLabels(newSelection); // Update labels with information of the selected employee
+            }
+        });
+    }
+
+    private void updateLabels(Employee employee) {
+        employeeNameLbl.setText(employee.getName());
+        employeeCountryLbl.setText("Country: " + employee.getCountry());
+        employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
+        employeOverMultLbl.setText("Overhead Multiplier Percent: " + employee.getOverheadMultPercent());
+        employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
+        employeeTeamLbl.setText("Team: " + employee.getEmployeeTeam());
+        employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
+        employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
+        if (employee.isOverHeadCost()){
+            employeeBooleanLbl.setText("Overhead Cost");
+        } else {
+            employeeBooleanLbl.setText("Production Resource");
+        }
+
+    }
+
 
     public void openAddEmployee(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
@@ -63,7 +91,7 @@ public class MainWindowController {
         }
     }
 
-    protected void updateEmployeeProperties(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization) throws SQLException {
+    protected void updateEmployeeProperties(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
         boolean employeeExists = false;
         Employee existingEmployee = null;
         //update employee
@@ -75,7 +103,7 @@ public class MainWindowController {
 
         //create employee
         if (!employeeExists){
-            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization);
+            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverHeadCost);
             int employeeID = employeeManager.createEmployee(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);

@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="481.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
    <children>
       <TextField fx:id="empNameField" layoutX="251.0" layoutY="40.0" />
@@ -25,7 +27,14 @@
       <Label layoutX="16.0" layoutY="343.0" prefHeight="21.0" prefWidth="217.0" text="Annual Effective Working Hours" />
       <Label layoutX="79.0" layoutY="386.0" prefHeight="21.0" prefWidth="154.0" text="Utilization Percentage" />
       <Label layoutX="1.0" layoutY="431.0" prefHeight="21.0" prefWidth="255.0" text="OverheadCost or Production Resource" />
-      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="256.0" layoutY="426.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="256.0" layoutY="426.0" prefWidth="150.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Overhead Cost" />
+               <String fx:value="Production Resource" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
       <Button layoutX="507.0" layoutY="224.0" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee" />
    </children>
 </AnchorPane>
