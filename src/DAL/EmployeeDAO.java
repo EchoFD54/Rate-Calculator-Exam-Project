@@ -25,13 +25,13 @@ public class EmployeeDAO {
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, employee.getName());
-            preparedStatement.setInt(2, employee.getAnnualSalary());
-            preparedStatement.setInt(3, employee.getOverheadMultPercent());
-            preparedStatement.setInt(4, employee.getFixedAnnualAmount());
+            preparedStatement.setDouble(2, employee.getAnnualSalary());
+            preparedStatement.setDouble(3, employee.getOverheadMultPercent());
+            preparedStatement.setDouble(4, employee.getFixedAnnualAmount());
             preparedStatement.setString(5, employee.getCountry());
             preparedStatement.setString(6, employee.getEmployeeTeam());
-            preparedStatement.setInt(7, employee.getAnnualWorkingHours());
-            preparedStatement.setInt(8, employee.getUtilizationPercentage());
+            preparedStatement.setDouble(7, employee.getAnnualWorkingHours());
+            preparedStatement.setDouble(8, employee.getUtilizationPercentage());
             preparedStatement.setBoolean(9, employee.isOverHeadCost());
 
             int affectedRows = preparedStatement.executeUpdate();
@@ -56,13 +56,13 @@ public class EmployeeDAO {
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getName());
-            preparedStatement.setInt(2, employee.getAnnualSalary());
-            preparedStatement.setInt(3, employee.getOverheadMultPercent());
-            preparedStatement.setInt(4, employee.getFixedAnnualAmount());
+            preparedStatement.setDouble(2, employee.getAnnualSalary());
+            preparedStatement.setDouble(3, employee.getOverheadMultPercent());
+            preparedStatement.setDouble(4, employee.getFixedAnnualAmount());
             preparedStatement.setString(5, employee.getCountry());
             preparedStatement.setString(6, employee.getEmployeeTeam());
-            preparedStatement.setInt(7, employee.getAnnualWorkingHours());
-            preparedStatement.setInt(8, employee.getUtilizationPercentage());
+            preparedStatement.setDouble(7, employee.getAnnualWorkingHours());
+            preparedStatement.setDouble(8, employee.getUtilizationPercentage());
             preparedStatement.setBoolean(9, employee.isOverHeadCost());
             preparedStatement.setInt(10, employee.getId());
 
@@ -105,13 +105,13 @@ public class EmployeeDAO {
             while (resultSet.next()) {
                int employeeId = resultSet.getInt("id");
                String name = resultSet.getString("name");
-               String annualSalary = String.valueOf(resultSet.getInt("annualSalary"));
-               String overheadMultPercent = String.valueOf(resultSet.getInt("overheadMultPercent"));
-               String fixedAnnualAmount = String.valueOf(resultSet.getInt("fixedAnnualAmount"));
+               String annualSalary = String.valueOf(resultSet.getDouble("annualSalary"));
+               String overheadMultPercent = String.valueOf(resultSet.getDouble("overheadMultPercent"));
+               String fixedAnnualAmount = String.valueOf(resultSet.getDouble("fixedAnnualAmount"));
                String country = resultSet.getString("country");
                String employeeTeam = String.valueOf(resultSet.getString("employeeTeam"));
-               String annualWorkingHours = String.valueOf(resultSet.getInt("annualWorkingHours"));
-               String utilizationPercentage = String.valueOf(resultSet.getInt("utilizationPercentage"));
+               String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
+               String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
                boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
                Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, employeeTeam, annualWorkingHours, utilizationPercentage, isOverHeadCost);
                 employeeList.add(employee);

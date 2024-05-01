@@ -3,37 +3,37 @@ package BE;
 public class Employee {
     private int id;
     private String name;
-    private int annualSalary;
-    private int overheadMultPercent;
-    private int fixedAnnualAmount;
+    private double annualSalary;
+    private double overheadMultPercent;
+    private double fixedAnnualAmount;
     private String country;
     private String employeeTeam;
-    private int annualWorkingHours;
-    private int utilizationPercentage;
+    private double annualWorkingHours;
+    private double utilizationPercentage;
     private boolean isOverHeadCost;
 
     public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost) {
         this.name = name;
-        this.annualSalary = Integer.parseInt(annSalary);
-        this.overheadMultPercent = Integer.parseInt(multPer);
-        this.fixedAnnualAmount = Integer.parseInt(fixedAnnAmt);
+        this.annualSalary = Double.parseDouble(annSalary);
+        this.overheadMultPercent = Double.parseDouble(multPer);
+        this.fixedAnnualAmount = Double.parseDouble(fixedAnnAmt);
         this.country = country;
         this.employeeTeam = team;
-        this.annualWorkingHours = Integer.parseInt(workHours);
-        this.utilizationPercentage = Integer.parseInt(utilization);
+        this.annualWorkingHours = Double.parseDouble(workHours);
+        this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
     }
 
     public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost){
         this.id = employeeId;
         this.name = name;
-        this.annualSalary = Integer.parseInt(annSalary);
-        this.overheadMultPercent = Integer.parseInt(multPer);
-        this.fixedAnnualAmount = Integer.parseInt(fixedAnnAmt);
+        this.annualSalary = Double.parseDouble(annSalary);
+        this.overheadMultPercent = Double.parseDouble(multPer);
+        this.fixedAnnualAmount = Double.parseDouble(fixedAnnAmt);
         this.country = country;
         this.employeeTeam = team;
-        this.annualWorkingHours = Integer.parseInt(workHours);
-        this.utilizationPercentage = Integer.parseInt(utilization);
+        this.annualWorkingHours = Double.parseDouble(workHours);
+        this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
     }
 
@@ -62,7 +62,7 @@ public class Employee {
         this.name = name;
     }
 
-    public int getAnnualSalary() {
+    public double getAnnualSalary() {
         return annualSalary;
     }
 
@@ -70,19 +70,19 @@ public class Employee {
         this.annualSalary = annualSalary;
     }
 
-    public int getOverheadMultPercent() {
+    public double getOverheadMultPercent() {
         return overheadMultPercent;
     }
 
-    public void setOverheadMultPercent(int overheadMultPercent) {
+    public void setOverheadMultPercent(double overheadMultPercent) {
         this.overheadMultPercent = overheadMultPercent;
     }
 
-    public int getFixedAnnualAmount() {
+    public double getFixedAnnualAmount() {
         return fixedAnnualAmount;
     }
 
-    public void setFixedAnnualAmount(int fixedAnnualAmount) {
+    public void setFixedAnnualAmount(double fixedAnnualAmount) {
         this.fixedAnnualAmount = fixedAnnualAmount;
     }
 
@@ -102,19 +102,19 @@ public class Employee {
         this.country = country;
     }
 
-    public int getAnnualWorkingHours() {
+    public double getAnnualWorkingHours() {
         return annualWorkingHours;
     }
 
-    public void setAnnualWorkingHours(int annualWorkingHours) {
+    public void setAnnualWorkingHours(double annualWorkingHours) {
         this.annualWorkingHours = annualWorkingHours;
     }
 
-    public int getUtilizationPercentage() {
+    public double getUtilizationPercentage() {
         return utilizationPercentage;
     }
 
-    public void setUtilizationPercentage(int utilizationPercentage) {
+    public void setUtilizationPercentage(double utilizationPercentage) {
         this.utilizationPercentage = utilizationPercentage;
     }
 
