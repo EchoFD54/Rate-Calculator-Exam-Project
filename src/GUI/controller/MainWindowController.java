@@ -96,12 +96,12 @@ public class MainWindowController {
             if (employee.getName().equals(name)){
                 existingEmployee = employee;
                 existingEmployee.setName(name);
-                existingEmployee.setAnnualSalary(Integer.parseInt(annSalary));
-                existingEmployee.setOverheadMultPercent(Integer.parseInt(multPer));
-                existingEmployee.setFixedAnnualAmount(Integer.parseInt(fixedAnnAmt));
+                existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
+                existingEmployee.setOverheadMultPercent(Double.parseDouble(multPer));
+                existingEmployee.setFixedAnnualAmount(Double.parseDouble(fixedAnnAmt));
                 existingEmployee.setEmployeeTeam(team);
-                existingEmployee.setAnnualWorkingHours(Integer.parseInt(workHours));
-                existingEmployee.setUtilizationPercentage(Integer.parseInt(utilization));
+                existingEmployee.setAnnualWorkingHours(Double.parseDouble(workHours));
+                existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
                 //update employee on database (cant edit name for now)
                 employeeManager.updateEmployee(existingEmployee);

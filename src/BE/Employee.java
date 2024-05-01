@@ -66,7 +66,7 @@ public class Employee {
         return annualSalary;
     }
 
-    public void setAnnualSalary(int annualSalary) {
+    public void setAnnualSalary(double annualSalary) {
         this.annualSalary = annualSalary;
     }
 
