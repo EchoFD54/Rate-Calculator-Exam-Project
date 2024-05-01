@@ -37,6 +37,16 @@ public class Employee {
         this.isOverHeadCost = isOverHeadCost;
     }
 
+    public  double calculateHourlyDate(){
+        double totalAnnualSalary = annualSalary + fixedAnnualAmount;
+        double effectiveHourlyRate = totalAnnualSalary / annualWorkingHours;
+        double totalUtilization = utilizationPercentage /100.0;
+        double hourlyRate = effectiveHourlyRate * totalUtilization * overheadMultPercent;
+        return hourlyRate;
+    }
+
+
+
 
     public int getId() {
         return id;
@@ -117,6 +127,8 @@ public class Employee {
     public void setUtilizationPercentage(double utilizationPercentage) {
         this.utilizationPercentage = utilizationPercentage;
     }
+
+
 
 
 

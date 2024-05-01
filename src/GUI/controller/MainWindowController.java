@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class MainWindowController {
     public TableView<Employee> employeeTableView;
-    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl;
+    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl;
 
     private EmployeeManager employeeManager = new EmployeeManager();
 
@@ -99,6 +99,7 @@ public class MainWindowController {
                 existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
                 existingEmployee.setOverheadMultPercent(Double.parseDouble(multPer));
                 existingEmployee.setFixedAnnualAmount(Double.parseDouble(fixedAnnAmt));
+                existingEmployee.setCountry(country);
                 existingEmployee.setEmployeeTeam(team);
                 existingEmployee.setAnnualWorkingHours(Double.parseDouble(workHours));
                 existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
@@ -195,5 +196,12 @@ public class MainWindowController {
     }
 
 
+    public void clickCalcHourRate(ActionEvent actionEvent) {
+        Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null){
+            String hourlyRate = String.valueOf(selectedEmployee.calculateHourlyDate());
+            hourRateLbl.setText(hourlyRate);
+        }
+    }
 }
 

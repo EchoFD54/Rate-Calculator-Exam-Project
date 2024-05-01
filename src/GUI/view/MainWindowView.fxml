@@ -45,5 +45,7 @@
             </VBox>
          </children>
       </AnchorPane>
+      <Button layoutX="462.0" layoutY="17.0" mnemonicParsing="false" onAction="#clickCalcHourRate" text="Caculate Hourly Rate" />
+      <Label fx:id="hourRateLbl" layoutX="669.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" text="HourlyRate" />
    </children>
 </AnchorPane>
