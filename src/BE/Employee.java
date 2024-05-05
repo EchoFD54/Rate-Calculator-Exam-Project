@@ -1,5 +1,7 @@
 package BE;
 
+import java.text.DecimalFormat;
+
 public class Employee {
     private int id;
     private String name;
@@ -42,6 +44,8 @@ public class Employee {
         double effectiveHourlyRate = totalAnnualSalary / annualWorkingHours;
         double totalUtilization = utilizationPercentage /100.0;
         double hourlyRate = effectiveHourlyRate * totalUtilization * overheadMultPercent;
+        DecimalFormat df = new DecimalFormat("#.##");
+        hourlyRate = Double.parseDouble(df.format(hourlyRate));
         return hourlyRate;
     }
 

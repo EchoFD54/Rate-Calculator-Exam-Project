@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -19,9 +18,9 @@
           <TableColumn fx:id="employeeTeamColumn" prefWidth="140.0" text="Team" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="407.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
+      <AnchorPane layoutX="412.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
          <children>
-            <VBox layoutX="62.0" layoutY="28.0" spacing="20.0">
+            <VBox layoutX="60.0" layoutY="28.0" prefHeight="492.0" prefWidth="325.0" spacing="20.0">
                <children>
                   <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="325.0" text="Name">
                      <font>
@@ -36,16 +35,11 @@
                   <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
                   <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
                   <Label fx:id="employeeBooleanLbl" text="Boolean" />
-                  <Button mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee">
-                     <VBox.margin>
-                        <Insets left="100.0" />
-                     </VBox.margin>
-                  </Button>
+                  <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="462.0" layoutY="17.0" mnemonicParsing="false" onAction="#clickCalcHourRate" text="Caculate Hourly Rate" />
-      <Label fx:id="hourRateLbl" layoutX="669.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" text="HourlyRate" />
+      <Button layoutX="575.0" layoutY="14.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
    </children>
 </AnchorPane>

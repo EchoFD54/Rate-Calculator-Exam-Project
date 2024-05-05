@@ -70,6 +70,8 @@ public class MainWindowController {
         } else {
             employeeBooleanLbl.setText("Production Resource");
         }
+        String hourlyRate = String.valueOf(employee.calculateHourlyDate());
+        hourRateLbl.setText("Hourly Rate: " + hourlyRate);
     }
 
     public void openAddEmployee(ActionEvent actionEvent) {
@@ -196,12 +198,6 @@ public class MainWindowController {
     }
 
 
-    public void clickCalcHourRate(ActionEvent actionEvent) {
-        Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null){
-            String hourlyRate = String.valueOf(selectedEmployee.calculateHourlyDate());
-            hourRateLbl.setText(hourlyRate);
-        }
-    }
+
 }
 
