@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="823.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
-      <Button layoutX="52.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
-      <Button layoutX="223.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />
-      <TableView fx:id="employeeTableView" layoutX="52.0" layoutY="58.0" prefHeight="520.0" prefWidth="308.0">
+      <Button layoutX="118.0" layoutY="22.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
+      <Button layoutX="289.0" layoutY="22.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />
+      <TableView fx:id="employeeTableView" layoutX="118.0" layoutY="66.0" prefHeight="520.0" prefWidth="308.0">
         <columns>
           <TableColumn fx:id="employeeNameColumn" prefWidth="167.0" text="Name" />
           <TableColumn fx:id="employeeTeamColumn" prefWidth="140.0" text="Team" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="412.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
+      <AnchorPane layoutX="450.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
          <children>
             <VBox layoutX="60.0" layoutY="28.0" prefHeight="492.0" prefWidth="325.0" spacing="20.0">
                <children>
@@ -29,17 +29,22 @@
                   </Label>
                   <Label fx:id="employeeCountryLbl" text="Country" />
                   <Label fx:id="employeeTeamLbl" text="Team" />
+                  <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
                   <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
                   <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
                   <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
                   <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
                   <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
                   <Label fx:id="employeeBooleanLbl" text="Boolean" />
-                  <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="575.0" layoutY="14.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
+      <Button layoutX="613.0" layoutY="22.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
+      <TableView fx:id="teamsEmployeeTableView" layoutX="14.0" layoutY="66.0" prefHeight="520.0" prefWidth="81.0">
+        <columns>
+          <TableColumn fx:id="teamsColumn" prefWidth="79.0" text="C1" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

@@ -1,27 +1,31 @@
 package BE;
 
 public class Team {
-    private int TeamId;
-    private String name;
+    private int teamId;
+    private String teamName;
 
-    public Team(int TeamId, String name) {
-        this.TeamId = TeamId;
-        this.name = name;
+    public Team(int teamId, String teamName) {
+        this.teamId = teamId;
+        this.teamName = teamName;
+    }
+
+    public Team(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getName() {
-        return name;
+        return teamName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String teamName) {
+        this.teamName = teamName;
     }
 
     public int getTeamId() {
-        return TeamId;
+        return teamId;
     }
 
     public void setTeamId(int teamId) {
-        TeamId = teamId;
+        teamId = teamId;
     }
 }

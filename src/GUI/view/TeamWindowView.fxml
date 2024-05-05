@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.TeamWindowControler">
+   <children>
+      <TableView fx:id="teamsTableVIew" layoutX="106.0" layoutY="60.0" prefHeight="280.0" prefWidth="389.0">
+        <columns>
+          <TableColumn fx:id="teamNameColumn" prefWidth="387.0" text="Teams" />
+        </columns>
+      </TableView>
+      <Button layoutX="106.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAddTeam" text="New Team" />
+      <Button layoutX="254.0" layoutY="14.0" mnemonicParsing="false" onAction="#openEditTeam" text="Edit Team" />
+      <Button layoutX="385.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
+   </children>
+</AnchorPane>

@@ -1,6 +1,5 @@
 package GUI.controller;
 
-import BE.Employee;
 import BLL.EmployeeManager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -16,7 +15,7 @@ public class AddEmployeeController {
     public ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
 
-    private MainWindowController mainWindowController;
+    private EmployeeWindowController employeeWindowController;
     private Stage stage;
 
     private EmployeeManager employeeManager = new EmployeeManager();
@@ -60,7 +59,7 @@ public class AddEmployeeController {
 
         if (isValidInput){
             // Add employee to database and tableview if input is valid
-            mainWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverheadCost);
+            employeeWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverheadCost);
             ((Stage) empNameField.getScene().getWindow()).close();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -80,8 +79,8 @@ public class AddEmployeeController {
         }
     }
 
-    public void setMainWindowController(MainWindowController mainWindowController) {
-        this.mainWindowController = mainWindowController;
+    public void setEmployeeWindowController(EmployeeWindowController employeeWindowController) {
+        this.employeeWindowController = employeeWindowController;
     }
 
 

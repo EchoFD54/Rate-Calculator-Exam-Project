@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class MainWindowController {
+public class EmployeeWindowController {
     public TableView<Employee> employeeTableView;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl;
 
@@ -80,7 +80,7 @@ public class MainWindowController {
         try {
             root = loader.load();
             AddEmployeeController addEmployeeController = loader.getController();
-            addEmployeeController.setMainWindowController(this);
+            addEmployeeController.setEmployeeWindowController(this);
             Stage stage = new Stage();
             stage.setTitle("Add Employee");
             stage.setScene(new Scene(root));
@@ -161,7 +161,7 @@ public class MainWindowController {
             try {
                 root = loader.load();
                 AddEmployeeController addEmployeeController = loader.getController();
-                addEmployeeController.setMainWindowController(this);
+                addEmployeeController.setEmployeeWindowController(this);
 
                 //set employee properties
                 addEmployeeController.empNameField.setText(selectedEmployee.getName());
