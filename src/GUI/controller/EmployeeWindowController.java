@@ -1,7 +1,9 @@
 package GUI.controller;
 
 import BE.Employee;
+import BE.Team;
 import BLL.EmployeeManager;
+import BLL.TeamManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,10 @@ import java.sql.SQLException;
 public class EmployeeWindowController {
     public TableView<Employee> employeeTableView;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl;
+    public TableView<Team> teamsEmployeeTableView;
 
     private EmployeeManager employeeManager = new EmployeeManager();
+    private TeamManager teamManager = new TeamManager();
 
 
     @FXML
@@ -26,6 +30,7 @@ public class EmployeeWindowController {
         setEmployeeTableView();
         setDataBase();
         setEmployeeTab();
+        setTeamTableView();
     }
 
     private void setEmployeeTableView(){
@@ -54,6 +59,20 @@ public class EmployeeWindowController {
                 updateLabels(newSelection); // Update labels with information of the selected employee
             }
         });
+    }
+
+    private void setTeamTableView() {
+        TableColumn<Team, String> teamNameColumn = (TableColumn<Team, String>) teamsEmployeeTableView.getColumns().get(0);
+        teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        try {
+            for (Team team: teamManager.getAllTeams()){
+                teamsEmployeeTableView.getItems().add(team);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void updateLabels(Employee employee) {
