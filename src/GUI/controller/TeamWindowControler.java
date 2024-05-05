@@ -8,8 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -58,6 +57,7 @@ public class TeamWindowControler {
             if (team.getName().equals(name)){
                 existingTeam = team;
                 existingTeam.setName(name);
+                teamManager.updateTeam(existingTeam);
                 teamExists = true;
                 break;
             }
@@ -74,9 +74,66 @@ public class TeamWindowControler {
     }
 
     public void openEditTeam(ActionEvent actionEvent) {
+        Team selectedTeam = (Team) teamsTableVIew.getSelectionModel().getSelectedItem();
+        if (selectedTeam != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddTeamView.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                AddTeamController addTeamController = loader.getController();
+                addTeamController.setTeamWindowController(this);
+                addTeamController.teamNameField.setText(selectedTeam.getName());
+                Stage stage = new Stage();
+                stage.setTitle("Edit Team");
+                stage.setScene(new Scene(root));
+                stage.show();
+                addTeamController.addTeamBtn.setText("Edit Team");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Team Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a Team to edit.");
+            loadAlertStyle(alert);
+            alert.showAndWait();
+        }
     }
 
     public void deleteTeam(ActionEvent actionEvent) {
+        Team selectedTeam = (Team) teamsTableVIew.getSelectionModel().getSelectedItem();
+        if (selectedTeam != null){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete this team?");
+            alert.setContentText("This action cannot be undone.");
+            loadAlertStyle(alert);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    int selectedIndex = teamsTableVIew.getSelectionModel().getSelectedIndex();
+                    try {
+                        teamManager.deleteTeam(selectedTeam.getTeamId());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    teamsTableVIew.getItems().remove(selectedIndex);
+                }
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Employee Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an employee to delete.");
+            loadAlertStyle(alert);
+            alert.showAndWait();
+        }
 
+    }
+
+    private void loadAlertStyle(Alert alert){
+        String alertStylesheet = "GUI/view/Styles/alert.css";
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(alertStylesheet);
     }
 }

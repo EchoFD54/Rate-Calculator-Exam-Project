@@ -16,4 +16,12 @@ public class TeamManager {
         return teamDAO.getTeamList();
     }
 
+    public void updateTeam(Team team) throws SQLException {
+        teamDAO.updateTeam(team);
+    }
+
+    public void deleteTeam(int teamId) throws SQLException {
+        teamDAO.deleteTeam(teamId);
+    }
+
 }
