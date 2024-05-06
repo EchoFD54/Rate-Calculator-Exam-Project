@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddTeamController">
+<AnchorPane prefHeight="301.0" prefWidth="522.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddTeamController">
    <children>
-      <TextField fx:id="teamNameField" layoutX="210.0" layoutY="122.0" />
-      <Button fx:id="addTeamBtn" layoutX="252.0" layoutY="210.0" mnemonicParsing="false" onAction="#addTeam" text="Add Team" />
-      <Label layoutX="257.0" layoutY="65.0" text="Team Name" />
+      <TextField fx:id="teamNameField" layoutX="157.0" layoutY="133.0" prefHeight="36.0" prefWidth="207.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></TextField>
+      <Button fx:id="addTeamBtn" layoutX="202.0" layoutY="204.0" mnemonicParsing="false" onAction="#addTeam" prefHeight="36.0" prefWidth="117.0" text="Add Team">
+         <effect>
+            <DropShadow radius="4.75" width="0.0" />
+         </effect></Button>
+      <Label layoutX="54.0" layoutY="133.0" prefHeight="36.0" prefWidth="102.0" text="Team Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <ImageView fitHeight="36.0" fitWidth="69.0" layoutX="364.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Logo_S_2_.png" />
+         </image>
+         <effect>
+            <DropShadow height="12.81" radius="6.1975" width="13.98" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="105.0" fitWidth="83.0" layoutX="219.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/1144760.png" />
+         </image>
+         <effect>
+            <Glow level="0.23">
+               <input>
+                  <Shadow blurType="ONE_PASS_BOX" height="0.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color red="0.028382066637277603" green="0.5894736647605896" blue="0.10319428145885468" />
+                     </color>
+                  </Shadow>
+               </input>
+            </Glow>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="83.0" layoutX="219.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/1144760.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,11 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.HomeWindowController">
+<AnchorPane prefHeight="400.0" prefWidth="566.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.HomeWindowController">
    <children>
-      <Button layoutX="238.0" layoutY="240.0" mnemonicParsing="false" onAction="#openTeamWindow" text="Manage Teams" />
-      <Button layoutX="224.0" layoutY="116.0" mnemonicParsing="false" onAction="#openEmployeeWindow" text="Manage Employees" />
+      <ImageView fitHeight="107.0" fitWidth="115.0" layoutX="384.0" layoutY="24.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/hrc.png" />
+         </image>
+      </ImageView>
+      <Button cache="true" ellipsisString="" layoutX="315.0" layoutY="295.0" mnemonicParsing="false" onAction="#openTeamWindow" prefHeight="58.0" prefWidth="184.0" style="-fx-background-radius: 0;" text="Manage Teams">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="70.0" layoutY="295.0" mnemonicParsing="false" onAction="#openEmployeeWindow" prefHeight="58.0" prefWidth="184.0" style="-fx-background-radius: 0;" text="Manage Employees">
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <ImageView fitHeight="267.0" fitWidth="432.0" layoutX="37.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Schneider_Electric-Logo.wine.png" />
+         </image>
+      </ImageView>
+      <Text fill="#c7d1c7" fontSmoothingType="LCD" layoutX="280.0" layoutY="158.0" stroke="BLACK" strokeLineCap="BUTT" strokeMiterLimit="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RATING CALCULATOR" textAlignment="CENTER" wrappingWidth="226.39993896484384">
+         <font>
+            <Font name="Corbel" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="TWO_PASS_BOX" height="128.96" radius="31.740000000000002" spread="0.42" width="0.0">
+               <color>
+                  <Color red="0.5928577184677124" green="0.8842105269432068" blue="0.37005847692489624" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <ImageView fitHeight="78.0" fitWidth="82.0" layoutX="123.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/1144760.png" />
+         </image>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.01918128691613674" green="0.8631578683853149" blue="0.11764522641897202" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="78.0" fitWidth="78.0" layoutX="369.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/4624062.png" />
+         </image>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.04771929979324341" green="0.75789475440979" blue="0.08322806656360626" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </ImageView>
    </children>
+   <effect>
+      <Blend />
+   </effect>
 </AnchorPane>
