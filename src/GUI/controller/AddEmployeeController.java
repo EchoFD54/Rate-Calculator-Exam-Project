@@ -29,13 +29,14 @@ public class AddEmployeeController {
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
         Boolean isOverheadCost;
+
         if (OverheadChoiceBox.getSelectionModel().getSelectedItem().equals("Overhead Cost")) {
             isOverheadCost = true;
         } else {
             isOverheadCost = false;
         }
 
-        // Check if all input are valid numbers
+        // Check if all input are valid numbers and within valid ranges
         boolean isValidInput = true;
         String invalidField = "";
 
@@ -51,7 +52,7 @@ public class AddEmployeeController {
         } else if (!isValidDouble(workHours)) {
             isValidInput = false;
             invalidField = "Work Hours";
-        } else if (!isValidDouble(utilization)) {
+        } else if (!isValidDouble(utilization) || !isValidUtilization(utilization)) {
             isValidInput = false;
             invalidField = "Utilization";
         }
@@ -66,6 +67,15 @@ public class AddEmployeeController {
             alert.setHeaderText(null);
             alert.setContentText("Please input a valid number for " + invalidField);
             alert.showAndWait();
+        }
+    }
+
+    private boolean isValidUtilization(String utilization) {
+        try {
+            double utilizationValue = Double.parseDouble(utilization);
+            return utilizationValue >= 0 && utilizationValue <= 100;
+        } catch (NumberFormatException e) {
+            return false; // Unable to parse utilization as a double
         }
     }
 
