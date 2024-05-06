@@ -56,7 +56,11 @@ public class EmployeeWindowController {
         // Add listener to the TableView's selection model
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                updateLabels(newSelection); // Update labels with information of the selected employee
+                try {
+                    updateLabels(newSelection); // Update labels with information of the selected employee
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -75,13 +79,28 @@ public class EmployeeWindowController {
 
     }
 
-    private void updateLabels(Employee employee) {
+    public void addToTeamBtn(ActionEvent actionEvent) throws SQLException {
+               addSelectedEmployeeToTeam();
+    }
+
+  private void addSelectedEmployeeToTeam() throws SQLException {
+        Integer teamId = teamsEmployeeTableView.getSelectionModel().getSelectedItem().getTeamId();
+        Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
+        if (teamId != null && employeeId != null){
+            teamManager.addEmployeeToTeam(employeeId, teamId);
+        }
+  }
+
+
+
+    private void updateLabels(Employee employee) throws SQLException {
         employeeNameLbl.setText(employee.getName());
         employeeCountryLbl.setText("Country: " + employee.getCountry());
         employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
         employeOverMultLbl.setText("Overhead Multiplier Percent: " + employee.getOverheadMultPercent());
         employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
-        employeeTeamLbl.setText("Team: " + employee.getEmployeeTeam());
+        String teamName = employeeManager.getTeamName(employee.getId());
+        employeeTeamLbl.setText("Team: " + teamName);
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
         if (employee.isOverHeadCost()){
@@ -109,7 +128,7 @@ public class EmployeeWindowController {
         }
     }
 
-    protected void updateEmployeeProperties(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
+    protected void updateEmployeeProperties(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
         boolean employeeExists = false;
         Employee existingEmployee = null;
         //update employee
@@ -121,7 +140,6 @@ public class EmployeeWindowController {
                 existingEmployee.setOverheadMultPercent(Double.parseDouble(multPer));
                 existingEmployee.setFixedAnnualAmount(Double.parseDouble(fixedAnnAmt));
                 existingEmployee.setCountry(country);
-                existingEmployee.setEmployeeTeam(team);
                 existingEmployee.setAnnualWorkingHours(Double.parseDouble(workHours));
                 existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
@@ -134,7 +152,7 @@ public class EmployeeWindowController {
 
         //create employee
         if (!employeeExists){
-            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverHeadCost);
+            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost);
             int employeeID = employeeManager.createEmployee(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);
@@ -188,7 +206,6 @@ public class EmployeeWindowController {
                 addEmployeeController.empMultPerField.setText(selectedEmployee.getOverheadMultPercent() + "");
                 addEmployeeController.empFixedAnnAmtField.setText(selectedEmployee.getFixedAnnualAmount() + "");
                 addEmployeeController.empCountryField.setText(selectedEmployee.getCountry());
-                addEmployeeController.empTeamField.setText(selectedEmployee.getEmployeeTeam());
                 addEmployeeController.empWorkHoursField.setText(selectedEmployee.getAnnualWorkingHours() + "");
                 addEmployeeController.empUtilizationField.setText(selectedEmployee.getUtilizationPercentage() + "");
 

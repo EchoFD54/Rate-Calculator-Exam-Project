@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class AddEmployeeController {
-    public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empCountryField, empTeamField, empWorkHoursField, empUtilizationField;
+    public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empCountryField, empWorkHoursField, empUtilizationField;
     public ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
 
@@ -26,7 +26,6 @@ public class AddEmployeeController {
         String multPer = empMultPerField.getText();
         String fixedAnnAmt = empFixedAnnAmtField.getText();
         String country = empCountryField.getText();
-        String team = empTeamField.getText();
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
         Boolean isOverheadCost;
@@ -59,7 +58,7 @@ public class AddEmployeeController {
 
         if (isValidInput){
             // Add employee to database and tableview if input is valid
-            employeeWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, team, workHours, utilization, isOverheadCost);
+            employeeWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost);
             ((Stage) empNameField.getScene().getWindow()).close();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

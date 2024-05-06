@@ -19,8 +19,8 @@ public class EmployeeDAO {
 
 
     public int createEmployee(Employee employee) throws SQLException {
-        String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, employeeTeam, annualWorkingHours, utilizationPercentage, isOverHeadCost) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -29,10 +29,9 @@ public class EmployeeDAO {
             preparedStatement.setDouble(3, employee.getOverheadMultPercent());
             preparedStatement.setDouble(4, employee.getFixedAnnualAmount());
             preparedStatement.setString(5, employee.getCountry());
-            preparedStatement.setString(6, employee.getEmployeeTeam());
-            preparedStatement.setDouble(7, employee.getAnnualWorkingHours());
-            preparedStatement.setDouble(8, employee.getUtilizationPercentage());
-            preparedStatement.setBoolean(9, employee.isOverHeadCost());
+            preparedStatement.setDouble(6, employee.getAnnualWorkingHours());
+            preparedStatement.setDouble(7, employee.getUtilizationPercentage());
+            preparedStatement.setBoolean(8, employee.isOverHeadCost());
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -52,7 +51,7 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee(Employee employee) throws SQLException {
-        String sql = "UPDATE Employee SET name = ?, annualSalary = ?, overheadMultPercent = ?, fixedAnnualAmount = ?, country = ?, employeeTeam = ?, annualWorkingHours = ?, utilizationPercentage = ?, isOverHeadCost = ? WHERE id = ?";
+        String sql = "UPDATE Employee SET name = ?, annualSalary = ?, overheadMultPercent = ?, fixedAnnualAmount = ?, country = ?, annualWorkingHours = ?, utilizationPercentage = ?, isOverHeadCost = ? WHERE id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getName());
@@ -60,11 +59,10 @@ public class EmployeeDAO {
             preparedStatement.setDouble(3, employee.getOverheadMultPercent());
             preparedStatement.setDouble(4, employee.getFixedAnnualAmount());
             preparedStatement.setString(5, employee.getCountry());
-            preparedStatement.setString(6, employee.getEmployeeTeam());
-            preparedStatement.setDouble(7, employee.getAnnualWorkingHours());
-            preparedStatement.setDouble(8, employee.getUtilizationPercentage());
-            preparedStatement.setBoolean(9, employee.isOverHeadCost());
-            preparedStatement.setInt(10, employee.getId());
+            preparedStatement.setDouble(6, employee.getAnnualWorkingHours());
+            preparedStatement.setDouble(7, employee.getUtilizationPercentage());
+            preparedStatement.setBoolean(8, employee.isOverHeadCost());
+            preparedStatement.setInt(9, employee.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -109,17 +107,35 @@ public class EmployeeDAO {
                String overheadMultPercent = String.valueOf(resultSet.getDouble("overheadMultPercent"));
                String fixedAnnualAmount = String.valueOf(resultSet.getDouble("fixedAnnualAmount"));
                String country = resultSet.getString("country");
-               String employeeTeam = String.valueOf(resultSet.getString("employeeTeam"));
                String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
                String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
                boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
-               Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, employeeTeam, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+               Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost);
                 employeeList.add(employee);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving employee list: " + e.getMessage(), e);
         }
         return employeeList;
+    }
+
+    public String getTeamNameByEmployeeId(int employeeId) throws SQLException {
+        String sql = "SELECT teams.team_name FROM Employee " +
+                "INNER JOIN teams ON Employee.team_id = teams.team_id " +
+                "WHERE Employee.id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("team_name");
+                } else {
+                    return "No Team Assigned";
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error retrieving team name for employee: " + e.getMessage(), e);
+        }
     }
 
 

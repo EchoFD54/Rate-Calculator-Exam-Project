@@ -96,4 +96,44 @@ public class TeamDAO {
             throw new SQLException("Error deleting team: " + e.getMessage());
         }
     }
+
+
+    public void addEmployeeToTeam(int employeeId, int teamId) throws SQLException {
+        String sql = "UPDATE Employee SET team_id = ? WHERE id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, teamId);
+            preparedStatement.setInt(2, employeeId);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Adding employee to team failed, no rows affected.");
+            }
+
+            System.out.println("Employee with ID " + employeeId + " added to team with ID " + teamId + " successfully.");
+        } catch (SQLException e) {
+            throw new SQLException("Error adding employee to team: " + e.getMessage(), e);
+        }
+    }
+
+    public List<Employee> getEmployeesByTeam(int teamId) throws SQLException {
+        List<Employee> employeeList = new ArrayList<>();
+        String sql = "SELECT * FROM Employee WHERE id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, teamId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Construct Employee objects and add them to the list
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error retrieving employees by team: " + e.getMessage(), e);
+        }
+        return employeeList;
+    }
+
+
+
 }

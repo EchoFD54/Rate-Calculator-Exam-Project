@@ -14,8 +14,8 @@
       <Button layoutX="289.0" layoutY="22.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete Employee" />
       <TableView fx:id="employeeTableView" layoutX="118.0" layoutY="66.0" prefHeight="520.0" prefWidth="308.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="167.0" text="Name" />
-          <TableColumn fx:id="employeeTeamColumn" prefWidth="140.0" text="Team" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="307.0" text="Name" />
+          <TableColumn fx:id="employeeTeamColumn" minWidth="0.0" prefWidth="0.0" text="Team" />
         </columns>
       </TableView>
       <AnchorPane layoutX="450.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
@@ -40,11 +40,12 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="613.0" layoutY="22.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
+      <Button layoutX="553.0" layoutY="22.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit Employee" />
       <TableView fx:id="teamsEmployeeTableView" layoutX="14.0" layoutY="66.0" prefHeight="520.0" prefWidth="81.0">
         <columns>
-          <TableColumn fx:id="teamsColumn" prefWidth="79.0" text="C1" />
+          <TableColumn fx:id="teamsColumn" prefWidth="79.0" text="Teams" />
         </columns>
       </TableView>
+      <Button layoutX="695.0" layoutY="22.0" mnemonicParsing="false" onAction="#addToTeamBtn" text="Add to Team" />
    </children>
 </AnchorPane>

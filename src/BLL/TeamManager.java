@@ -24,4 +24,9 @@ public class TeamManager {
         teamDAO.deleteTeam(teamId);
     }
 
+    public void addEmployeeToTeam(int employeeId, int teamId) throws SQLException {
+        teamDAO.addEmployeeToTeam(employeeId, teamId);
+    }
+
+
 }

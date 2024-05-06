@@ -17,13 +17,15 @@ public class EmployeeManager {
         employeeDAO.updateEmployee(e);
     }
 
-
-
     public void deleteEmployee(int employeeId) throws SQLException {
         employeeDAO.deleteEmployee(employeeId);
     }
 
     public List<Employee> getAllEmployees() throws SQLException {
         return employeeDAO.getEmployeeList();
+    }
+
+    public String getTeamName(int employeeId) throws SQLException {
+        return employeeDAO.getTeamNameByEmployeeId(employeeId);
     }
 }

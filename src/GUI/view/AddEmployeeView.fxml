@@ -15,19 +15,17 @@
       <TextField fx:id="empMultPerField" layoutX="251.0" layoutY="138.0" />
       <TextField fx:id="empFixedAnnAmtField" layoutX="251.0" layoutY="188.0" />
       <TextField fx:id="empCountryField" layoutX="251.0" layoutY="239.0" />
-      <TextField fx:id="empTeamField" layoutX="251.0" layoutY="292.0" />
-      <TextField fx:id="empWorkHoursField" layoutX="251.0" layoutY="338.0" />
-      <TextField fx:id="empUtilizationField" layoutX="251.0" layoutY="381.0" />
+      <TextField fx:id="empWorkHoursField" layoutX="254.0" layoutY="294.0" />
+      <TextField fx:id="empUtilizationField" layoutX="254.0" layoutY="339.0" />
       <Label layoutX="186.0" layoutY="45.0" prefHeight="21.0" prefWidth="47.0" text="Name" />
       <Label layoutX="132.0" layoutY="96.0" prefHeight="25.0" prefWidth="101.0" text="Annual Salary" />
       <Label layoutX="13.0" layoutY="143.0" prefHeight="25.0" prefWidth="236.0" text="Overhead Multiplier Percentage" />
       <Label layoutX="79.0" layoutY="193.0" prefHeight="21.0" prefWidth="154.0" text="Fixed Annual Amount" />
       <Label layoutX="173.0" layoutY="244.0" prefHeight="21.0" prefWidth="60.0" text="Country" />
-      <Label layoutX="186.0" layoutY="297.0" prefHeight="21.0" prefWidth="47.0" text="Team" />
-      <Label layoutX="16.0" layoutY="343.0" prefHeight="25.0" prefWidth="229.0" text="Annual Effective Working Hours" />
-      <Label layoutX="79.0" layoutY="386.0" prefHeight="25.0" prefWidth="165.0" text="Utilization Percentage" />
-      <Label layoutX="1.0" layoutY="431.0" prefHeight="25.0" prefWidth="284.0" text="Overhead Cost or Production Resource" />
-      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="282.0" layoutY="420.0" prefWidth="150.0">
+      <Label layoutX="18.0" layoutY="298.0" prefHeight="25.0" prefWidth="229.0" text="Annual Effective Working Hours" />
+      <Label layoutX="79.0" layoutY="343.0" prefHeight="25.0" prefWidth="165.0" text="Utilization Percentage" />
+      <Label layoutY="408.0" prefHeight="25.0" prefWidth="284.0" text="Overhead Cost or Production Resource" />
+      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="285.0" layoutY="385.0" prefWidth="150.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Overhead Cost" />

@@ -13,27 +13,26 @@ public class Employee {
     private double annualWorkingHours;
     private double utilizationPercentage;
     private boolean isOverHeadCost;
+    private int employeeTeamId;
 
-    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost) {
+    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) {
         this.name = name;
         this.annualSalary = Double.parseDouble(annSalary);
         this.overheadMultPercent = Double.parseDouble(multPer);
         this.fixedAnnualAmount = Double.parseDouble(fixedAnnAmt);
         this.country = country;
-        this.employeeTeam = team;
         this.annualWorkingHours = Double.parseDouble(workHours);
         this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
     }
 
-    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String team, String workHours, String utilization, Boolean isOverHeadCost){
+    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost){
         this.id = employeeId;
         this.name = name;
         this.annualSalary = Double.parseDouble(annSalary);
         this.overheadMultPercent = Double.parseDouble(multPer);
         this.fixedAnnualAmount = Double.parseDouble(fixedAnnAmt);
         this.country = country;
-        this.employeeTeam = team;
         this.annualWorkingHours = Double.parseDouble(workHours);
         this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
@@ -133,7 +132,11 @@ public class Employee {
     }
 
 
+    public int getEmployeeTeamId() {
+        return employeeTeamId;
+    }
 
-
-
+    public void setEmployeeTeamId(int employeeTeamId) {
+        this.employeeTeamId = employeeTeamId;
+    }
 }
