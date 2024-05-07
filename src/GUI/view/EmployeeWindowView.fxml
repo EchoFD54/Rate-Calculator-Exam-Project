@@ -4,23 +4,23 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="823.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<AnchorPane prefHeight="632.0" prefWidth="932.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
-      <Button layoutX="37.0" layoutY="546.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
-      <Button layoutX="261.0" layoutY="547.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete">
+      <Button layoutX="41.0" layoutY="574.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
+      <Button layoutX="262.0" layoutY="574.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font></Button>
-      <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="90.0" prefHeight="434.0" prefWidth="356.0">
+      <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="119.0" prefHeight="434.0" prefWidth="356.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="351.0" text="Name" />
-          <TableColumn fx:id="employeeTeamColumn" minWidth="0.0" prefWidth="0.0" text="Team" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="354.0" text="Name" />
         </columns>
       </TableView>
       <AnchorPane layoutX="461.0" layoutY="66.0" prefHeight="520.0" prefWidth="445.0">
@@ -50,8 +50,8 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="182.0" layoutY="547.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
-      <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="90.0" prefHeight="434.0" prefWidth="153.0">
+      <Button layoutX="177.0" layoutY="574.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
+      <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="119.0" prefHeight="434.0" prefWidth="153.0">
         <columns>
           <TableColumn fx:id="teamsColumn" prefWidth="151.0" text="Teams" />
         </columns>
@@ -71,15 +71,17 @@
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
       </ImageView>
-      <Button layoutX="400.0" layoutY="48.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
+      <Button layoutX="400.0" layoutY="76.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="380.0" layoutY="546.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0" text="Remove from team">
+      <Button layoutX="382.0" layoutY="574.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0" text="Remove from team">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font>
       </Button>
+      <TextField fx:id="searchTextField" layoutX="213.0" layoutY="81.0" prefHeight="33.0" prefWidth="153.0" />
+      <Button fx:id="searchBtn" layoutX="136.0" layoutY="78.0" mnemonicParsing="false" onAction="#toggleFilter" text="Search" />
    </children>
 </AnchorPane>

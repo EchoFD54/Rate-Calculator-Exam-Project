@@ -4,6 +4,7 @@ import BE.Employee;
 import BE.Team;
 import BLL.EmployeeManager;
 import BLL.TeamManager;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,10 @@ public class EmployeeWindowController {
 
     private final EmployeeManager employeeManager = new EmployeeManager();
     private final TeamManager teamManager = new TeamManager();
+    public TextField searchTextField;
+    public Button searchBtn;
+
+    private Boolean isFilterActive = false;
 
 
     @FXML
@@ -33,13 +38,13 @@ public class EmployeeWindowController {
         setDataBase();
         setEmployeeTab();
         setTeamTableView();
+        setButtons();
     }
 
     private void setEmployeeTableView() {
         TableColumn<Employee, String> employeeNameColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(0);
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn<Employee, String> employeeTeamColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(1);
-        employeeTeamColumn.setCellValueFactory(new PropertyValueFactory<>("employeeTeam"));
+
     }
 
     private void setDataBase() throws SQLException {
@@ -77,6 +82,18 @@ public class EmployeeWindowController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void setButtons(){
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                try {
+                    clearFilter();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     public void addToTeamBtn(ActionEvent actionEvent) throws SQLException {
@@ -251,6 +268,35 @@ public class EmployeeWindowController {
     }
 
 
+    public void toggleFilter(ActionEvent actionEvent) throws SQLException {
+         if (isFilterActive){
+           clearFilter();
+        } else {
+        applyFilter();
+         }
+    }
+
+    private void applyFilter() throws SQLException {
+        String searchQuery = searchTextField.getText().toLowerCase();
+        ObservableList<Employee> filteredEmployees = FXCollections.observableArrayList();
+
+        for ( Employee employee : employeeManager.getAllEmployees()){
+            if (employee.getName().toLowerCase().contains(searchQuery)){
+                filteredEmployees.add(employee);
+            }
+        }
+
+        employeeTableView.setItems(filteredEmployees);
+        searchBtn.setText("Clear");
+        isFilterActive = true;
+    }
+
+    private void clearFilter() throws SQLException {
+        employeeTableView.setItems(FXCollections.observableArrayList(employeeManager.getAllEmployees()));
+        searchTextField.clear();
+        searchBtn.setText("Search");
+        isFilterActive = false;
+    }
 
 }
 
