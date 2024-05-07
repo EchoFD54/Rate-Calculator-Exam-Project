@@ -118,7 +118,7 @@ public class TeamDAO {
 
     public List<Employee> getEmployeesByTeam(int teamId) throws SQLException {
         List<Employee> employeeList = new ArrayList<>();
-        String sql = "SELECT * FROM Employee WHERE id = ?";
+        String sql = "SELECT * FROM Employee WHERE team_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, teamId);
@@ -126,6 +126,11 @@ public class TeamDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     // Construct Employee objects and add them to the list
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    // Construct the Employee object based on your table structure
+                    Employee employee = new Employee(id, name);
+                    employeeList.add(employee);
                 }
             }
         } catch (SQLException e) {

@@ -38,6 +38,11 @@ public class Employee {
         this.isOverHeadCost = isOverHeadCost;
     }
 
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public  double calculateHourlyDate(){
         double totalAnnualSalary = annualSalary + fixedAnnualAmount;
         double effectiveHourlyRate = totalAnnualSalary / annualWorkingHours;

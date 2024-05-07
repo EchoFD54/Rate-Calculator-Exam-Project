@@ -28,5 +28,9 @@ public class TeamManager {
         teamDAO.addEmployeeToTeam(employeeId, teamId);
     }
 
+    public List getEmployeesFromTeam(int teamId) throws SQLException {
+        return teamDAO.getEmployeesByTeam(teamId);
+    }
+
 
 }
