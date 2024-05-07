@@ -6,26 +6,53 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="481.0" prefWidth="689.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
+<AnchorPane prefHeight="481.0" prefWidth="671.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
    <children>
-      <TextField fx:id="empNameField" layoutX="251.0" layoutY="40.0" />
-      <TextField fx:id="empAnnSalaryField" layoutX="251.0" layoutY="91.0" />
-      <TextField fx:id="empMultPerField" layoutX="251.0" layoutY="138.0" />
-      <TextField fx:id="empFixedAnnAmtField" layoutX="251.0" layoutY="188.0" />
-      <TextField fx:id="empCountryField" layoutX="251.0" layoutY="239.0" />
-      <TextField fx:id="empWorkHoursField" layoutX="254.0" layoutY="294.0" />
-      <TextField fx:id="empUtilizationField" layoutX="254.0" layoutY="339.0" />
-      <Label layoutX="186.0" layoutY="45.0" prefHeight="21.0" prefWidth="47.0" text="Name" />
-      <Label layoutX="132.0" layoutY="96.0" prefHeight="25.0" prefWidth="101.0" text="Annual Salary" />
-      <Label layoutX="13.0" layoutY="143.0" prefHeight="25.0" prefWidth="236.0" text="Overhead Multiplier Percentage" />
-      <Label layoutX="79.0" layoutY="193.0" prefHeight="21.0" prefWidth="154.0" text="Fixed Annual Amount" />
-      <Label layoutX="173.0" layoutY="244.0" prefHeight="21.0" prefWidth="60.0" text="Country" />
-      <Label layoutX="18.0" layoutY="298.0" prefHeight="25.0" prefWidth="229.0" text="Annual Effective Working Hours" />
-      <Label layoutX="79.0" layoutY="343.0" prefHeight="25.0" prefWidth="165.0" text="Utilization Percentage" />
-      <Label layoutY="408.0" prefHeight="25.0" prefWidth="284.0" text="Overhead Cost or Production Resource" />
-      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="285.0" layoutY="385.0" prefWidth="150.0">
+      <TextField fx:id="empNameField" layoutX="316.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empAnnSalaryField" layoutX="316.0" layoutY="90.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empMultPerField" layoutX="316.0" layoutY="140.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empFixedAnnAmtField" layoutX="316.0" layoutY="191.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empCountryField" layoutX="316.0" layoutY="243.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empWorkHoursField" layoutX="316.0" layoutY="296.0" prefHeight="36.0" prefWidth="166.0" />
+      <TextField fx:id="empUtilizationField" layoutX="315.0" layoutY="351.0" prefHeight="36.0" prefWidth="166.0" />
+      <Label layoutX="26.0" layoutY="45.0" prefHeight="21.0" prefWidth="47.0" text="Name">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="26.0" layoutY="94.0" prefHeight="25.0" prefWidth="101.0" text="Annual Salary">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="24.0" layoutY="144.0" prefHeight="25.0" prefWidth="236.0" text="Overhead Multiplier Percentage">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="196.0" prefHeight="21.0" prefWidth="154.0" text="Fixed Annual Amount">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="249.0" prefHeight="21.0" prefWidth="60.0" text="Country">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="302.0" prefHeight="25.0" prefWidth="229.0" text="Annual Effective Working Hours">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="357.0" prefHeight="25.0" prefWidth="165.0" text="Utilization Percentage">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="414.0" prefHeight="25.0" prefWidth="284.0" text="Overhead Cost or Production Resource">
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font></Label>
+      <ChoiceBox fx:id="OverheadChoiceBox" layoutX="315.0" layoutY="404.0" prefHeight="50.0" prefWidth="166.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Overhead Cost" />
@@ -33,6 +60,21 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button fx:id="addEmployeeBtn" layoutX="507.0" layoutY="224.0" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee" />
+      <Button fx:id="addEmployeeBtn" layoutX="523.0" layoutY="170.0" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee" />
+      <ImageView fitHeight="132.0" fitWidth="122.0" layoutX="523.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/1144760.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="67.0" layoutX="551.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Logo_S_2_.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="143.0" layoutX="518.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Schneider_Electric-Logo.wine.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
