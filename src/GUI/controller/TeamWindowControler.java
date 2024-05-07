@@ -18,12 +18,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class TeamWindowControler {
     public TableView<Team> teamsTableView;
     public TableColumn<Team, String> teamNameColumn;
-    public TableColumn<Team, String> teamEmployeesColumn; // New column for team employees
+    public TableColumn<Team, String> teamEmployeesColumn;
     private TeamManager teamManager = new TeamManager();
 
     @FXML
@@ -35,7 +34,6 @@ public class TeamWindowControler {
     private void setTeamsTableView() {
         teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        // Configure the team members column
         teamEmployeesColumn.setCellValueFactory(cellData -> {
             Team team = cellData.getValue();
             try {

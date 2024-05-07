@@ -15,7 +15,6 @@ public class HomeWindowController {
         Parent root;
         try {
             root = loader.load();
-            TeamWindowControler teamWindowControler = loader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -30,7 +29,6 @@ public class HomeWindowController {
         Parent root;
         try {
             root = loader.load();
-            EmployeeWindowController employeeWindowController = loader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

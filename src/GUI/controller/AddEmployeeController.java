@@ -1,14 +1,10 @@
 package GUI.controller;
 
 import BE.Employee;
-import BLL.EmployeeManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -91,6 +87,7 @@ public class AddEmployeeController {
             alert.setTitle("Input Error");
             alert.setHeaderText(null);
             alert.setContentText("Please input a valid number for " + invalidField);
+            loadAlertStyle(alert);
             alert.showAndWait();
         }
     }
@@ -136,5 +133,9 @@ public class AddEmployeeController {
         }
     }
 
-
+    private void loadAlertStyle(Alert alert) {
+        String alertStylesheet = "GUI/view/Styles/alert.css";
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(alertStylesheet);
+    }
 }

@@ -14,10 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class LoginWindowController {
     public TextField usernameField;
@@ -52,7 +50,6 @@ public class LoginWindowController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-            // Close the login window
             ((Stage) usernameField.getScene().getWindow()).close();
         } catch (IOException e) {
             throw new RuntimeException(e);

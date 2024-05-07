@@ -25,7 +25,6 @@ public class AddTeamController {
 
     public void setTeam(Team team) {
         this.team = team;
-        // Set the initial text of the teamNameField to the selected team's name
         teamNameField.setText(team.getName());
     }
 

@@ -187,6 +187,7 @@ public class EmployeeWindowController {
         //create employee
         if (!employeeExists) {
             Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost);
+            //add to database
             int employeeID = employeeManager.createEmployee(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);
