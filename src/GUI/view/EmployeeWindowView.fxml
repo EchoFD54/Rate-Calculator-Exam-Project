@@ -19,7 +19,7 @@
          </font></Button>
       <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="90.0" prefHeight="434.0" prefWidth="356.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="336.0000114440918" text="Name" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="351.0" text="Name" />
           <TableColumn fx:id="employeeTeamColumn" minWidth="0.0" prefWidth="0.0" text="Team" />
         </columns>
       </TableView>
@@ -32,6 +32,7 @@
                         <Font name="Comic Sans MS Bold" size="40.0" />
                      </font>
                   </Label>
+                  <Label fx:id="employeeBooleanLbl" text="Boolean" />
                   <Label fx:id="employeeCountryLbl" text="Country">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -45,7 +46,6 @@
                   <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
                   <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
                   <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
-                  <Label fx:id="employeeBooleanLbl" text="Boolean" />
                </children>
             </VBox>
          </children>
@@ -53,7 +53,7 @@
       <Button layoutX="182.0" layoutY="547.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
       <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="90.0" prefHeight="434.0" prefWidth="153.0">
         <columns>
-          <TableColumn fx:id="teamsColumn" prefWidth="135.20001220703125" text="Teams" />
+          <TableColumn fx:id="teamsColumn" prefWidth="151.0" text="Teams" />
         </columns>
       </TableView>
       <ImageView fitHeight="88.0" fitWidth="72.0" layoutX="825.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">

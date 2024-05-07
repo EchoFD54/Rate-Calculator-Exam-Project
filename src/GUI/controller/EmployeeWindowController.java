@@ -109,7 +109,7 @@ public class EmployeeWindowController {
         employeeNameLbl.setText(employee.getName());
         employeeCountryLbl.setText("Country: " + employee.getCountry());
         employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
-        employeOverMultLbl.setText("Overhead Multiplier Percent: " + employee.getOverheadMultPercent());
+        employeOverMultLbl.setText("Overhead Multiplier Percentage: " + employee.getOverheadMultPercent());
         employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
         String teamName = employeeManager.getTeamName(employee.getId());
         employeeTeamLbl.setText("Team: " + teamName);
