@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginWindowController {
-    public TextField usernameField, passwordField;
+    public TextField usernameField;
+    public PasswordField passwordField;
 
     private ArrayList<User> users = new ArrayList<>();
     private final UserManager userManager = new UserManager();
