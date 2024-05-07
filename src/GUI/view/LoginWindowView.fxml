@@ -4,14 +4,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
    <children>
-      <TextField fx:id="usernameField" layoutX="207.0" layoutY="153.0" />
-      <Label layoutX="204.0" layoutY="121.0" text="Username/Email" />
-      <Button layoutX="268.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickLogin" text="Login" />
-      <PasswordField fx:id="passwordField" layoutX="204.0" layoutY="237.0" prefHeight="33.0" prefWidth="181.0" />
-      <Label layoutX="204.0" layoutY="206.0" text="Password" />
+      <ImageView fitHeight="278.0" fitWidth="409.0" layoutX="96.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/IMG-20240507-WA0114-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="36.0" fitWidth="57.0" layoutX="174.0" layoutY="208.0" pickOnBounds="true">
+         <image>
+            <Image url="@Images/IMG-20240507-WA0107-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="180.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/IMG-20240507-WA0104-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="227.0" layoutY="211.0" prefHeight="33.0" prefWidth="181.0" promptText="m.schneider@s.electric.dk" />
+      <Label layoutX="230.0" layoutY="186.0" text="Username/Email">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font></Label>
+      <Button layoutX="265.0" layoutY="337.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="36.0" prefWidth="76.0" text="Login" />
+      <PasswordField fx:id="passwordField" layoutX="227.0" layoutY="284.0" prefHeight="33.0" prefWidth="181.0" promptText="********" />
+      <Label layoutX="231.0" layoutY="259.0" text="Password" />
    </children>
 </AnchorPane>

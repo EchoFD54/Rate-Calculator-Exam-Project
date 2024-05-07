@@ -14,12 +14,19 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="566.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.HomeWindowController">
    <children>
-      <ImageView fitHeight="107.0" fitWidth="115.0" layoutX="384.0" layoutY="24.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="108.0" fitWidth="114.0" layoutX="390.0" layoutY="31.0" opacity="0.13" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/hrc.png" />
          </image>
+         <effect>
+            <InnerShadow blurType="GAUSSIAN" height="32.24" radius="16.3525" width="35.17">
+               <color>
+                  <Color green="1.0" blue="0.10000000149011612" />
+               </color>
+            </InnerShadow>
+         </effect>
       </ImageView>
-      <Button cache="true" ellipsisString="" layoutX="315.0" layoutY="295.0" mnemonicParsing="false" onAction="#openTeamWindow" prefHeight="58.0" prefWidth="184.0" style="-fx-background-radius: 0;" text="Manage Teams">
+      <Button cache="true" ellipsisString="" layoutX="317.0" layoutY="295.0" mnemonicParsing="false" onAction="#openTeamWindow" prefHeight="58.0" prefWidth="184.0" style="-fx-background-radius: 0;" text="Manage Teams">
          <effect>
             <DropShadow />
          </effect>
@@ -39,7 +46,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ImageView fitHeight="267.0" fitWidth="432.0" layoutX="37.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="267.0" fitWidth="432.0" layoutX="46.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
@@ -49,14 +56,14 @@
             <Font name="Corbel" size="20.0" />
          </font>
          <effect>
-            <DropShadow blurType="TWO_PASS_BOX" height="128.96" radius="31.740000000000002" spread="0.42" width="0.0">
+            <DropShadow height="114.31" radius="28.0775" width="0.0">
                <color>
-                  <Color red="0.5928577184677124" green="0.8842105269432068" blue="0.37005847692489624" />
+                  <Color red="0.07236842066049576" green="0.8684210777282715" />
                </color>
             </DropShadow>
          </effect>
       </Text>
-      <ImageView fitHeight="78.0" fitWidth="82.0" layoutX="123.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="78.0" fitWidth="82.0" layoutX="126.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/1144760.png" />
          </image>
@@ -68,7 +75,7 @@
             </InnerShadow>
          </effect>
       </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="78.0" layoutX="369.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="89.0" fitWidth="86.0" layoutX="369.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/4624062.png" />
          </image>
