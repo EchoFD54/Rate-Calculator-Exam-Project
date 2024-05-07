@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import BLL.EmployeeManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -8,24 +10,44 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class AddEmployeeController {
     public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empCountryField, empWorkHoursField, empUtilizationField;
     public ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
+    public ChoiceBox<String> empCountryChoiceBox;
 
     private EmployeeWindowController employeeWindowController;
     private Stage stage;
 
-    private EmployeeManager employeeManager = new EmployeeManager();
+    private ObservableList<String> countries = FXCollections.observableArrayList();
+
+    public void initialize() {
+      loadCountries();
+      empCountryChoiceBox.setItems(countries);
+    }
+
+    private void loadCountries() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/CountryList"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                countries.add(line.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addEmployeeBtn(ActionEvent actionEvent) throws SQLException {
         String name = empNameField.getText();
         String annSalary = empAnnSalaryField.getText();
         String multPer = empMultPerField.getText();
         String fixedAnnAmt = empFixedAnnAmtField.getText();
-        String country = empCountryField.getText();
+        String country = empCountryChoiceBox.getValue();
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
         Boolean isOverheadCost;
