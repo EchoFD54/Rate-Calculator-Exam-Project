@@ -57,6 +57,13 @@ public class Employee {
         return hourlyRate;
     }
 
+    public double calculateDailyRate(){
+        int hoursInADay = 8;
+        double hourlyRate = calculateHourlyDate();
+        double dailyRate = hourlyRate * hoursInADay;dailyRate = Math.round(dailyRate * 100.0) / 100.0;
+        return dailyRate;
+    }
+
 
 
 

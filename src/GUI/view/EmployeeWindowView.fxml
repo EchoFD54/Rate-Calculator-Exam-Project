@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="823.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="823.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
       <Button layoutX="37.0" layoutY="546.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
       <Button layoutX="261.0" layoutY="547.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete">
@@ -23,7 +23,7 @@
           <TableColumn fx:id="employeeTeamColumn" minWidth="0.0" prefWidth="0.0" text="Team" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="450.0" layoutY="58.0" prefHeight="520.0" prefWidth="445.0">
+      <AnchorPane layoutX="461.0" layoutY="66.0" prefHeight="520.0" prefWidth="445.0">
          <children>
             <VBox layoutX="97.0" layoutY="-4.0" prefHeight="520.0" prefWidth="374.0" spacing="20.0">
                <children>
@@ -39,6 +39,7 @@
                   </Label>
                   <Label fx:id="employeeTeamLbl" text="Team" />
                   <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
+                  <Label fx:id="dailyRateLbl" text="DailyRate" />
                   <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
                   <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
                   <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
@@ -50,10 +51,6 @@
          </children>
       </AnchorPane>
       <Button layoutX="182.0" layoutY="547.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
-      <Button layoutX="399.0" layoutY="546.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
-         <font>
-            <Font name="Comic Sans MS" size="12.0" />
-         </font></Button>
       <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="90.0" prefHeight="434.0" prefWidth="153.0">
         <columns>
           <TableColumn fx:id="teamsColumn" prefWidth="135.20001220703125" text="Teams" />
@@ -74,5 +71,15 @@
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
       </ImageView>
+      <Button layoutX="400.0" layoutY="48.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
+         <font>
+            <Font name="Comic Sans MS" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="380.0" layoutY="546.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0" text="Remove from team">
+         <font>
+            <Font name="Comic Sans MS" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

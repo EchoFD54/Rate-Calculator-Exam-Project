@@ -19,7 +19,8 @@ import java.sql.SQLException;
 
 public class EmployeeWindowController {
     public TableView<Employee> employeeTableView;
-    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl, employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl;
+    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
+            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
     public TableView<Team> teamsEmployeeTableView;
 
     private EmployeeManager employeeManager = new EmployeeManager();
@@ -34,7 +35,7 @@ public class EmployeeWindowController {
         setTeamTableView();
     }
 
-    private void setEmployeeTableView(){
+    private void setEmployeeTableView() {
         TableColumn<Employee, String> employeeNameColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(0);
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Employee, String> employeeTeamColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(1);
@@ -43,7 +44,7 @@ public class EmployeeWindowController {
 
     private void setDataBase() throws SQLException {
         try {
-            for (Employee employee : employeeManager.getAllEmployees()){
+            for (Employee employee : employeeManager.getAllEmployees()) {
                 employeeTableView.getItems().add(employee);
             }
         } catch (SQLException e) {
@@ -69,7 +70,7 @@ public class EmployeeWindowController {
         teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         try {
-            for (Team team: teamManager.getAllTeams()){
+            for (Team team : teamManager.getAllTeams()) {
                 teamsEmployeeTableView.getItems().add(team);
             }
         } catch (SQLException e) {
@@ -79,17 +80,29 @@ public class EmployeeWindowController {
     }
 
     public void addToTeamBtn(ActionEvent actionEvent) throws SQLException {
-               addSelectedEmployeeToTeam();
+        addSelectedEmployeeToTeam();
     }
 
-  private void addSelectedEmployeeToTeam() throws SQLException {
+    private void addSelectedEmployeeToTeam() throws SQLException {
         Integer teamId = teamsEmployeeTableView.getSelectionModel().getSelectedItem().getTeamId();
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
-        if (teamId != null && employeeId != null){
+        if (teamId != null && employeeId != null) {
             teamManager.addEmployeeToTeam(employeeId, teamId);
         }
-  }
+    }
 
+    public void removeEmployeeFromTeamBtn(ActionEvent actionEvent) throws SQLException {
+        removeSelectedEmployeeFromTeam();
+    }
+
+    private void removeSelectedEmployeeFromTeam() throws SQLException {
+        Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
+        try {
+            teamManager.removeEmployeeFromTeam(employeeId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void updateLabels(Employee employee) throws SQLException {
@@ -102,13 +115,15 @@ public class EmployeeWindowController {
         employeeTeamLbl.setText("Team: " + teamName);
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
-        if (employee.isOverHeadCost()){
+        if (employee.isOverHeadCost()) {
             employeeBooleanLbl.setText("Overhead Cost");
         } else {
             employeeBooleanLbl.setText("Production Resource");
         }
         String hourlyRate = String.valueOf(employee.calculateHourlyDate());
         hourRateLbl.setText("Hourly Rate: " + hourlyRate);
+        String dailyRate = String.valueOf(employee.calculateDailyRate());
+        dailyRateLbl.setText("Daily Rate: " + dailyRate);
     }
 
     public void openAddEmployee(ActionEvent actionEvent) {
@@ -129,12 +144,12 @@ public class EmployeeWindowController {
         }
     }
 
-    protected void updateEmployeeProperties(int id, String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
+    protected void updateEmployeeProperties(int id, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
         boolean employeeExists = false;
         Employee existingEmployee = null;
         //update employee
-        for (Employee employee : employeeTableView.getItems()){
-            if (employee.getId() == id){
+        for (Employee employee : employeeTableView.getItems()) {
+            if (employee.getId() == id) {
                 existingEmployee = employee;
                 existingEmployee.setName(name);
                 existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
@@ -147,13 +162,13 @@ public class EmployeeWindowController {
                 //update employee on database
                 employeeManager.updateEmployee(existingEmployee);
                 refreshEmployeeTable(existingEmployee);
-              employeeExists = true;
-              break;
+                employeeExists = true;
+                break;
             }
         }
 
         //create employee
-        if (!employeeExists){
+        if (!employeeExists) {
             Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost);
             int employeeID = employeeManager.createEmployee(newEmployee);
             newEmployee.setId(employeeID);
@@ -162,22 +177,22 @@ public class EmployeeWindowController {
 
     }
 
-    public void refreshEmployeeTable(Employee updatedEmployee){
+    public void refreshEmployeeTable(Employee updatedEmployee) {
         ObservableList<Employee> items = employeeTableView.getItems();
         int index = items.indexOf(updatedEmployee);
-        if (index >= 0){
+        if (index >= 0) {
             items.set(index, updatedEmployee);
         }
     }
 
     public void deleteEmployee(ActionEvent actionEvent) {
         Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null){
+        if (selectedEmployee != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this employee?");
             alert.setContentText("This action cannot be undone.");
-           loadAlertStyle(alert);
+            loadAlertStyle(alert);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     int selectedIndex = employeeTableView.getSelectionModel().getSelectedIndex();
@@ -197,12 +212,12 @@ public class EmployeeWindowController {
             loadAlertStyle(alert);
             alert.showAndWait();
         }
-        }
+    }
 
 
     public void openEditEmployee(ActionEvent actionEvent) {
         Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null){
+        if (selectedEmployee != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
             Parent root;
             try {
@@ -218,7 +233,7 @@ public class EmployeeWindowController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Employee Selected");
             alert.setHeaderText(null);
@@ -228,7 +243,7 @@ public class EmployeeWindowController {
 
     }
 
-    private void loadAlertStyle(Alert alert){
+    private void loadAlertStyle(Alert alert) {
         String alertStylesheet = "GUI/view/Styles/alert.css";
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(alertStylesheet);
