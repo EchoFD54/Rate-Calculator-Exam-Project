@@ -23,8 +23,8 @@ public class EmployeeWindowController {
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
     public TableView<Team> teamsEmployeeTableView;
 
-    private EmployeeManager employeeManager = new EmployeeManager();
-    private TeamManager teamManager = new TeamManager();
+    private final EmployeeManager employeeManager = new EmployeeManager();
+    private final TeamManager teamManager = new TeamManager();
 
 
     @FXML
@@ -238,6 +238,7 @@ public class EmployeeWindowController {
             alert.setTitle("No Employee Selected");
             alert.setHeaderText(null);
             alert.setContentText("Please select an employee to edit.");
+            loadAlertStyle(alert);
             alert.showAndWait();
         }
 
