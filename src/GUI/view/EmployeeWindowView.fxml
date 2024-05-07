@@ -50,7 +50,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="177.0" layoutY="574.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
+      <Button layoutX="184.0" layoutY="574.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
       <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="119.0" prefHeight="434.0" prefWidth="153.0">
         <columns>
           <TableColumn fx:id="teamsColumn" prefWidth="151.0" text="Teams" />

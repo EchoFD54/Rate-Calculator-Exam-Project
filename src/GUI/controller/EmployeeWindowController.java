@@ -204,7 +204,7 @@ public class EmployeeWindowController {
     }
 
     public void deleteEmployee(ActionEvent actionEvent) {
-        Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
         if (selectedEmployee != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
