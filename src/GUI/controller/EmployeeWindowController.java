@@ -34,7 +34,6 @@ public class EmployeeWindowController {
     }
 
     private void setEmployeeTableView(){
-        //set columns
         TableColumn<Employee, String> employeeNameColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(0);
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Employee, String> employeeTeamColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(1);
@@ -53,11 +52,10 @@ public class EmployeeWindowController {
     }
 
     private void setEmployeeTab() {
-        // Add listener to the TableView's selection model
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 try {
-                    updateLabels(newSelection); // Update labels with information of the selected employee
+                    updateLabels(newSelection); // update labels with information of the selected employee
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

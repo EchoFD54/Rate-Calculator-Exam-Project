@@ -3,7 +3,6 @@ package DAL;
 import BE.Employee;
 import BE.Team;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,15 +80,16 @@ public class TeamDAO {
     }
 
     public void deleteTeam(int teamId) throws SQLException {
-        String sql = "DELETE FROM teams WHERE team_id = ?";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, teamId);
+        String updateSql = "UPDATE Employee SET team_id = NULL WHERE team_id = ?";
+        String deleteSql = "DELETE FROM teams WHERE team_id = ?";
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new SQLException("Team with ID " + teamId + " not found.");
-            }
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement updateStatement = connection.prepareStatement(updateSql);
+             PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+            updateStatement.setInt(1, teamId);
+            updateStatement.executeUpdate();
+            deleteStatement.setInt(1, teamId);
+            deleteStatement.executeUpdate();
 
             System.out.println("Team with ID " + teamId + " deleted successfully.");
         } catch (SQLException e) {
