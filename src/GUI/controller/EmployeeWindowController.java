@@ -4,6 +4,7 @@ import BE.Employee;
 import BE.Team;
 import BLL.EmployeeManager;
 import BLL.TeamManager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -145,6 +146,7 @@ public class EmployeeWindowController {
                 existingEmployee.setOverHeadCost(isOverHeadCost);
                 //update employee on database
                 employeeManager.updateEmployee(existingEmployee);
+                refreshEmployeeTable(existingEmployee);
               employeeExists = true;
               break;
             }
@@ -158,6 +160,14 @@ public class EmployeeWindowController {
             employeeTableView.getItems().add(newEmployee);
         }
 
+    }
+
+    public void refreshEmployeeTable(Employee updatedEmployee){
+        ObservableList<Employee> items = employeeTableView.getItems();
+        int index = items.indexOf(updatedEmployee);
+        if (index >= 0){
+            items.set(index, updatedEmployee);
+        }
     }
 
     public void deleteEmployee(ActionEvent actionEvent) {

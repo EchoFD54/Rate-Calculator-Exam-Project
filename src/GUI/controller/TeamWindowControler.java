@@ -4,6 +4,7 @@ import BE.Employee;
 import BE.Team;
 import BLL.TeamManager;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +84,9 @@ public class TeamWindowControler {
             if (team.getTeamId() == teamId){
                 existingTeam = team;
                 existingTeam.setName(name);
+                //update team on database and refresh tableview
                 teamManager.updateTeam(existingTeam);
+                refreshTeamsTableView(existingTeam);
                 teamExists = true;
                 break;
             }
@@ -96,6 +99,16 @@ public class TeamWindowControler {
             teamsTableView.getItems().add(newTeam);
 
         }
+
+    }
+
+    private void refreshTeamsTableView(Team updatedTeam) {
+        ObservableList<Team> items = teamsTableView.getItems();
+        int index = items.indexOf(updatedTeam);
+        if (index >= 0){
+            items.set(index, updatedTeam);
+        }
+
 
     }
 
