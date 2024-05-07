@@ -17,7 +17,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class AddEmployeeController {
-    public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empCountryField, empWorkHoursField, empUtilizationField;
+    public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empWorkHoursField, empUtilizationField;
     public ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
     public ChoiceBox<String> empCountryChoiceBox;
@@ -126,6 +126,14 @@ public class AddEmployeeController {
         empFixedAnnAmtField.setText(employee.getFixedAnnualAmount() + "");
         empWorkHoursField.setText(employee.getAnnualWorkingHours() + "");
         empUtilizationField.setText(employee.getUtilizationPercentage() + "");
+
+        empCountryChoiceBox.setValue(employee.getCountry());
+
+        if (employee.isOverHeadCost()){
+            OverheadChoiceBox.setValue("Overhead Cost");
+        } else {
+            OverheadChoiceBox.setValue("Production Resource");
+        }
     }
 
 
