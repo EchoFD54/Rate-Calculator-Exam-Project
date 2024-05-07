@@ -117,6 +117,8 @@ public class EmployeeWindowController {
             root = loader.load();
             AddEmployeeController addEmployeeController = loader.getController();
             addEmployeeController.setEmployeeWindowController(this);
+            Employee employee = new Employee();
+            addEmployeeController.setEmployee(employee);
             Stage stage = new Stage();
             stage.setTitle("Add Employee");
             stage.setScene(new Scene(root));
@@ -126,12 +128,12 @@ public class EmployeeWindowController {
         }
     }
 
-    protected void updateEmployeeProperties(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
+    protected void updateEmployeeProperties(int id, String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
         boolean employeeExists = false;
         Employee existingEmployee = null;
         //update employee
         for (Employee employee : employeeTableView.getItems()){
-            if (employee.getName().equals(name)){
+            if (employee.getId() == id){
                 existingEmployee = employee;
                 existingEmployee.setName(name);
                 existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
@@ -141,7 +143,7 @@ public class EmployeeWindowController {
                 existingEmployee.setAnnualWorkingHours(Double.parseDouble(workHours));
                 existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
-                //update employee on database (cant edit name for now)
+                //update employee on database
                 employeeManager.updateEmployee(existingEmployee);
               employeeExists = true;
               break;
@@ -197,16 +199,7 @@ public class EmployeeWindowController {
                 root = loader.load();
                 AddEmployeeController addEmployeeController = loader.getController();
                 addEmployeeController.setEmployeeWindowController(this);
-
-                //set employee properties
-                addEmployeeController.empNameField.setText(selectedEmployee.getName());
-                addEmployeeController.empAnnSalaryField.setText(selectedEmployee.getAnnualSalary() + "");
-                addEmployeeController.empMultPerField.setText(selectedEmployee.getOverheadMultPercent() + "");
-                addEmployeeController.empFixedAnnAmtField.setText(selectedEmployee.getFixedAnnualAmount() + "");
-                addEmployeeController.empCountryField.setText(selectedEmployee.getCountry());
-                addEmployeeController.empWorkHoursField.setText(selectedEmployee.getAnnualWorkingHours() + "");
-                addEmployeeController.empUtilizationField.setText(selectedEmployee.getUtilizationPercentage() + "");
-
+                addEmployeeController.setEmployee(selectedEmployee);
                 Stage stage = new Stage();
                 stage.setTitle("Edit Employee");
                 stage.setScene(new Scene(root));

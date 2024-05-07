@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import BE.Employee;
 import BLL.EmployeeManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,7 @@ public class AddEmployeeController {
     private Stage stage;
 
     private ObservableList<String> countries = FXCollections.observableArrayList();
+    private Employee employee;
 
     public void initialize() {
       loadCountries();
@@ -50,6 +52,7 @@ public class AddEmployeeController {
         String country = empCountryChoiceBox.getValue();
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
+        int id = employee.getId();
         Boolean isOverheadCost;
 
         if (OverheadChoiceBox.getSelectionModel().getSelectedItem().equals("Overhead Cost")) {
@@ -58,7 +61,7 @@ public class AddEmployeeController {
             isOverheadCost = false;
         }
 
-        // Check if all input are valid numbers and within valid ranges
+        // Check if all input are valid numbers and if the percentage is within a valid range
         boolean isValidInput = true;
         String invalidField = "";
 
@@ -81,7 +84,7 @@ public class AddEmployeeController {
 
         if (isValidInput){
             // Add employee to database and tableview if input is valid
-            employeeWindowController.updateEmployeeProperties(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost);
+            employeeWindowController.updateEmployeeProperties(id, name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost);
             ((Stage) empNameField.getScene().getWindow()).close();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -97,7 +100,7 @@ public class AddEmployeeController {
             double utilizationValue = Double.parseDouble(utilization);
             return utilizationValue >= 0 && utilizationValue <= 100;
         } catch (NumberFormatException e) {
-            return false; // Unable to parse utilization as a double
+            return false;
         }
     }
 
@@ -112,6 +115,17 @@ public class AddEmployeeController {
 
     public void setEmployeeWindowController(EmployeeWindowController employeeWindowController) {
         this.employeeWindowController = employeeWindowController;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        empNameField.setText(employee.getName());
+        empNameField.setText(employee.getName());
+        empAnnSalaryField.setText(employee.getAnnualSalary() + "");
+        empMultPerField.setText(employee.getOverheadMultPercent() + "");
+        empFixedAnnAmtField.setText(employee.getFixedAnnualAmount() + "");
+        empWorkHoursField.setText(employee.getAnnualWorkingHours() + "");
+        empUtilizationField.setText(employee.getUtilizationPercentage() + "");
     }
 
 

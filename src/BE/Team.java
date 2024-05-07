@@ -13,6 +13,10 @@ public class Team {
         this.teamName = teamName;
     }
 
+    public Team() {
+
+    }
+
     public String getName() {
         return teamName;
     }

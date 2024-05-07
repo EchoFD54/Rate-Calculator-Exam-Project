@@ -65,6 +65,8 @@ public class TeamWindowControler {
             root = loader.load();
             AddTeamController addTeamController = loader.getController();
             addTeamController.setTeamWindowController(this);
+            Team newTeam = new Team();
+            addTeamController.setTeam(newTeam);
             Stage stage = new Stage();
             stage.setTitle("Add Employee");
             stage.setScene(new Scene(root));
@@ -74,11 +76,11 @@ public class TeamWindowControler {
         }
     }
 
-    public void updateTeamProperties(String name) throws SQLException {
+    public void updateTeamProperties(int teamId, String name) throws SQLException {
         boolean teamExists = false;
         Team existingTeam = null;
         for (Team team : teamsTableView.getItems()) {
-            if (team.getName().equals(name)){
+            if (team.getTeamId() == teamId){
                 existingTeam = team;
                 existingTeam.setName(name);
                 teamManager.updateTeam(existingTeam);
@@ -106,7 +108,7 @@ public class TeamWindowControler {
                 root = loader.load();
                 AddTeamController addTeamController = loader.getController();
                 addTeamController.setTeamWindowController(this);
-                addTeamController.teamNameField.setText(selectedTeam.getName());
+                addTeamController.setTeam(selectedTeam);
                 Stage stage = new Stage();
                 stage.setTitle("Edit Team");
                 stage.setScene(new Scene(root));

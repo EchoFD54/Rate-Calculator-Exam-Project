@@ -43,6 +43,10 @@ public class Employee {
         this.name = name;
     }
 
+    public Employee() {
+
+    }
+
     public  double calculateHourlyDate(){
         double totalAnnualSalary = annualSalary + fixedAnnualAmount;
         double effectiveHourlyRate = totalAnnualSalary / annualWorkingHours;
