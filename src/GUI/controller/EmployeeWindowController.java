@@ -28,13 +28,12 @@ public class EmployeeWindowController {
     public TableColumn<Team, String> teamEmployeesColumn;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
+    public TextField searchTextField;
+    public Button searchBtn;
+    public ChoiceBox teamsChoiceBox;
 
     private final EmployeeManager employeeManager = new EmployeeManager();
     private final TeamManager teamManager = new TeamManager();
-    public TextField searchTextField;
-    public Button searchBtn;
-
-
 
     private Boolean isFilterActive = false;
 
@@ -47,6 +46,7 @@ public class EmployeeWindowController {
         setTeamsDatabase();
         setEmployeeTab();
         setButtons();
+        populateTeamsChoiceBox();
     }
 
     private void setEmployeeTableView() {
@@ -114,6 +114,19 @@ public class EmployeeWindowController {
                 }
             }
         });
+
+    }
+
+    private void populateTeamsChoiceBox() {
+        teamsChoiceBox.getItems().clear();
+        try {
+            List<Team> teams = teamManager.getAllTeams();
+            for (Team team : teams) {
+                teamsChoiceBox.getItems().add(team.getName());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addToTeamBtn(ActionEvent actionEvent) throws SQLException {
@@ -123,6 +136,7 @@ public class EmployeeWindowController {
     private void addSelectedEmployeeToTeam() throws SQLException {
         Integer teamId = teamsTableView.getSelectionModel().getSelectedItem().getTeamId();
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
+
         if (teamId != null && employeeId != null) {
             teamManager.addEmployeeToTeam(employeeId, teamId);
             refreshTeamsTableView();
@@ -255,6 +269,7 @@ public class EmployeeWindowController {
                 //update employee on database
                 employeeManager.updateEmployee(existingEmployee);
                 refreshEmployeeTable(existingEmployee);
+                refreshTeamsTableView();
                 employeeExists = true;
                 break;
             }
@@ -346,7 +361,7 @@ public class EmployeeWindowController {
                 existingTeam.setName(name);
                 //update team on database and refresh tableview
                 teamManager.updateTeam(existingTeam);
-                refreshTeamsTableView(existingTeam);
+                refreshTeamsTableView();
                 teamExists = true;
                 break;
             }
@@ -357,22 +372,11 @@ public class EmployeeWindowController {
             int teamID = teamManager.createTeam(newTeam);
             newTeam.setTeamId(teamID);
             teamsTableView.getItems().add(newTeam);
+            refreshTeamsTableView();
 
         }
 
     }
-
-    private void refreshTeamsTableView(Team updatedTeam) {
-        ObservableList<Team> items = teamsTableView.getItems();
-        int index = items.indexOf(updatedTeam);
-        if (index >= 0){
-            items.set(index, updatedTeam);
-        }
-
-
-    }
-
-
 
     public void deleteTeam(ActionEvent actionEvent) {
         Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
@@ -386,11 +390,13 @@ public class EmployeeWindowController {
                 if (response == ButtonType.OK) {
                     int selectedIndex = teamsTableView.getSelectionModel().getSelectedIndex();
                     try {
+                        teamsTableView.getItems().remove(selectedIndex);
                         teamManager.deleteTeam(selectedTeam.getTeamId());
+                        refreshTeamsTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    teamsTableView.getItems().remove(selectedIndex);
+
                 }
             });
         } else {
@@ -439,6 +445,7 @@ public class EmployeeWindowController {
         teamsTableView.getItems().clear();
         List<Team> allTeams = teamManager.getAllTeams();
         teamsTableView.getItems().addAll(allTeams);
+        populateTeamsChoiceBox();
 
     }
 
