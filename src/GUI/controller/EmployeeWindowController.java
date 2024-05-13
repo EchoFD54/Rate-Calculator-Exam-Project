@@ -178,21 +178,62 @@ public class EmployeeWindowController {
         dailyRateLbl.setText("Daily Rate: " + dailyRate);
     }
 
-    public void openAddEmployee(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
-        Parent root;
+    private FXMLLoader loadFXML(String path) {
+        return new FXMLLoader(getClass().getResource(path));
+    }
+
+    private Stage createStage(String title, Parent root) {
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        return stage;
+    }
+
+    private Employee getSelectedEmployee() {
+        return employeeTableView.getSelectionModel().getSelectedItem();
+    }
+
+    private Team getSelectedTeam() {
+        return teamsTableView.getSelectionModel().getSelectedItem();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        loadAlertStyle(alert);
+        alert.showAndWait();
+    }
+
+
+    private void openAddOrEditEmployee(String title, Employee employee) {
+        FXMLLoader loader = loadFXML("/GUI/View/AddEmployeeView.fxml");
         try {
-            root = loader.load();
+            Parent root = loader.load();
             AddEmployeeController addEmployeeController = loader.getController();
             addEmployeeController.setEmployeeWindowController(this);
-            Employee employee = new Employee();
             addEmployeeController.setEmployee(employee);
-            Stage stage = new Stage();
-            stage.setTitle("Add Employee");
-            stage.setScene(new Scene(root));
+            Stage stage = createStage(title, root);
             stage.show();
+            if (title.equals("Edit Employee")) {
+                addEmployeeController.addEmployeeBtn.setText("Edit Employee");
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void openAddEmployee(ActionEvent actionEvent) {
+        openAddOrEditEmployee("Add Employee", new Employee());
+    }
+
+    public void openEditEmployee(ActionEvent actionEvent) {
+        Employee selectedEmployee = getSelectedEmployee();
+        if (selectedEmployee != null) {
+            openAddOrEditEmployee("Edit Employee", selectedEmployee);
+        } else {
+            showAlert("No Employee Selected", "Please select an employee to edit.");
         }
     }
 
@@ -251,6 +292,7 @@ public class EmployeeWindowController {
                     int selectedIndex = employeeTableView.getSelectionModel().getSelectedIndex();
                     try {
                         employeeManager.deleteEmployee(selectedEmployee.getId());
+                        refreshTeamsTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -258,60 +300,40 @@ public class EmployeeWindowController {
                 }
             });
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Employee Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an employee to delete.");
-            loadAlertStyle(alert);
-            alert.showAndWait();
+          showAlert("No Employee Selected", "Please select an employee to delete.");
         }
     }
 
 
-    public void openEditEmployee(ActionEvent actionEvent) {
-        Employee selectedEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddEmployeeView.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
-                AddEmployeeController addEmployeeController = loader.getController();
-                addEmployeeController.setEmployeeWindowController(this);
-                addEmployeeController.setEmployee(selectedEmployee);
-                Stage stage = new Stage();
-                stage.setTitle("Edit Employee");
-                stage.setScene(new Scene(root));
-                stage.show();
-                addEmployeeController.addEmployeeBtn.setText("Edit Employee");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Employee Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an employee to edit.");
-            loadAlertStyle(alert);
-            alert.showAndWait();
-        }
 
-    }
-
-    public void openAddTeam(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddTeamVIew.fxml"));
-        Parent root;
+    private void openAddOrEditTeam(String title, Team team) {
+        FXMLLoader loader = loadFXML("/GUI/View/AddTeamView.fxml");
         try {
-            root = loader.load();
+            Parent root = loader.load();
             AddTeamController addTeamController = loader.getController();
             addTeamController.setEmployeeWindowController(this);
-            Team newTeam = new Team();
-            addTeamController.setTeam(newTeam);
-            Stage stage = new Stage();
-            stage.setTitle("Add Employee");
-            stage.setScene(new Scene(root));
+            addTeamController.setTeam(team);
+            Stage stage = createStage(title, root);
             stage.show();
+            if (title.equals("Edit Team")) {
+                addTeamController.addTeamBtn.setText("Edit Team");
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public void openAddTeam(ActionEvent actionEvent) {
+        openAddOrEditTeam("Add Team", new Team());
+    }
+
+    public void openEditTeam(ActionEvent actionEvent) {
+        Team selectedTeam = getSelectedTeam();
+        if (selectedTeam != null) {
+            openAddOrEditTeam("Edit Team", selectedTeam);
+        } else {
+            showAlert("No Team Selected", "Please select a Team to edit.");
         }
     }
 
@@ -350,33 +372,7 @@ public class EmployeeWindowController {
 
     }
 
-    public void openEditTeam(ActionEvent actionEvent) {
-        Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
-        if (selectedTeam != null){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddTeamView.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
-                AddTeamController addTeamController = loader.getController();
-                addTeamController.setEmployeeWindowController(this);
-                addTeamController.setTeam(selectedTeam);
-                Stage stage = new Stage();
-                stage.setTitle("Edit Team");
-                stage.setScene(new Scene(root));
-                stage.show();
-                addTeamController.addTeamBtn.setText("Edit Team");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Team Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a Team to edit.");
-            loadAlertStyle(alert);
-            alert.showAndWait();
-        }
-    }
+
 
     public void deleteTeam(ActionEvent actionEvent) {
         Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
@@ -398,12 +394,7 @@ public class EmployeeWindowController {
                 }
             });
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Employee Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an employee to delete.");
-            loadAlertStyle(alert);
-            alert.showAndWait();
+           showAlert("No Team Selected", "Please select an Team to delete.");
         }
     }
 
