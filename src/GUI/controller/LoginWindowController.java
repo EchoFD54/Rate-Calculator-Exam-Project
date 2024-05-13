@@ -45,7 +45,7 @@ public class LoginWindowController {
 
     private void openHomeWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/HomeWindowView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EmployeeWindowView.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

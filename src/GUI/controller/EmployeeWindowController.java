@@ -34,7 +34,7 @@ public class EmployeeWindowController {
     private final TeamManager teamManager = new TeamManager();
     public TextField searchTextField;
     public Button searchBtn;
-    ;
+    
 
 
     private Boolean isFilterActive = false;
