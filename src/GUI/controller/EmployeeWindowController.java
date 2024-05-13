@@ -137,6 +137,7 @@ public class EmployeeWindowController {
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
         try {
             teamManager.removeEmployeeFromTeam(employeeId);
+            refreshTeamsTableView();
         } catch (SQLException e) {
             e.printStackTrace();
         }
