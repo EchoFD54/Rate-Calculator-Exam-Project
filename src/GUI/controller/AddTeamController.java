@@ -11,14 +11,14 @@ import java.sql.SQLException;
 public class AddTeamController {
     public TextField teamNameField;
     public Button addTeamBtn;
-    private TeamWindowControler teamWindowControler;
+    private EmployeeWindowController employeeWindowController;
     private Team team;
 
     public void addTeam(ActionEvent actionEvent) throws SQLException {
         String name = teamNameField.getText();
         int teamId = team.getTeamId();
 
-        teamWindowControler.updateTeamProperties( teamId, name);
+        employeeWindowController.updateTeamProperties( teamId, name);
         ((Stage) teamNameField.getScene().getWindow()).close();
 
     }
@@ -28,8 +28,8 @@ public class AddTeamController {
         teamNameField.setText(team.getName());
     }
 
-    public void setTeamWindowController(TeamWindowControler teamWindowControler) {
-        this.teamWindowControler = teamWindowControler;
+    public void setEmployeeWindowController(EmployeeWindowController employeeWindowController) {
+        this.employeeWindowController = employeeWindowController;
 
     }
 }

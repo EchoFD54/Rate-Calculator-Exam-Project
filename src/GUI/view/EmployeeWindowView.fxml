@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="632.0" prefWidth="932.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<AnchorPane prefHeight="1000.0" prefWidth="1900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
       <Button layoutX="41.0" layoutY="574.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
       <Button layoutX="262.0" layoutY="574.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete">
@@ -20,7 +20,7 @@
          </font></Button>
       <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="119.0" prefHeight="434.0" prefWidth="356.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="354.0" text="Name" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="354.0" text="Employees" />
         </columns>
       </TableView>
       <AnchorPane layoutX="461.0" layoutY="66.0" prefHeight="520.0" prefWidth="445.0">
@@ -83,5 +83,14 @@
       </Button>
       <TextField fx:id="searchTextField" layoutX="213.0" layoutY="81.0" prefHeight="33.0" prefWidth="153.0" />
       <Button fx:id="searchBtn" layoutX="136.0" layoutY="78.0" mnemonicParsing="false" onAction="#toggleFilter" text="Search" />
+      <TableView fx:id="teamsTableView" layoutX="1053.0" layoutY="123.0" prefHeight="427.0" prefWidth="530.0">
+        <columns>
+          <TableColumn fx:id="teamNameColumn" prefWidth="137.0" text="Teams" />
+          <TableColumn fx:id="teamEmployeesColumn" prefWidth="391.0" text="Employees" />
+        </columns>
+      </TableView>
+      <Button layoutX="1672.0" layoutY="123.0" mnemonicParsing="false" onAction="#openAddTeam" text="New Team" />
+      <Button layoutX="1674.0" layoutY="290.0" mnemonicParsing="false" onAction="#openEditTeam" text="Edit Team" />
+      <Button layoutX="1666.0" layoutY="517.0" mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
    </children>
 </AnchorPane>

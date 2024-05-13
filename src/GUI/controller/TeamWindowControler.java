@@ -63,7 +63,7 @@ public class TeamWindowControler {
         try {
             root = loader.load();
             AddTeamController addTeamController = loader.getController();
-            addTeamController.setTeamWindowController(this);
+            //addTeamController.setTeamWindowController(this);
             Team newTeam = new Team();
             addTeamController.setTeam(newTeam);
             Stage stage = new Stage();
@@ -118,7 +118,7 @@ public class TeamWindowControler {
             try {
                 root = loader.load();
                 AddTeamController addTeamController = loader.getController();
-                addTeamController.setTeamWindowController(this);
+                //addTeamController.setTeamWindowController(this);
                 addTeamController.setTeam(selectedTeam);
                 Stage stage = new Stage();
                 stage.setTitle("Edit Team");

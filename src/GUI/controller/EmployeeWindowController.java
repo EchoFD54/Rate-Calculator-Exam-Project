@@ -4,6 +4,7 @@ import BE.Employee;
 import BE.Team;
 import BLL.EmployeeManager;
 import BLL.TeamManager;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +18,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.StringJoiner;
 
 public class EmployeeWindowController {
     public TableView<Employee> employeeTableView;
+    public TableView<Team> teamsTableView;
+    public TableColumn<Team, String> teamNameColumn;
+    public TableColumn<Team, String> teamEmployeesColumn;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
     public TableView<Team> teamsEmployeeTableView;
@@ -28,6 +34,8 @@ public class EmployeeWindowController {
     private final TeamManager teamManager = new TeamManager();
     public TextField searchTextField;
     public Button searchBtn;
+    ;
+
 
     private Boolean isFilterActive = false;
 
@@ -35,7 +43,9 @@ public class EmployeeWindowController {
     @FXML
     private void initialize() throws SQLException {
         setEmployeeTableView();
+        setTeamsTableView();
         setDataBase();
+        setTeamsDatabase();
         setEmployeeTab();
         setTeamTableView();
         setButtons();
@@ -47,6 +57,24 @@ public class EmployeeWindowController {
 
     }
 
+    private void setTeamsTableView() {
+        teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        teamEmployeesColumn.setCellValueFactory(cellData -> {
+            Team team = cellData.getValue();
+            try {
+                List<Employee> employees = teamManager.getEmployeesFromTeam(team.getTeamId());
+                StringJoiner employeeNames = new StringJoiner(", ");
+                for (Employee employee : employees) {
+                    employeeNames.add(employee.getName());
+                }
+                return new SimpleStringProperty(employeeNames.toString());
+            } catch (SQLException e) {
+                throw new RuntimeException("Error retrieving employees for team: " + e.getMessage(), e);
+            }
+        });
+    }
+
     private void setDataBase() throws SQLException {
         try {
             for (Employee employee : employeeManager.getAllEmployees()) {
@@ -55,7 +83,14 @@ public class EmployeeWindowController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    private void setTeamsDatabase() throws SQLException {
+        try {
+            teamsTableView.getItems().addAll(teamManager.getAllTeams());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving teams: " + e.getMessage(), e);
+        }
     }
 
     private void setEmployeeTab() {
@@ -260,6 +295,116 @@ public class EmployeeWindowController {
             alert.showAndWait();
         }
 
+    }
+
+    public void openAddTeam(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddTeamVIew.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            AddTeamController addTeamController = loader.getController();
+            addTeamController.setEmployeeWindowController(this);
+            Team newTeam = new Team();
+            addTeamController.setTeam(newTeam);
+            Stage stage = new Stage();
+            stage.setTitle("Add Employee");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateTeamProperties(int teamId, String name) throws SQLException {
+        boolean teamExists = false;
+        Team existingTeam = null;
+        for (Team team : teamsTableView.getItems()) {
+            if (team.getTeamId() == teamId){
+                existingTeam = team;
+                existingTeam.setName(name);
+                //update team on database and refresh tableview
+                teamManager.updateTeam(existingTeam);
+                refreshTeamsTableView(existingTeam);
+                teamExists = true;
+                break;
+            }
+        }
+
+        if (!teamExists){
+            Team newTeam = new Team(name);
+            int teamID = teamManager.createTeam(newTeam);
+            newTeam.setTeamId(teamID);
+            teamsTableView.getItems().add(newTeam);
+
+        }
+
+    }
+
+    private void refreshTeamsTableView(Team updatedTeam) {
+        ObservableList<Team> items = teamsTableView.getItems();
+        int index = items.indexOf(updatedTeam);
+        if (index >= 0){
+            items.set(index, updatedTeam);
+        }
+
+
+    }
+
+    public void openEditTeam(ActionEvent actionEvent) {
+        Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTeam != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddTeamView.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                AddTeamController addTeamController = loader.getController();
+                addTeamController.setEmployeeWindowController(this);
+                addTeamController.setTeam(selectedTeam);
+                Stage stage = new Stage();
+                stage.setTitle("Edit Team");
+                stage.setScene(new Scene(root));
+                stage.show();
+                addTeamController.addTeamBtn.setText("Edit Team");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Team Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a Team to edit.");
+            loadAlertStyle(alert);
+            alert.showAndWait();
+        }
+    }
+
+    public void deleteTeam(ActionEvent actionEvent) {
+        Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTeam != null){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete this team?");
+            alert.setContentText("This action cannot be undone.");
+            loadAlertStyle(alert);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    int selectedIndex = teamsTableView.getSelectionModel().getSelectedIndex();
+                    try {
+                        teamManager.deleteTeam(selectedTeam.getTeamId());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    teamsTableView.getItems().remove(selectedIndex);
+                }
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Employee Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an employee to delete.");
+            loadAlertStyle(alert);
+            alert.showAndWait();
+        }
     }
 
     private void loadAlertStyle(Alert alert) {
