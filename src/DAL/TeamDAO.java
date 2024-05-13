@@ -80,16 +80,16 @@ public class TeamDAO {
     }
 
     public void deleteTeam(int teamId) throws SQLException {
-        String updateSql = "UPDATE Employee SET team_id = NULL WHERE team_id = ?";
-        String deleteSql = "DELETE FROM Team WHERE team_id = ?";
+        String deleteEmployeeInTeamSql = "DELETE FROM EmployeeInTeam WHERE team_id = ?";
+        String deleteTeamSql = "DELETE FROM Team WHERE team_id = ?";
 
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement updateStatement = connection.prepareStatement(updateSql);
-             PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
-            updateStatement.setInt(1, teamId);
-            updateStatement.executeUpdate();
-            deleteStatement.setInt(1, teamId);
-            deleteStatement.executeUpdate();
+             PreparedStatement deleteEmployeeInTeamStatement = connection.prepareStatement(deleteEmployeeInTeamSql);
+             PreparedStatement deleteTeamStatement = connection.prepareStatement(deleteTeamSql)) {
+            deleteEmployeeInTeamStatement.setInt(1, teamId);
+            deleteEmployeeInTeamStatement.executeUpdate();
+            deleteTeamStatement.setInt(1, teamId);
+            deleteTeamStatement.executeUpdate();
 
             System.out.println("Team with ID " + teamId + " deleted successfully.");
         } catch (SQLException e) {
@@ -97,13 +97,12 @@ public class TeamDAO {
         }
     }
 
-
     public void addEmployeeToTeam(int employeeId, int teamId) throws SQLException {
-        String sql = "UPDATE Employee SET team_id = ? WHERE id = ?";
+        String sql = "INSERT INTO EmployeeInTeam(employee_id, team_id) VALUES(?,?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, teamId);
-            preparedStatement.setInt(2, employeeId);
+            preparedStatement.setInt(1, employeeId);
+            preparedStatement.setInt(2, teamId);
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -118,17 +117,14 @@ public class TeamDAO {
 
     public List<Employee> getEmployeesByTeam(int teamId) throws SQLException {
         List<Employee> employeeList = new ArrayList<>();
-        String sql = "SELECT * FROM Employee WHERE team_id = ?";
+        String sql = "SELECT e.* FROM Employee e INNER JOIN EmployeeInTeam et ON e.id = et.employee_id WHERE et.team_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, teamId);
-
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    // Construct Employee objects and add them to the list
                     int id = resultSet.getInt("id");
                     String name = resultSet.getString("name");
-                    // Construct the Employee object based on your table structure
                     Employee employee = new Employee(id, name);
                     employeeList.add(employee);
                 }
@@ -140,21 +136,21 @@ public class TeamDAO {
     }
 
     public void removeEmployeeFromTeam(int employeeId) throws SQLException {
-        String sql = "UPDATE Employee SET team_id = NULL WHERE id = ?";
+        String sql = "DELETE FROM EmployeeInTeam WHERE employee_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeId);
-
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Removing employee from team failed, no rows affected.");
             }
-
             System.out.println("Employee with ID " + employeeId + " removed from team successfully.");
         } catch (SQLException e) {
             throw new SQLException("Error removing employee from team: " + e.getMessage(), e);
         }
     }
+
+
 
 
 

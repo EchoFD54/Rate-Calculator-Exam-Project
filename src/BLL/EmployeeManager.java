@@ -25,7 +25,7 @@ public class EmployeeManager {
         return employeeDAO.getEmployeeList();
     }
 
-    public String getTeamName(int employeeId) throws SQLException {
-        return employeeDAO.getTeamNameByEmployeeId(employeeId);
+    public List getTeamName(int employeeId) throws SQLException {
+        return employeeDAO.getTeamNamesByEmployeeId(employeeId);
     }
 }

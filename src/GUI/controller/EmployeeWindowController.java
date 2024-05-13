@@ -28,13 +28,12 @@ public class EmployeeWindowController {
     public TableColumn<Team, String> teamEmployeesColumn;
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
-    public TableView<Team> teamsEmployeeTableView;
 
     private final EmployeeManager employeeManager = new EmployeeManager();
     private final TeamManager teamManager = new TeamManager();
     public TextField searchTextField;
     public Button searchBtn;
-    
+
 
 
     private Boolean isFilterActive = false;
@@ -47,7 +46,6 @@ public class EmployeeWindowController {
         setDataBase();
         setTeamsDatabase();
         setEmployeeTab();
-        setTeamTableView();
         setButtons();
     }
 
@@ -105,19 +103,6 @@ public class EmployeeWindowController {
         });
     }
 
-    private void setTeamTableView() {
-        TableColumn<Team, String> teamNameColumn = (TableColumn<Team, String>) teamsEmployeeTableView.getColumns().get(0);
-        teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        try {
-            for (Team team : teamManager.getAllTeams()) {
-                teamsEmployeeTableView.getItems().add(team);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
     private void setButtons(){
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -136,10 +121,11 @@ public class EmployeeWindowController {
     }
 
     private void addSelectedEmployeeToTeam() throws SQLException {
-        Integer teamId = teamsEmployeeTableView.getSelectionModel().getSelectedItem().getTeamId();
+        Integer teamId = teamsTableView.getSelectionModel().getSelectedItem().getTeamId();
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
         if (teamId != null && employeeId != null) {
             teamManager.addEmployeeToTeam(employeeId, teamId);
+            refreshTeamsTableView();
         }
     }
 
@@ -163,8 +149,10 @@ public class EmployeeWindowController {
         employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
         employeOverMultLbl.setText("Overhead Multiplier Percentage: " + employee.getOverheadMultPercent());
         employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
-        String teamName = employeeManager.getTeamName(employee.getId());
-        employeeTeamLbl.setText("Team: " + teamName);
+        //Get the teams that the employee belongs to
+        List <String> teamNames = employeeManager.getTeamName(employee.getId());
+        String teamNamesString = String.join(", ", teamNames);
+        employeeTeamLbl.setText("Teams: " + teamNamesString);
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
         if (employee.isOverHeadCost()) {
@@ -442,6 +430,13 @@ public class EmployeeWindowController {
         searchTextField.clear();
         searchBtn.setText("Search");
         isFilterActive = false;
+    }
+
+    private void refreshTeamsTableView() throws SQLException {
+        teamsTableView.getItems().clear();
+        List<Team> allTeams = teamManager.getAllTeams();
+        teamsTableView.getItems().addAll(allTeams);
+
     }
 
 }

@@ -23,7 +23,7 @@
           <TableColumn fx:id="employeeNameColumn" prefWidth="354.0" text="Employees" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="461.0" layoutY="66.0" prefHeight="520.0" prefWidth="445.0">
+      <AnchorPane layoutX="390.0" layoutY="30.0" prefHeight="520.0" prefWidth="445.0">
          <children>
             <VBox layoutX="97.0" layoutY="-4.0" prefHeight="520.0" prefWidth="374.0" spacing="20.0">
                <children>
@@ -51,12 +51,7 @@
          </children>
       </AnchorPane>
       <Button layoutX="184.0" layoutY="574.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
-      <TableView fx:id="teamsEmployeeTableView" layoutX="380.0" layoutY="119.0" prefHeight="434.0" prefWidth="153.0">
-        <columns>
-          <TableColumn fx:id="teamsColumn" prefWidth="151.0" text="Teams" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="88.0" fitWidth="72.0" layoutX="825.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="88.0" fitWidth="72.0" layoutX="825.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/1144760.png" />
          </image>
@@ -71,12 +66,12 @@
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
       </ImageView>
-      <Button layoutX="400.0" layoutY="76.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
+      <Button layoutX="920.0" layoutY="179.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0" text="Add to Team">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="382.0" layoutY="574.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0" text="Remove from team">
+      <Button layoutX="897.0" layoutY="254.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0" text="Remove from team">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font>

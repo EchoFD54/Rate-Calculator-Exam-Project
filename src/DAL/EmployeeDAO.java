@@ -75,18 +75,21 @@ public class EmployeeDAO {
         }
     }
 
-    // Method to delete an employee from the database
     public void deleteEmployee(int employeeId) throws SQLException {
-        String sql = "DELETE FROM Employee WHERE id = ?";
+        String deleteEmployeeSql = "DELETE FROM Employee WHERE id = ?";
+        String deleteEmployeeInTeamSql = "DELETE FROM EmployeeInTeam WHERE employee_id = ?";
 
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employeeId);
+             PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteEmployeeSql);
+             PreparedStatement deleteEmployeeInTeamStatement = connection.prepareStatement(deleteEmployeeInTeamSql)) {
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new SQLException("Employee with ID " + employeeId + " not found.");
-            }
+            // Remove from Employee table
+            deleteEmployeeStatement.setInt(1, employeeId);
+            deleteEmployeeStatement.executeUpdate();
+
+            // Remove from EmployeeInTeam table
+            deleteEmployeeInTeamStatement.setInt(1, employeeId);
+            deleteEmployeeInTeamStatement.executeUpdate();
 
             System.out.println("Employee with ID " + employeeId + " deleted successfully.");
         } catch (SQLException e) {
@@ -119,23 +122,23 @@ public class EmployeeDAO {
         return employeeList;
     }
 
-    public String getTeamNameByEmployeeId(int employeeId) throws SQLException {
-        String sql = "SELECT Team.team_name FROM Employee " +
-                "INNER JOIN Team ON Employee.team_id = Team.team_id " +
-                "WHERE Employee.id = ?";
+    public List<String> getTeamNamesByEmployeeId(int employeeId) throws SQLException {
+        List<String> teamNames = new ArrayList<>();
+        String sql = "SELECT Team.team_name FROM EmployeeInTeam " +
+                "INNER JOIN Team ON EmployeeInTeam.team_id = Team.team_id " +
+                "WHERE EmployeeInTeam.employee_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getString("team_name");
-                } else {
-                    return "No Team Assigned";
+                while (resultSet.next()) {
+                    teamNames.add(resultSet.getString("team_name"));
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Error retrieving team name for employee: " + e.getMessage(), e);
+            throw new SQLException("Error retrieving team names for employee: " + e.getMessage(), e);
         }
+        return teamNames;
     }
 
 
