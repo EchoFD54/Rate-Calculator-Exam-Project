@@ -120,8 +120,8 @@ public class EmployeeDAO {
     }
 
     public String getTeamNameByEmployeeId(int employeeId) throws SQLException {
-        String sql = "SELECT teams.team_name FROM Employee " +
-                "INNER JOIN teams ON Employee.team_id = teams.team_id " +
+        String sql = "SELECT Team.team_name FROM Employee " +
+                "INNER JOIN Team ON Employee.team_id = Team.team_id " +
                 "WHERE Employee.id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

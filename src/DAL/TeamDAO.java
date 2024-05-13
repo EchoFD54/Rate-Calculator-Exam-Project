@@ -20,7 +20,7 @@ public class TeamDAO {
 
 
     public int createTeam(Team team)  throws SQLException {
-        String sql = "INSERT INTO teams (team_name) " + "VALUES (?)";
+        String sql = "INSERT INTO Team (team_name) " + "VALUES (?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, team.getName());
@@ -43,7 +43,7 @@ public class TeamDAO {
     }
 
     public void updateTeam(Team team)  throws SQLException {
-        String sql = "UPDATE teams SET team_name = ? WHERE team_id = ?";
+        String sql = "UPDATE Team SET team_name = ? WHERE team_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, team.getName());
@@ -62,7 +62,7 @@ public class TeamDAO {
 
     public List<Team> getTeamList() throws SQLException {
         List<Team> teamList = new ArrayList<>();
-        String sql = "SELECT * FROM teams";
+        String sql = "SELECT * FROM Team";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -81,7 +81,7 @@ public class TeamDAO {
 
     public void deleteTeam(int teamId) throws SQLException {
         String updateSql = "UPDATE Employee SET team_id = NULL WHERE team_id = ?";
-        String deleteSql = "DELETE FROM teams WHERE team_id = ?";
+        String deleteSql = "DELETE FROM Team WHERE team_id = ?";
 
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(updateSql);
