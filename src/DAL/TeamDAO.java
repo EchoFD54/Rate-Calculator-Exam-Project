@@ -135,16 +135,17 @@ public class TeamDAO {
         return employeeList;
     }
 
-    public void removeEmployeeFromTeam(int employeeId) throws SQLException {
-        String sql = "DELETE FROM EmployeeInTeam WHERE employee_id = ?";
+    public void removeEmployeeFromTeam(int employeeId, int teamId) throws SQLException {
+        String sql = "DELETE FROM EmployeeInTeam WHERE employee_id = ? AND team_id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeId);
+            preparedStatement.setInt(2, teamId);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Removing employee from team failed, no rows affected.");
             }
-            System.out.println("Employee with ID " + employeeId + " removed from team successfully.");
+            System.out.println("Employee with ID " + employeeId + " removed from team " + teamId + " successfully.");
         } catch (SQLException e) {
             throw new SQLException("Error removing employee from team: " + e.getMessage(), e);
         }

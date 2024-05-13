@@ -135,11 +135,22 @@ public class EmployeeWindowController {
 
     private void removeSelectedEmployeeFromTeam() throws SQLException {
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
-        try {
-            teamManager.removeEmployeeFromTeam(employeeId);
-            refreshTeamsTableView();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        Team selectedTeam = teamsTableView.getSelectionModel().getSelectedItem();
+        if (selectedTeam != null) {
+            int teamId = selectedTeam.getTeamId();
+            try {
+                teamManager.removeEmployeeFromTeam(employeeId, teamId);
+                refreshTeamsTableView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Team Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a team to delete the employee from.");
+            loadAlertStyle(alert);
+            alert.showAndWait();
         }
     }
 

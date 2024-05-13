@@ -83,17 +83,23 @@ public class EmployeeDAO {
              PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteEmployeeSql);
              PreparedStatement deleteEmployeeInTeamStatement = connection.prepareStatement(deleteEmployeeInTeamSql)) {
 
-            // Remove from Employee table
-            deleteEmployeeStatement.setInt(1, employeeId);
-            deleteEmployeeStatement.executeUpdate();
-
             // Remove from EmployeeInTeam table
             deleteEmployeeInTeamStatement.setInt(1, employeeId);
-            deleteEmployeeInTeamStatement.executeUpdate();
+            int affectedRowsInTeam = deleteEmployeeInTeamStatement.executeUpdate();
+            if (affectedRowsInTeam == 0) {
+                throw new SQLException("No rows deleted from EmployeeInTeam table for employee ID: " + employeeId);
+            }
+
+            // Remove from Employee table
+            deleteEmployeeStatement.setInt(1, employeeId);
+            int affectedRows = deleteEmployeeStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("No rows deleted from Employee table for employee ID: " + employeeId);
+            }
 
             System.out.println("Employee with ID " + employeeId + " deleted successfully.");
         } catch (SQLException e) {
-            throw new SQLException("Error deleting employee: " + e.getMessage());
+            throw new SQLException("Error deleting employee: " + e.getMessage(), e);
         }
     }
 

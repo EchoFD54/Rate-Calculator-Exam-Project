@@ -32,8 +32,8 @@ public class TeamManager {
         return teamDAO.getEmployeesByTeam(teamId);
     }
 
-    public void removeEmployeeFromTeam(int employeeId) throws SQLException {
-        teamDAO.removeEmployeeFromTeam(employeeId);
+    public void removeEmployeeFromTeam(int employeeId, int teamId) throws SQLException {
+        teamDAO.removeEmployeeFromTeam(employeeId, teamId);
     }
 
 
