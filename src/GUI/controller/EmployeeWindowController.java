@@ -4,6 +4,7 @@ import BE.Employee;
 import BE.Team;
 import BLL.EmployeeManager;
 import BLL.TeamManager;
+import GUI.model.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,8 +33,8 @@ public class EmployeeWindowController {
     public Button searchBtn;
     public ChoiceBox teamsChoiceBox;
 
-    private final EmployeeManager employeeManager = new EmployeeManager();
-    private final TeamManager teamManager = new TeamManager();
+
+    private final Model model = new Model();
 
     private Boolean isFilterActive = false;
 
@@ -61,7 +62,7 @@ public class EmployeeWindowController {
         teamEmployeesColumn.setCellValueFactory(cellData -> {
             Team team = cellData.getValue();
             try {
-                List<Employee> employees = teamManager.getEmployeesFromTeam(team.getTeamId());
+                List<Employee> employees = model.getEmployeesFromTeamInDB(team.getTeamId());
                 StringJoiner employeeNames = new StringJoiner(", ");
                 for (Employee employee : employees) {
                     employeeNames.add(employee.getName());
@@ -75,7 +76,7 @@ public class EmployeeWindowController {
 
     private void setDataBase() throws SQLException {
         try {
-            for (Employee employee : employeeManager.getAllEmployees()) {
+            for (Employee employee : model.getEmployeesFromDB()) {
                 employeeTableView.getItems().add(employee);
             }
         } catch (SQLException e) {
@@ -85,7 +86,7 @@ public class EmployeeWindowController {
 
     private void setTeamsDatabase() throws SQLException {
         try {
-            teamsTableView.getItems().addAll(teamManager.getAllTeams());
+            teamsTableView.getItems().addAll(model.getTeamsFromDB());
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving teams: " + e.getMessage(), e);
         }
@@ -120,7 +121,7 @@ public class EmployeeWindowController {
     private void populateTeamsChoiceBox() {
         teamsChoiceBox.getItems().clear();
         try {
-            List<Team> teams = teamManager.getAllTeams();
+            List<Team> teams = model.getTeamsFromDB();
             for (Team team : teams) {
                 teamsChoiceBox.getItems().add(team.getName());
             }
@@ -134,11 +135,11 @@ public class EmployeeWindowController {
     }
 
     private void addSelectedEmployeeToTeam() throws SQLException {
-        Integer teamId = teamsTableView.getSelectionModel().getSelectedItem().getTeamId();
         Integer employeeId = employeeTableView.getSelectionModel().getSelectedItem().getId();
+        Integer teamId = teamsTableView.getSelectionModel().getSelectedItem().getTeamId();
 
         if (teamId != null && employeeId != null) {
-            teamManager.addEmployeeToTeam(employeeId, teamId);
+            model.addEmployeeToTeamInDB(employeeId, teamId);
             refreshTeamsTableView();
         }
     }
@@ -153,7 +154,7 @@ public class EmployeeWindowController {
         if (selectedTeam != null) {
             int teamId = selectedTeam.getTeamId();
             try {
-                teamManager.removeEmployeeFromTeam(employeeId, teamId);
+                model.deleteEmployeeFromTeamInDB(employeeId, teamId);
                 refreshTeamsTableView();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -176,7 +177,7 @@ public class EmployeeWindowController {
         employeOverMultLbl.setText("Overhead Multiplier Percentage: " + employee.getOverheadMultPercent());
         employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
         //Get the teams that the employee belongs to
-        List <String> teamNames = employeeManager.getTeamName(employee.getId());
+        List <String> teamNames = model.GetTeamsFromDBUsingEmployee(employee.getId());
         String teamNamesString = String.join(", ", teamNames);
         employeeTeamLbl.setText("Teams: " + teamNamesString);
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
@@ -260,6 +261,7 @@ public class EmployeeWindowController {
                 existingEmployee = employee;
                 existingEmployee.setName(name);
                 existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
+                
                 existingEmployee.setOverheadMultPercent(Double.parseDouble(multPer));
                 existingEmployee.setFixedAnnualAmount(Double.parseDouble(fixedAnnAmt));
                 existingEmployee.setCountry(country);
@@ -267,7 +269,7 @@ public class EmployeeWindowController {
                 existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
                 //update employee on database
-                employeeManager.updateEmployee(existingEmployee);
+                model.updateEmployeeInDB(existingEmployee);
                 refreshEmployeeTable(existingEmployee);
                 refreshTeamsTableView();
                 employeeExists = true;
@@ -279,7 +281,7 @@ public class EmployeeWindowController {
         if (!employeeExists) {
             Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost);
             //add to database
-            int employeeID = employeeManager.createEmployee(newEmployee);
+            int employeeID = model.createEmployeeInDB(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);
         }
@@ -306,7 +308,7 @@ public class EmployeeWindowController {
                 if (response == ButtonType.OK) {
                     int selectedIndex = employeeTableView.getSelectionModel().getSelectedIndex();
                     try {
-                        employeeManager.deleteEmployee(selectedEmployee.getId());
+                        model.deleteEmployeeFromDB(selectedEmployee.getId());
                         refreshTeamsTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -355,21 +357,23 @@ public class EmployeeWindowController {
     public void updateTeamProperties(int teamId, String name) throws SQLException {
         boolean teamExists = false;
         Team existingTeam = null;
+        //edit existing team
         for (Team team : teamsTableView.getItems()) {
             if (team.getTeamId() == teamId){
                 existingTeam = team;
                 existingTeam.setName(name);
                 //update team on database and refresh tableview
-                teamManager.updateTeam(existingTeam);
+                model.updateTeamInDB(existingTeam);
                 refreshTeamsTableView();
                 teamExists = true;
                 break;
             }
         }
 
+        //create a new team
         if (!teamExists){
             Team newTeam = new Team(name);
-            int teamID = teamManager.createTeam(newTeam);
+            int teamID = model.createTeamInDB(newTeam);
             newTeam.setTeamId(teamID);
             teamsTableView.getItems().add(newTeam);
             refreshTeamsTableView();
@@ -391,7 +395,7 @@ public class EmployeeWindowController {
                     int selectedIndex = teamsTableView.getSelectionModel().getSelectedIndex();
                     try {
                         teamsTableView.getItems().remove(selectedIndex);
-                        teamManager.deleteTeam(selectedTeam.getTeamId());
+                        model.deleteTeamFromDB(selectedTeam.getTeamId());
                         refreshTeamsTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -423,7 +427,7 @@ public class EmployeeWindowController {
         String searchQuery = searchTextField.getText().toLowerCase();
         ObservableList<Employee> filteredEmployees = FXCollections.observableArrayList();
 
-        for ( Employee employee : employeeManager.getAllEmployees()){
+        for ( Employee employee : model.getEmployeesFromDB()){
             if (employee.getName().toLowerCase().contains(searchQuery)){
                 filteredEmployees.add(employee);
             }
@@ -435,7 +439,7 @@ public class EmployeeWindowController {
     }
 
     private void clearFilter() throws SQLException {
-        employeeTableView.setItems(FXCollections.observableArrayList(employeeManager.getAllEmployees()));
+        employeeTableView.setItems(FXCollections.observableArrayList(model.getEmployeesFromDB()));
         searchTextField.clear();
         searchBtn.setText("Search");
         isFilterActive = false;
@@ -443,7 +447,7 @@ public class EmployeeWindowController {
 
     private void refreshTeamsTableView() throws SQLException {
         teamsTableView.getItems().clear();
-        List<Team> allTeams = teamManager.getAllTeams();
+        List<Team> allTeams = model.getTeamsFromDB();
         teamsTableView.getItems().addAll(allTeams);
         populateTeamsChoiceBox();
 

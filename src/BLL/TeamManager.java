@@ -1,5 +1,6 @@
 package BLL;
 
+import BE.Employee;
 import BE.Team;
 import DAL.TeamDAO;
 
@@ -28,7 +29,7 @@ public class TeamManager {
         teamDAO.addEmployeeToTeam(employeeId, teamId);
     }
 
-    public List getEmployeesFromTeam(int teamId) throws SQLException {
+    public List<Employee> getEmployeesFromTeam(int teamId) throws SQLException {
         return teamDAO.getEmployeesByTeam(teamId);
     }
 
