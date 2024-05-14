@@ -1,7 +1,7 @@
 package GUI.controller;
 
 import BE.User;
-import BLL.UserManager;
+import GUI.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +21,8 @@ public class LoginWindowController {
     public TextField usernameField;
     public PasswordField passwordField;
 
-    private ArrayList<User> users = new ArrayList<>();
-    private final UserManager userManager = new UserManager();
+    private final ArrayList<User> users = new ArrayList<>();
+    private final Model model = new Model();
 
 
     public void clickLogin(ActionEvent actionEvent) {
@@ -58,7 +58,7 @@ public class LoginWindowController {
 
     public void initialize() {
         try {
-            users.addAll(userManager.getAllUsers());
+            users.addAll(model.getUsersFromDB());
         } catch (SQLException e) {
             throw new RuntimeException("Error initializing user data: " + e.getMessage(), e);
         }

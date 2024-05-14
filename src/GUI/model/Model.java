@@ -2,8 +2,10 @@ package GUI.model;
 
 import BE.Employee;
 import BE.Team;
+import BE.User;
 import BLL.EmployeeManager;
 import BLL.TeamManager;
+import BLL.UserManager;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 public class Model {
     private final EmployeeManager employeeManager = new EmployeeManager();
     private final TeamManager teamManager = new TeamManager();
+    private final UserManager userManager = new UserManager();
 
 
     public int createEmployeeInDB(Employee employee) throws SQLException {
@@ -59,6 +62,10 @@ public class Model {
 
     public void  deleteTeamFromDB(int teamId) throws SQLException {
         teamManager.deleteTeam(teamId);
+    }
+
+    public List<User> getUsersFromDB() throws SQLException {
+       return userManager.getAllUsers();
     }
 
 }
