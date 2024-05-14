@@ -30,6 +30,6 @@ public class Team {
     }
 
     public void setTeamId(int teamId) {
-        teamId = teamId;
+        this.teamId = teamId;
     }
 }

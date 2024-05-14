@@ -85,10 +85,7 @@ public class EmployeeDAO {
 
             // Remove from EmployeeInTeam table
             deleteEmployeeInTeamStatement.setInt(1, employeeId);
-            int affectedRowsInTeam = deleteEmployeeInTeamStatement.executeUpdate();
-            if (affectedRowsInTeam == 0) {
-                throw new SQLException("No rows deleted from EmployeeInTeam table for employee ID: " + employeeId);
-            }
+            deleteEmployeeInTeamStatement.executeUpdate();
 
             // Remove from Employee table
             deleteEmployeeStatement.setInt(1, employeeId);

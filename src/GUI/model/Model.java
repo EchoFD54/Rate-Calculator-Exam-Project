@@ -60,5 +60,5 @@ public class Model {
     public void  deleteTeamFromDB(int teamId) throws SQLException {
         teamManager.deleteTeam(teamId);
     }
-    
+
 }

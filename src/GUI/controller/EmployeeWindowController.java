@@ -2,8 +2,6 @@ package GUI.controller;
 
 import BE.Employee;
 import BE.Team;
-import BLL.EmployeeManager;
-import BLL.TeamManager;
 import GUI.model.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
