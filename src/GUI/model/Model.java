@@ -32,6 +32,22 @@ public class Model {
         return employeeManager.getTeamNames(employeeId);
     }
 
+    public List<String> getAllCountriesFromDB() throws SQLException {
+        return employeeManager.getAllCountries();
+    }
+
+    public List<Employee> getEmployeesFromCountryInDB(String country) throws SQLException {
+        return employeeManager.getEmployeesByCountry(country);
+    }
+
+    public double calculateTotalDayRateByCountry(String country) throws SQLException {
+        List<Employee> employees = employeeManager.getEmployeesByCountry(country);
+        double totalDayRate = 0;
+        for (Employee employee : employees) {
+            totalDayRate += employee.calculateDailyRate();
+        }
+        return totalDayRate;
+    }
     public void deleteEmployeeFromDB(int employeeId) throws SQLException {
         employeeManager.deleteEmployee(employeeId);
     }

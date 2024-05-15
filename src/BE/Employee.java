@@ -38,6 +38,19 @@ public class Employee {
         this.isOverHeadCost = isOverHeadCost;
     }
 
+    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt,  String workHours, String utilization, Boolean isOverHeadCost){
+        this.id = employeeId;
+        this.name = name;
+        this.annualSalary = Double.parseDouble(annSalary);
+        this.overheadMultPercent = Double.parseDouble(multPer);
+        this.fixedAnnualAmount = Double.parseDouble(fixedAnnAmt);
+        this.annualWorkingHours = Double.parseDouble(workHours);
+        this.utilizationPercentage = Double.parseDouble(utilization);
+        this.isOverHeadCost = isOverHeadCost;
+    }
+
+
+
     public Employee(int id, String name) {
         this.id = id;
         this.name = name;

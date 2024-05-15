@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import GUI.model.CountryInfo;
 import BE.Employee;
 import BE.Team;
 import GUI.model.Model;
@@ -25,6 +26,12 @@ public class EmployeeWindowController {
     public TableView<Team> teamsTableView;
     public TableColumn<Team, String> teamNameColumn;
     public TableColumn<Team, String> teamEmployeesColumn;
+    public TableView<CountryInfo> countriesTableView;
+    public TableColumn<CountryInfo, String> countryNameColumn;
+    public TableColumn<CountryInfo, String> countryEmployeesColumn;
+    public TableColumn<CountryInfo, Double> countryDailyRateColumn;
+    private ObservableList<CountryInfo> countryInfoList = FXCollections.observableArrayList();
+
     public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
     public TextField searchTextField;
@@ -33,6 +40,8 @@ public class EmployeeWindowController {
 
 
     private final Model model = new Model();
+
+
 
     private Boolean isFilterActive = false;
 
@@ -46,6 +55,8 @@ public class EmployeeWindowController {
         setEmployeeTab();
         setButtons();
         populateTeamsChoiceBox();
+        setCountriesTableView();
+
     }
 
     private void setEmployeeTableView() {
@@ -70,6 +81,39 @@ public class EmployeeWindowController {
                 throw new RuntimeException("Error retrieving employees for team: " + e.getMessage(), e);
             }
         });
+
+
+    }
+
+    private void setCountriesTableView() {
+        countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
+        countryEmployeesColumn.setCellValueFactory(new PropertyValueFactory<>("employeesInCountry"));
+        countryDailyRateColumn.setCellValueFactory(new PropertyValueFactory<>("countryDailyRate"));
+        loadCountryInfo();
+        countriesTableView.setItems(countryInfoList);
+    }
+
+    private void loadCountryInfo() {
+       try {
+           List<String> countries = model.getAllCountriesFromDB();
+           for (String country : countries) {
+               List<Employee> employees = model.getEmployeesFromCountryInDB(country);
+               StringBuilder employeesInCountry = new StringBuilder();
+               double totalDailyRate = 0;
+               for (Employee employee : employees) {
+                   employeesInCountry.append(employee.getName()).append(", ");
+                   totalDailyRate = model.calculateTotalDayRateByCountry(country);
+               }
+
+               if (employeesInCountry.length() > 0){
+                   employeesInCountry.deleteCharAt(employeesInCountry.length() - 2);
+               }
+
+               countryInfoList.add(new CountryInfo(country, employeesInCountry.toString(), totalDailyRate));
+           }
+       } catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     private void setDataBase() throws SQLException {
@@ -270,6 +314,7 @@ public class EmployeeWindowController {
                 model.updateEmployeeInDB(existingEmployee);
                 refreshEmployeeTable(existingEmployee);
                 refreshTeamsTableView();
+                refreshCountriesTableView();
                 employeeExists = true;
                 break;
             }
@@ -282,6 +327,7 @@ public class EmployeeWindowController {
             int employeeID = model.createEmployeeInDB(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);
+            refreshCountriesTableView();
         }
 
     }
@@ -308,6 +354,7 @@ public class EmployeeWindowController {
                     try {
                         model.deleteEmployeeFromDB(selectedEmployee.getId());
                         refreshTeamsTableView();
+                        refreshCountriesTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -449,6 +496,12 @@ public class EmployeeWindowController {
         teamsTableView.getItems().addAll(allTeams);
         populateTeamsChoiceBox();
 
+    }
+
+    private void refreshCountriesTableView() throws SQLException {
+        countriesTableView.getItems().clear();
+        loadCountryInfo();
+        countriesTableView.setItems(countryInfoList);
     }
 
 }

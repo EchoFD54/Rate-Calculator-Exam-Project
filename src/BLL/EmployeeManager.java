@@ -28,4 +28,12 @@ public class EmployeeManager {
     public List<String> getTeamNames(int employeeId) throws SQLException {
         return employeeDAO.getTeamNamesByEmployeeId(employeeId);
     }
+
+    public List<String> getAllCountries() throws SQLException {
+        return employeeDAO.getAllCountries();
+    }
+
+    public List<Employee> getEmployeesByCountry(String country) throws SQLException {
+        return employeeDAO.getEmployeesByCountry(country);
+    }
 }

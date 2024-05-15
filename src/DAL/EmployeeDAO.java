@@ -144,6 +144,43 @@ public class EmployeeDAO {
         return teamNames;
     }
 
+    public List<String> getAllCountries() throws SQLException {
+        String sql = "SELECT DISTINCT country FROM Employee";
+        List<String> countries = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                countries.add(resultSet.getString("country"));
+            }
+        }
+        return countries;
+    }
+
+    public List<Employee> getEmployeesByCountry(String country) throws SQLException {
+        String sql = "SELECT * FROM Employee WHERE country = ?";
+        List<Employee> employees = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, country);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String annualSalary = String.valueOf(resultSet.getDouble("annualSalary"));
+                    String overheadMultPercent = String.valueOf(resultSet.getDouble("overheadMultPercent"));
+                    String fixedAnnualAmount = String.valueOf(resultSet.getDouble("fixedAnnualAmount"));
+                    String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
+                    String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
+                    boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
+                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+                    employees.add(employee);
+                }
+            }
+        }
+        return employees;
+    }
+
 
 
 }
