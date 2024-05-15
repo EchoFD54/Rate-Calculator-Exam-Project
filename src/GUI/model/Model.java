@@ -76,6 +76,15 @@ public class Model {
         teamManager.removeEmployeeFromTeam(employeeId, teamId);
     }
 
+    public double calculateTeamDailyRate(int teamId) throws SQLException {
+        List<Employee> employees = teamManager.getEmployeesFromTeam(teamId);
+        double totalDayRate = 0;
+        for (Employee employee : employees) {
+            totalDayRate += employee.calculateDailyRate();
+        }
+        return totalDayRate;
+    }
+
     public void  deleteTeamFromDB(int teamId) throws SQLException {
         teamManager.deleteTeam(teamId);
     }

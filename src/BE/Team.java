@@ -3,6 +3,7 @@ package BE;
 public class Team {
     private int teamId;
     private String teamName;
+    private double teamDailyRate;
 
     public Team(int teamId, String teamName) {
         this.teamId = teamId;
@@ -31,5 +32,13 @@ public class Team {
 
     public void setTeamId(int teamId) {
         this.teamId = teamId;
+    }
+
+    public double getTeamDailyRate() {
+        return teamDailyRate;
+    }
+
+    public void setTeamDailyRate(double dailyRate) {
+        this.teamDailyRate = dailyRate;
     }
 }

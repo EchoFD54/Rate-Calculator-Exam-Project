@@ -4,6 +4,7 @@ import GUI.model.CountryInfo;
 import BE.Employee;
 import BE.Team;
 import GUI.model.Model;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,7 @@ public class EmployeeWindowController {
     public TableView<Team> teamsTableView;
     public TableColumn<Team, String> teamNameColumn;
     public TableColumn<Team, String> teamEmployeesColumn;
+    public TableColumn<Team, Double> teamDailyRateColumn;
     public TableView<CountryInfo> countriesTableView;
     public TableColumn<CountryInfo, String> countryNameColumn;
     public TableColumn<CountryInfo, String> countryEmployeesColumn;
@@ -38,10 +40,7 @@ public class EmployeeWindowController {
     public Button searchBtn;
     public ChoiceBox teamsChoiceBox;
 
-
     private final Model model = new Model();
-
-
 
     private Boolean isFilterActive = false;
 
@@ -79,6 +78,17 @@ public class EmployeeWindowController {
                 return new SimpleStringProperty(employeeNames.toString());
             } catch (SQLException e) {
                 throw new RuntimeException("Error retrieving employees for team: " + e.getMessage(), e);
+            }
+        });
+
+        teamDailyRateColumn.setCellValueFactory(cellData -> {
+            Team team = cellData.getValue();
+            try {
+                double dailyRate = model.calculateTeamDailyRate(team.getTeamId());
+                team.setTeamDailyRate(dailyRate); 
+                return new SimpleDoubleProperty(dailyRate).asObject();
+            } catch (SQLException e) {
+                throw new RuntimeException("Error calculating daily rate for team: " + e.getMessage(), e);
             }
         });
 
