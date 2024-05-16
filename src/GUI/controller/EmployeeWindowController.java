@@ -62,6 +62,10 @@ public class EmployeeWindowController {
         TableColumn<Employee, String> employeeNameColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(0);
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        TableColumn<Employee, Void> actionColumn = new TableColumn<>("Actions");
+        actionColumn.setCellFactory(EmployeeActionCell.forTableColumn(this));
+        employeeTableView.getColumns().add(actionColumn);
+
     }
 
     private void setTeamsTableView() {
@@ -295,10 +299,9 @@ public class EmployeeWindowController {
         openAddOrEditEmployee("Add Employee", new Employee());
     }
 
-    public void openEditEmployee(ActionEvent actionEvent) {
-        Employee selectedEmployee = getSelectedEmployee();
-        if (selectedEmployee != null) {
-            openAddOrEditEmployee("Edit Employee", selectedEmployee);
+    public void openEditEmployee(Employee employee) {
+        if (employee != null) {
+            openAddOrEditEmployee("Edit Employee", employee);
         } else {
             showAlert("No Employee Selected", "Please select an employee to edit.");
         }
@@ -350,9 +353,8 @@ public class EmployeeWindowController {
         }
     }
 
-    public void deleteEmployee(ActionEvent actionEvent) {
-        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null) {
+    public void deleteEmployee(Employee employee) {
+        if (employee != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this employee?");
@@ -362,7 +364,7 @@ public class EmployeeWindowController {
                 if (response == ButtonType.OK) {
                     int selectedIndex = employeeTableView.getSelectionModel().getSelectedIndex();
                     try {
-                        model.deleteEmployeeFromDB(selectedEmployee.getId());
+                        model.deleteEmployeeFromDB(employee.getId());
                         refreshTeamsTableView();
                         refreshCountriesTableView();
                     } catch (SQLException e) {

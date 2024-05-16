@@ -15,13 +15,9 @@
 <AnchorPane prefHeight="1000.0" prefWidth="1900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
       <Button layoutX="41.0" layoutY="574.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
-      <Button layoutX="262.0" layoutY="574.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete">
-         <font>
-            <Font name="Comic Sans MS" size="12.0" />
-         </font></Button>
       <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="119.0" prefHeight="434.0" prefWidth="356.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="354.0" text="Employees" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="204.0" text="Employees" />
         </columns>
       </TableView>
       <AnchorPane layoutX="390.0" layoutY="30.0" prefHeight="520.0" prefWidth="445.0">
@@ -51,7 +47,6 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="184.0" layoutY="574.0" mnemonicParsing="false" onAction="#openEditEmployee" text="Edit" />
       <ImageView fitHeight="88.0" fitWidth="72.0" layoutX="825.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/1144760.png" />
