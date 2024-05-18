@@ -14,6 +14,7 @@ public class EmployeeActionCell extends TableCell<Employee, Void> {
     private final Button deleteButton;
     private final EmployeeWindowController controller;
 
+
     public EmployeeActionCell(EmployeeWindowController controller) {
         this.controller = controller;
         this.editButton = new Button("Edit");

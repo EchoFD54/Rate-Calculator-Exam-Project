@@ -23,22 +23,33 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class EmployeeWindowController {
-    public TableView<Employee> employeeTableView;
-    public TableView<Team> teamsTableView;
-    public TableColumn<Team, String> teamNameColumn;
-    public TableColumn<Team, String> teamEmployeesColumn;
-    public TableColumn<Team, Double> teamDailyRateColumn;
-    public TableView<CountryInfo> countriesTableView;
-    public TableColumn<CountryInfo, String> countryNameColumn;
-    public TableColumn<CountryInfo, String> countryEmployeesColumn;
-    public TableColumn<CountryInfo, Double> countryDailyRateColumn;
-    private ObservableList<CountryInfo> countryInfoList = FXCollections.observableArrayList();
-
-    public Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
+    @FXML
+    private TableView<Employee> employeeTableView;
+    @FXML
+    private TableView<Team> teamsTableView;
+    @FXML
+    private TableColumn<Team, String> teamNameColumn;
+    @FXML
+    private TableColumn<Team, String> teamEmployeesColumn;
+    @FXML
+    private TableColumn<Team, Double> teamDailyRateColumn;
+    @FXML
+    private TableView<CountryInfo> countriesTableView;
+    @FXML
+    private TableColumn<CountryInfo, String> countryNameColumn;
+    @FXML
+    private TableColumn<CountryInfo, String> countryEmployeesColumn;
+    @FXML
+    private TableColumn<CountryInfo, Double> countryDailyRateColumn;
+    @FXML
+    private Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
             employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
-    public TextField searchTextField;
-    public Button searchBtn;
-    public ChoiceBox teamsChoiceBox;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Button searchBtn;
+
+    private ObservableList<CountryInfo> countryInfoList = FXCollections.observableArrayList();
 
     private final Model model = new Model();
 
@@ -53,9 +64,7 @@ public class EmployeeWindowController {
         setTeamsDatabase();
         setEmployeeTab();
         setButtons();
-        populateTeamsChoiceBox();
         setCountriesTableView();
-
     }
 
     private void setEmployeeTableView() {
@@ -174,17 +183,6 @@ public class EmployeeWindowController {
 
     }
 
-    private void populateTeamsChoiceBox() {
-        teamsChoiceBox.getItems().clear();
-        try {
-            List<Team> teams = model.getTeamsFromDB();
-            for (Team team : teams) {
-                teamsChoiceBox.getItems().add(team.getName());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void addToTeamBtn(ActionEvent actionEvent) throws SQLException {
         addSelectedEmployeeToTeam();
@@ -227,6 +225,7 @@ public class EmployeeWindowController {
 
 
     private void updateLabels(Employee employee) throws SQLException {
+        //set Employees Information
         employeeNameLbl.setText(employee.getName());
         employeeCountryLbl.setText("Country: " + employee.getCountry());
         employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
@@ -236,6 +235,7 @@ public class EmployeeWindowController {
         List <String> teamNames = model.GetTeamsFromDBUsingEmployee(employee.getId());
         String teamNamesString = String.join(", ", teamNames);
         employeeTeamLbl.setText("Teams: " + teamNamesString);
+
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
         if (employee.isOverHeadCost()) {
@@ -243,6 +243,7 @@ public class EmployeeWindowController {
         } else {
             employeeBooleanLbl.setText("Production Resource");
         }
+        //Display employee's rates
         String hourlyRate = String.valueOf(employee.calculateHourlyDate());
         hourRateLbl.setText("Hourly Rate: " + hourlyRate);
         String dailyRate = String.valueOf(employee.calculateDailyRate());
@@ -260,13 +261,6 @@ public class EmployeeWindowController {
         return stage;
     }
 
-    private Employee getSelectedEmployee() {
-        return employeeTableView.getSelectionModel().getSelectedItem();
-    }
-
-    private Team getSelectedTeam() {
-        return teamsTableView.getSelectionModel().getSelectedItem();
-    }
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -325,6 +319,7 @@ public class EmployeeWindowController {
                 existingEmployee.setOverHeadCost(isOverHeadCost);
                 //update employee on database
                 model.updateEmployeeInDB(existingEmployee);
+                //refresh related things
                 refreshEmployeeTable(existingEmployee);
                 refreshTeamsTableView();
                 refreshCountriesTableView();
@@ -378,6 +373,10 @@ public class EmployeeWindowController {
         }
     }
 
+
+    private Team getSelectedTeam() {
+        return teamsTableView.getSelectionModel().getSelectedItem();
+    }
 
 
     private void openAddOrEditTeam(String title, Team team) {
@@ -440,7 +439,7 @@ public class EmployeeWindowController {
     }
 
     public void deleteTeam(ActionEvent actionEvent) {
-        Team selectedTeam = (Team) teamsTableView.getSelectionModel().getSelectedItem();
+        Team selectedTeam = getSelectedTeam();
         if (selectedTeam != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
@@ -506,8 +505,6 @@ public class EmployeeWindowController {
         teamsTableView.getItems().clear();
         List<Team> allTeams = model.getTeamsFromDB();
         teamsTableView.getItems().addAll(allTeams);
-        populateTeamsChoiceBox();
-
     }
 
     private void refreshCountriesTableView() throws SQLException {

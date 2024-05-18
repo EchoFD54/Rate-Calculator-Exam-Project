@@ -18,14 +18,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginWindowController {
-    public TextField usernameField;
-    public PasswordField passwordField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
 
     private final ArrayList<User> users = new ArrayList<>();
     private final Model model = new Model();
 
 
-    public void clickLogin(ActionEvent actionEvent) {
+    @FXML
+    private void clickLogin(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
         for (User user : users) {
@@ -43,6 +46,7 @@ public class LoginWindowController {
         alert.showAndWait();
     }
 
+    
     private void openHomeWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EmployeeWindowView.fxml"));

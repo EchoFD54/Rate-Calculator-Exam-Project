@@ -4,6 +4,7 @@ import BE.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -13,13 +14,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class AddEmployeeController {
-    public TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empWorkHoursField, empUtilizationField;
-    public ChoiceBox OverheadChoiceBox;
+    @FXML
+    private TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empWorkHoursField, empUtilizationField;
+    @FXML
+    private ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
-    public ChoiceBox<String> empCountryChoiceBox;
+    @FXML
+    private ChoiceBox<String> empCountryChoiceBox;
 
     private EmployeeWindowController employeeWindowController;
-    private Stage stage;
 
     private ObservableList<String> countries = FXCollections.observableArrayList();
     private Employee employee;
@@ -40,7 +43,8 @@ public class AddEmployeeController {
         }
     }
 
-    public void addEmployeeBtn(ActionEvent actionEvent) throws SQLException {
+    @FXML
+    private void addEmployeeBtn(ActionEvent actionEvent) throws SQLException {
         String name = empNameField.getText();
         String annSalary = empAnnSalaryField.getText();
         String multPer = empMultPerField.getText();
