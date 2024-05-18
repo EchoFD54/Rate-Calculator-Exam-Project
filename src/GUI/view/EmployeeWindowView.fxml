@@ -73,16 +73,15 @@
       </Button>
       <TextField fx:id="searchTextField" layoutX="213.0" layoutY="81.0" prefHeight="33.0" prefWidth="153.0" />
       <Button fx:id="searchBtn" layoutX="136.0" layoutY="78.0" mnemonicParsing="false" onAction="#toggleFilter" text="Search" />
-      <TableView fx:id="teamsTableView" layoutX="1049.0" layoutY="119.0" prefHeight="473.0" prefWidth="600.0">
+      <TableView fx:id="teamsTableView" layoutX="931.0" layoutY="123.0" prefHeight="473.0" prefWidth="816.0">
         <columns>
           <TableColumn fx:id="teamNameColumn" prefWidth="137.0" text="Teams" />
           <TableColumn fx:id="teamEmployeesColumn" prefWidth="320.0" text="Employees" />
             <TableColumn fx:id="teamDailyRateColumn" prefWidth="140.0" text="Team Daily Rate" />
         </columns>
       </TableView>
-      <Button layoutX="1672.0" layoutY="123.0" mnemonicParsing="false" onAction="#openAddTeam" text="New Team" />
-      <Button layoutX="1674.0" layoutY="290.0" mnemonicParsing="false" onAction="#openEditTeam" text="Edit Team" />
-      <Button layoutX="1666.0" layoutY="517.0" mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
+      <Button layoutX="1788.0" layoutY="130.0" mnemonicParsing="false" onAction="#openAddTeam" text="New Team" />
+
       <TableView fx:id="countriesTableView" layoutX="1049.0" layoutY="660.0" prefHeight="200.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="countryNameColumn" prefWidth="109.0" text="Country" />

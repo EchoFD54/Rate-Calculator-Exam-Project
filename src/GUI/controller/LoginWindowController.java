@@ -46,7 +46,7 @@ public class LoginWindowController {
         alert.showAndWait();
     }
 
-    
+
     private void openHomeWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EmployeeWindowView.fxml"));

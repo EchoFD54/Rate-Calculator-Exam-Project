@@ -105,7 +105,9 @@ public class EmployeeWindowController {
             }
         });
 
-
+        TableColumn<Team, Void> actionColumn = new TableColumn<>("Actions");
+        actionColumn.setCellFactory(TeamActionCell.forTableColumn(this));
+        teamsTableView.getColumns().add(actionColumn);
     }
 
     private void setCountriesTableView() {
@@ -401,10 +403,9 @@ public class EmployeeWindowController {
         openAddOrEditTeam("Add Team", new Team());
     }
 
-    public void openEditTeam(ActionEvent actionEvent) {
-        Team selectedTeam = getSelectedTeam();
-        if (selectedTeam != null) {
-            openAddOrEditTeam("Edit Team", selectedTeam);
+    public void openEditTeam(Team team) {
+        if (team != null) {
+            openAddOrEditTeam("Edit Team", team);
         } else {
             showAlert("No Team Selected", "Please select a Team to edit.");
         }
@@ -438,9 +439,8 @@ public class EmployeeWindowController {
 
     }
 
-    public void deleteTeam(ActionEvent actionEvent) {
-        Team selectedTeam = getSelectedTeam();
-        if (selectedTeam != null){
+    public void deleteTeam(Team team) {
+        if (team != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this team?");
@@ -450,8 +450,7 @@ public class EmployeeWindowController {
                 if (response == ButtonType.OK) {
                     int selectedIndex = teamsTableView.getSelectionModel().getSelectedIndex();
                     try {
-                        teamsTableView.getItems().remove(selectedIndex);
-                        model.deleteTeamFromDB(selectedTeam.getTeamId());
+                        model.deleteTeamFromDB(team.getTeamId());
                         refreshTeamsTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
