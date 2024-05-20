@@ -66,25 +66,6 @@ public class Employee {
 
     }
 
-    public  double calculateHourlyDate(){
-        double totalAnnualSalary = annualSalary + fixedAnnualAmount;
-        double effectiveHourlyRate = totalAnnualSalary / annualWorkingHours;
-        double totalUtilization = utilizationPercentage /100.0;
-        double hourlyRate = effectiveHourlyRate * totalUtilization * overheadMultPercent;
-        DecimalFormat df = new DecimalFormat("#.##");
-        hourlyRate = Double.parseDouble(df.format(hourlyRate));
-        return hourlyRate;
-    }
-
-    public double calculateDailyRate(){
-        int hoursInADay = dailyHours;
-        double hourlyRate = calculateHourlyDate();
-        double dailyRate = hourlyRate * hoursInADay;dailyRate = Math.round(dailyRate * 100.0) / 100.0;
-        return dailyRate;
-    }
-
-
-
 
     public int getId() {
         return id;

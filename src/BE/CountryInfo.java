@@ -1,4 +1,4 @@
-package GUI.model;
+package BE;
 
 public class CountryInfo {
     private String countryName;

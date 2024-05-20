@@ -10,6 +10,7 @@ import BLL.UserManager;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class Model {
     private final EmployeeManager employeeManager = new EmployeeManager();
     private final TeamManager teamManager = new TeamManager();
@@ -40,14 +41,7 @@ public class Model {
         return employeeManager.getEmployeesByCountry(country);
     }
 
-    public double calculateTotalDayRateByCountry(String country) throws SQLException {
-        List<Employee> employees = employeeManager.getEmployeesByCountry(country);
-        double totalDayRate = 0;
-        for (Employee employee : employees) {
-            totalDayRate += employee.calculateDailyRate();
-        }
-        return totalDayRate;
-    }
+
     public void deleteEmployeeFromDB(int employeeId) throws SQLException {
         employeeManager.deleteEmployee(employeeId);
     }
@@ -76,14 +70,6 @@ public class Model {
         teamManager.removeEmployeeFromTeam(employeeId, teamId);
     }
 
-    public double calculateTeamDailyRate(int teamId) throws SQLException {
-        List<Employee> employees = teamManager.getEmployeesFromTeam(teamId);
-        double totalDayRate = 0;
-        for (Employee employee : employees) {
-            totalDayRate += employee.calculateDailyRate();
-        }
-        return totalDayRate;
-    }
 
     public void  deleteTeamFromDB(int teamId) throws SQLException {
         teamManager.deleteTeam(teamId);

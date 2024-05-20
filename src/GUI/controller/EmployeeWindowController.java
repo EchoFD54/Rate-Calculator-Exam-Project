@@ -1,9 +1,10 @@
 package GUI.controller;
 
-import GUI.model.CountryInfo;
+import BE.CountryInfo;
 import BE.Employee;
 import BE.Team;
 import GUI.model.Model;
+import GUI.model.RateCalculator;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -53,6 +54,8 @@ public class EmployeeWindowController {
 
     private final Model model = new Model();
 
+    private final RateCalculator rateCalculator = new RateCalculator();
+
     private Boolean isFilterActive = false;
 
 
@@ -97,7 +100,7 @@ public class EmployeeWindowController {
         teamDailyRateColumn.setCellValueFactory(cellData -> {
             Team team = cellData.getValue();
             try {
-                double dailyRate = model.calculateTeamDailyRate(team.getTeamId());
+                double dailyRate = rateCalculator.calculateTeamDailyRate(team.getTeamId());
                 team.setTeamDailyRate(dailyRate); 
                 return new SimpleDoubleProperty(dailyRate).asObject();
             } catch (SQLException e) {
@@ -127,10 +130,10 @@ public class EmployeeWindowController {
                double totalDailyRate = 0;
                for (Employee employee : employees) {
                    employeesInCountry.append(employee.getName()).append(", ");
-                   totalDailyRate = model.calculateTotalDayRateByCountry(country);
+                   totalDailyRate = rateCalculator.calculateTotalDayRateByCountry(country);
                }
 
-               if (employeesInCountry.length() > 0){
+               if (!employeesInCountry.isEmpty()){
                    employeesInCountry.deleteCharAt(employeesInCountry.length() - 2);
                }
 
@@ -247,9 +250,9 @@ public class EmployeeWindowController {
             employeeBooleanLbl.setText("Production Resource");
         }
         //Display employee's rates
-        String hourlyRate = String.valueOf(employee.calculateHourlyDate());
+        String hourlyRate = String.valueOf(rateCalculator.calculateHourlyDate(employee));
         hourRateLbl.setText("Hourly Rate: " + hourlyRate);
-        String dailyRate = String.valueOf(employee.calculateDailyRate());
+        String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
         dailyRateLbl.setText("Daily Rate: " + dailyRate);
     }
 
