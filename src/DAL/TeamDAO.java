@@ -131,7 +131,8 @@ public class TeamDAO {
                     String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
                     String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
                     boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
-                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+                    String dailyHours = String.valueOf(resultSet.getInt("dailyHours"));
+                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours);
                     employeeList.add(employee);
                 }
             }

@@ -43,7 +43,7 @@ public class EmployeeWindowController {
     private TableColumn<CountryInfo, Double> countryDailyRateColumn;
     @FXML
     private Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
-            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl;
+            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl, employeeDailyHourLbl;
     @FXML
     private TextField searchTextField;
     @FXML
@@ -239,6 +239,7 @@ public class EmployeeWindowController {
         employeeTeamLbl.setText("Teams: " + teamNamesString);
 
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
+        employeeDailyHourLbl.setText("Daily Working Hours: " + employee.getDailyHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
         if (employee.isOverHeadCost()) {
             employeeBooleanLbl.setText("Overhead Cost");
@@ -303,7 +304,7 @@ public class EmployeeWindowController {
         }
     }
 
-    protected void updateEmployeeProperties(int id, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost) throws SQLException {
+    protected void updateEmployeeProperties(int id, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost, String dailyHours) throws SQLException {
         boolean employeeExists = false;
         Employee existingEmployee = null;
         //update employee
@@ -312,13 +313,13 @@ public class EmployeeWindowController {
                 existingEmployee = employee;
                 existingEmployee.setName(name);
                 existingEmployee.setAnnualSalary(Double.parseDouble(annSalary));
-                
                 existingEmployee.setOverheadMultPercent(Double.parseDouble(multPer));
                 existingEmployee.setFixedAnnualAmount(Double.parseDouble(fixedAnnAmt));
                 existingEmployee.setCountry(country);
                 existingEmployee.setAnnualWorkingHours(Double.parseDouble(workHours));
                 existingEmployee.setUtilizationPercentage(Double.parseDouble(utilization));
                 existingEmployee.setOverHeadCost(isOverHeadCost);
+                existingEmployee.setDailyHours(Integer.parseInt(dailyHours));
                 //update employee on database
                 model.updateEmployeeInDB(existingEmployee);
                 //refresh related things
@@ -332,7 +333,7 @@ public class EmployeeWindowController {
 
         //create employee
         if (!employeeExists) {
-            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost);
+            Employee newEmployee = new Employee(name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverHeadCost, dailyHours);
             //add to database
             int employeeID = model.createEmployeeInDB(newEmployee);
             newEmployee.setId(employeeID);

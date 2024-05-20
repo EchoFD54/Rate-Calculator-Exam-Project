@@ -14,8 +14,11 @@ public class Employee {
     private double utilizationPercentage;
     private boolean isOverHeadCost;
     private int employeeTeamId;
+    private double markup;
+    private double GM;
+    private int dailyHours;
 
-    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost) {
+    public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost, String dailyHours) {
         this.name = name;
         this.annualSalary = Double.parseDouble(annSalary);
         this.overheadMultPercent = Double.parseDouble(multPer);
@@ -24,9 +27,10 @@ public class Employee {
         this.annualWorkingHours = Double.parseDouble(workHours);
         this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
+        this.dailyHours = Integer.parseInt(dailyHours);
     }
 
-    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost){
+    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt, String country, String workHours, String utilization, Boolean isOverHeadCost, String dailyHours){
         this.id = employeeId;
         this.name = name;
         this.annualSalary = Double.parseDouble(annSalary);
@@ -36,9 +40,10 @@ public class Employee {
         this.annualWorkingHours = Double.parseDouble(workHours);
         this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
+        this.dailyHours = Integer.parseInt(dailyHours);
     }
 
-    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt,  String workHours, String utilization, Boolean isOverHeadCost){
+    public Employee(int employeeId, String name, String annSalary, String multPer, String fixedAnnAmt,  String workHours, String utilization, Boolean isOverHeadCost, String dailyHours){
         this.id = employeeId;
         this.name = name;
         this.annualSalary = Double.parseDouble(annSalary);
@@ -47,6 +52,7 @@ public class Employee {
         this.annualWorkingHours = Double.parseDouble(workHours);
         this.utilizationPercentage = Double.parseDouble(utilization);
         this.isOverHeadCost = isOverHeadCost;
+        this.dailyHours =   Integer.parseInt(dailyHours);
     }
 
 
@@ -71,7 +77,7 @@ public class Employee {
     }
 
     public double calculateDailyRate(){
-        int hoursInADay = 8;
+        int hoursInADay = dailyHours;
         double hourlyRate = calculateHourlyDate();
         double dailyRate = hourlyRate * hoursInADay;dailyRate = Math.round(dailyRate * 100.0) / 100.0;
         return dailyRate;
@@ -167,5 +173,29 @@ public class Employee {
 
     public void setEmployeeTeamId(int employeeTeamId) {
         this.employeeTeamId = employeeTeamId;
+    }
+
+    public double getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(double markup) {
+        this.markup = markup;
+    }
+
+    public double getGM() {
+        return GM;
+    }
+
+    public void setGM(double GM) {
+        this.GM = GM;
+    }
+
+    public int getDailyHours() {
+        return dailyHours;
+    }
+
+    public void setDailyHours(int dailyHours) {
+        this.dailyHours = dailyHours;
     }
 }

@@ -15,7 +15,7 @@ import java.io.FileReader;
 
 public class AddEmployeeController {
     @FXML
-    private TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empWorkHoursField, empUtilizationField;
+    private TextField empNameField, empAnnSalaryField, empMultPerField, empFixedAnnAmtField, empWorkHoursField, empUtilizationField, empDayHoursField;
     @FXML
     private ChoiceBox OverheadChoiceBox;
     public Button addEmployeeBtn;
@@ -52,6 +52,7 @@ public class AddEmployeeController {
         String country = empCountryChoiceBox.getValue();
         String workHours = empWorkHoursField.getText();
         String utilization = empUtilizationField.getText();
+        String dayHours = empDayHoursField.getText();
         int id = employee.getId();
         Boolean isOverheadCost;
 
@@ -84,7 +85,7 @@ public class AddEmployeeController {
 
         if (isValidInput){
             // Add employee to database and tableview if input is valid
-            employeeWindowController.updateEmployeeProperties(id, name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost);
+            employeeWindowController.updateEmployeeProperties(id, name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost, dayHours);
             ((Stage) empNameField.getScene().getWindow()).close();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -127,6 +128,7 @@ public class AddEmployeeController {
         empFixedAnnAmtField.setText(employee.getFixedAnnualAmount() + "");
         empWorkHoursField.setText(employee.getAnnualWorkingHours() + "");
         empUtilizationField.setText(employee.getUtilizationPercentage() + "");
+        empDayHoursField.setText(employee.getDailyHours() + "");
 
         empCountryChoiceBox.setValue(employee.getCountry());
 
