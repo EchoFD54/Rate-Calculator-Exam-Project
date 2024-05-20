@@ -74,7 +74,6 @@ public class EmployeeWindowController {
         TableColumn<Employee, Void> actionColumn = new TableColumn<>("Actions");
         actionColumn.setCellFactory(EmployeeActionCell.forTableColumn(this));
         employeeTableView.getColumns().add(actionColumn);
-
     }
 
     private void setTeamsTableView() {

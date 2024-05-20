@@ -1,0 +1,36 @@
+.root {
+    -fx-background-color: #ffffff;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 40px;
+    -fx-font-family: "System";
+    -fx-font-weight: Bold;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-pref-height: 60px;
+    -fx-pref-width-: 500px;
+    -fx-font-family: "System";
+    -fx-font-size: 28px;
+    -fx-font-weight: Bolder;
+    -fx-effect: dropshadow(one-pass-box, black, 1.5, 0.5, 1, 3);
+}
+
+.button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16;
+    -fx-font-size: 28px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 250px;
+    -fx-effect: dropshadow(one-pass-box, black, 1.5, 1, 1, 3);
+    -fx-font-family: "System";
+    -fx-font-weight: Bold;
+}

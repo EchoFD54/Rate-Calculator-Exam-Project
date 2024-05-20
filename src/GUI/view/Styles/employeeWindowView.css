@@ -44,9 +44,3 @@
     -fx-font-size: 16px;
 }
 
-.anchor-pane {
-    -fx-background-color: #e7f3e7;
-    -fx-border-color: #4caf50;
-    -fx-border-radius: 5;
-    -fx-padding: 10;
-}
