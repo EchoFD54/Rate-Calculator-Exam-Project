@@ -44,3 +44,6 @@
     -fx-font-size: 16px;
 }
 
+.employee-name-title {
+    -fx-text-alignment: center;
+}

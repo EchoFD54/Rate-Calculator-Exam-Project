@@ -16,6 +16,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
+<!-- This VBox is a container for the GridPane which is needed for perimeter margins to exist -->
 <VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane hgap="10" vgap="10" alignment="CENTER" gridLinesVisible="true">
         <VBox.margin>
@@ -60,73 +61,156 @@
         </HBox>
 
         <!-- Employee profile information -->
-        <AnchorPane prefHeight="520.0" minWidth="300" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
-            <ImageView fitHeight="88.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@Images/1144760.png" />
-            </ImageView>
-            <VBox prefHeight="520.0" prefWidth="374.0" spacing="20.0">
-                <HBox>
-                    <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="271.0" text="Name">
-                        <font>
-                            <Font name="Comic Sans MS Bold" size="40.0" />
-                        </font>
-                    </Label>
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeBooleanLbl" text="Boolean" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeCountryLbl" text="Country">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font>
-                    </Label>
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeTeamLbl" text="Team" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeDailyHourLbl" text="Daily Working Hours" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
-                </HBox>
-                <HBox>
-                    <Label text="RATES:" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
-                </HBox>
-                <HBox>
-                    <Label fx:id="dailyRateLbl" text="DailyRate" />
-                </HBox>
-                <HBox prefHeight="45.0" prefWidth="374.0" spacing="20.0">
-                    <Label alignment="CENTER" text="Markup" />
-                    <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
-                    <Label alignment="CENTER" text="GM" />
-                    <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
-                </HBox>
-                <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="374.0">
-                    <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate Cost, Revenue and rates" />
-                </HBox>
-                <HBox prefHeight="46.0" prefWidth="374.0" spacing="80.0">
-                    <Label fx:id="employeeCostLbl" text="Cost" />
-                    <Label fx:id="employeeRevenueLbl" text="Revenue" />
-                </HBox>
-            </VBox>
-        </AnchorPane>
+        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
+            <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" text="Name">
+                <font>
+                    <Font name="Comic Sans MS Bold" size="40.0" />
+                </font>
+            </Label>
+            <GridPane hgap="10" vgap="10">
+                <!-- Vertical headers -->
+                <Label
+                    styleClass="vertical-header"
+                    text="Overhead Cost"
+                    GridPane.rowIndex="0"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Country"
+                    GridPane.rowIndex="1"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Teams"
+                    GridPane.rowIndex="2"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Annual Salary"
+                    GridPane.rowIndex="3"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Overhead Multiplier (%)"
+                    GridPane.rowIndex="4"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Fixed Annual Amount"
+                    GridPane.rowIndex="5"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Annual Eff. Working Hours"
+                    GridPane.rowIndex="6"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Daily Working Hours"
+                    GridPane.rowIndex="7"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Utilization (%)"
+                    GridPane.rowIndex="8"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Hourly Rate"
+                    GridPane.rowIndex="9"
+                    GridPane.columnIndex="0"
+                />
+                <Label
+                    styleClass="vertical-header"
+                    text="Daily Rate"
+                    GridPane.rowIndex="10"
+                    GridPane.columnIndex="0"
+                />
+
+                <!-- Data column -->
+                <Label
+                    fx:id="employeeBooleanLbl"
+                    GridPane.rowIndex="0"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeCountryLbl"
+                    GridPane.rowIndex="1"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeTeamLbl"
+                    GridPane.rowIndex="2"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeAnnSalLbl"
+                    GridPane.rowIndex="3"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeOverMultLbl"
+                    GridPane.rowIndex="4"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeFixAmtLbl"
+                    GridPane.rowIndex="5"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeEffectHoursLbl"
+                    GridPane.rowIndex="6"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeDailyHourLbl"
+                    GridPane.rowIndex="7"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="employeeUtilizationLbl"
+                    GridPane.rowIndex="8"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="hourRateLbl"
+                    GridPane.rowIndex="9"
+                    GridPane.columnIndex="1"
+                />
+                <Label
+                    fx:id="dailyRateLbl"
+                    GridPane.rowIndex="10"
+                    GridPane.columnIndex="1"
+                />
+            </GridPane>
+        </VBox>
+
+        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4">
+            <!-- Markup + GM calculator -->
+            <HBox prefHeight="45.0" prefWidth="374.0" spacing="20.0">
+                <Label alignment="CENTER" text="Markup" />
+                <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
+                <Label alignment="CENTER" text="GM" />
+                <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="374.0">
+                <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate Cost, Revenue and rates" />
+            </HBox>
+            <HBox prefHeight="46.0" prefWidth="374.0" spacing="80.0">
+                <Label fx:id="employeeCostLbl" text="Cost" />
+                <Label fx:id="employeeRevenueLbl" text="Revenue" />
+            </HBox>
+        </VBox>
 
         <!-- Teams table -->
         <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" minWidth="600">
