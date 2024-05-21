@@ -44,9 +44,10 @@ public class EmployeeWindowController {
     private TableColumn<CountryInfo, Double> countryDailyRateColumn;
     @FXML
     private Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
-            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl, employeeDailyHourLbl;
+            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl, employeeDailyHourLbl,
+            employeeCostLbl, employeeRevenueLbl;
     @FXML
-    private TextField searchTextField;
+    private TextField searchTextField, markupTextField, gmTextField;
     @FXML
     private Button searchBtn;
 
@@ -230,17 +231,13 @@ public class EmployeeWindowController {
 
 
     private void updateLabels(Employee employee) throws SQLException {
+        resetFields();
         //set Employees Information
         employeeNameLbl.setText(employee.getName());
         employeeCountryLbl.setText("Country: " + employee.getCountry());
         employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
         employeOverMultLbl.setText("Overhead Multiplier Percentage: " + employee.getOverheadMultPercent());
         employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
-        //Get the teams that the employee belongs to
-        List <String> teamNames = model.GetTeamsFromDBUsingEmployee(employee.getId());
-        String teamNamesString = String.join(", ", teamNames);
-        employeeTeamLbl.setText("Teams: " + teamNamesString);
-
         employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
         employeeDailyHourLbl.setText("Daily Working Hours: " + employee.getDailyHours());
         employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
@@ -249,8 +246,12 @@ public class EmployeeWindowController {
         } else {
             employeeBooleanLbl.setText("Production Resource");
         }
+        //Get the teams that the employee belongs to
+        List <String> teamNames = model.GetTeamsFromDBUsingEmployee(employee.getId());
+        String teamNamesString = String.join(", ", teamNames);
+        employeeTeamLbl.setText("Teams: " + teamNamesString);
         //Display employee's rates
-        String hourlyRate = String.valueOf(rateCalculator.calculateHourlyDate(employee));
+        String hourlyRate = String.valueOf(rateCalculator.calculateHourlyRate(employee));
         hourRateLbl.setText("Hourly Rate: " + hourlyRate);
         String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
         dailyRateLbl.setText("Daily Rate: " + dailyRate);
@@ -515,6 +516,59 @@ public class EmployeeWindowController {
         loadCountryInfo();
         countriesTableView.setItems(countryInfoList);
     }
+
+    public void calculateCostAndRevenue(ActionEvent actionEvent) {
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee != null) {
+            try {
+                // If fields are empty, make the values 0
+                double markupPercentage = markupTextField.getText().isEmpty() ? 0 : Double.parseDouble(markupTextField.getText());
+                double grossMarginPercentage = gmTextField.getText().isEmpty() ? 0 : Double.parseDouble(gmTextField.getText());
+
+                if (markupPercentage < 0 || markupPercentage > 100 || grossMarginPercentage < 0 || grossMarginPercentage > 100) {
+                    throw new IllegalArgumentException("Markup and Gross Margin percentages must be between 0 and 100.");
+                }
+
+                // Calculate cost and revenue
+                double cost = rateCalculator.calculateEmployeeCost(selectedEmployee);
+                double revenue = rateCalculator.calculateEmployeeRevenue(selectedEmployee, markupPercentage, grossMarginPercentage);
+                employeeCostLbl.setText("Cost: " + String.format("%.2f", cost));
+                employeeRevenueLbl.setText("Revenue: " + String.format("%.2f", revenue));
+
+                // Calculate hourly and daily rates with multipliers applied
+                double hourlyRate = rateCalculator.calculateHourlyRate(selectedEmployee);
+                double markedUpHourlyRate = rateCalculator.applyMarkup(hourlyRate, markupPercentage);
+                double hourlyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpHourlyRate, grossMarginPercentage);
+                double dailyRate = rateCalculator.calculateDailyRate(selectedEmployee);
+                double markedUpDailyRate = rateCalculator.applyMarkup(dailyRate, markupPercentage);
+                double dailyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpDailyRate, grossMarginPercentage);
+                hourRateLbl.setText("Hourly Rate: " + String.format("%.2f", hourlyRateWithMargin));
+                dailyRateLbl.setText("Daily Rate: " + String.format("%.2f", dailyRateWithMargin));
+
+            } catch (NumberFormatException e) {
+                showAlert("Invalid numbers", "Please enter a number for Markup and GM multipliers");
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                showAlert("Invalid numbers", "Please enter a number between 0 and 100");
+                e.printStackTrace();
+            }
+        } else {
+            showAlert("No employee selected", "Please select an employee to make calculations.");
+        }
+    }
+
+    private void resetFields() {
+        markupTextField.setText("");
+        gmTextField.setText("");
+        employeeCostLbl.setText("Cost: ");
+        employeeRevenueLbl.setText("Revenue: ");
+        hourRateLbl.setText("Hourly Rate: ");
+        dailyRateLbl.setText("Daily Rate: ");
+    }
+
+
+
 
 }
 

@@ -10,11 +10,11 @@ public class RateCalculator {
 
     private final Model model = new Model();
 
-    public  double calculateHourlyDate(Employee employee){
+    public  double calculateHourlyRate(Employee employee){
         double totalAnnualSalary = employee.getAnnualSalary() + employee.getFixedAnnualAmount();
         double effectiveHourlyRate = totalAnnualSalary / employee.getAnnualWorkingHours();
-        double totalUtilization = employee.getUtilizationPercentage() /100.0;
-        double hourlyRate = effectiveHourlyRate * totalUtilization * employee.getOverheadMultPercent();
+        double overheadMultiplier = 1 + employee.getOverheadMultPercent() / 100.0;
+        double hourlyRate = effectiveHourlyRate * overheadMultiplier;
         DecimalFormat df = new DecimalFormat("#.##");
         hourlyRate = Double.parseDouble(df.format(hourlyRate));
         return hourlyRate;
@@ -22,7 +22,7 @@ public class RateCalculator {
 
     public double calculateDailyRate(Employee employee){
         int hoursInADay = employee.getDailyHours();
-        double hourlyRate = calculateHourlyDate(employee);
+        double hourlyRate = calculateHourlyRate(employee);
         double dailyRate = hourlyRate * hoursInADay;dailyRate = Math.round(dailyRate * 100.0) / 100.0;
         return dailyRate;
     }
@@ -44,4 +44,27 @@ public class RateCalculator {
         }
         return totalDayRate;
     }
+
+    public double applyMarkup(double rate, double markupPercentage) {
+        return rate * (1 + markupPercentage / 100.0);
+    }
+
+    public double calculateRateWithGrossMargin(double rate, double grossMarginPercentage) {
+        return rate / (1 - grossMarginPercentage / 100.0);
+    }
+
+    public double calculateEmployeeCost(Employee employee) {
+        double totalAnnualSalary = employee.getAnnualSalary() + employee.getFixedAnnualAmount();
+        double overheadMultiplier = 1 + employee.getOverheadMultPercent() / 100.0;
+        return totalAnnualSalary * overheadMultiplier;
+    }
+
+    public double calculateEmployeeRevenue(Employee employee, double markupPercentage, double grossMarginPercentage) {
+        double hourlyRate = calculateHourlyRate(employee);
+        double markedUpRate = applyMarkup(hourlyRate, markupPercentage);
+        double rateWithMargin = calculateRateWithGrossMargin(markedUpRate, grossMarginPercentage);
+        double utilizationFactor = employee.getUtilizationPercentage() / 100.0;
+        return rateWithMargin * employee.getAnnualWorkingHours() * utilizationFactor;
+    }
+
 }

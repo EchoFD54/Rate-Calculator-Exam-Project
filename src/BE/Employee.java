@@ -13,9 +13,7 @@ public class Employee {
     private double annualWorkingHours;
     private double utilizationPercentage;
     private boolean isOverHeadCost;
-    private int employeeTeamId;
-    private double markup;
-    private double GM;
+    private int employeeTeamId;;
     private int dailyHours;
 
     public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost, String dailyHours) {
@@ -156,21 +154,7 @@ public class Employee {
         this.employeeTeamId = employeeTeamId;
     }
 
-    public double getMarkup() {
-        return markup;
-    }
 
-    public void setMarkup(double markup) {
-        this.markup = markup;
-    }
-
-    public double getGM() {
-        return GM;
-    }
-
-    public void setGM(double GM) {
-        this.GM = GM;
-    }
 
     public int getDailyHours() {
         return dailyHours;
