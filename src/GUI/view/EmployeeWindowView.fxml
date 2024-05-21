@@ -14,8 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane hgap="10" vgap="10" alignment="CENTER" gridLinesVisible="true">
         <VBox.margin>
             <Insets top="20" right="20" bottom="20" left="20" />
@@ -64,17 +65,66 @@
                 <Image url="@Images/1144760.png" />
             </ImageView>
             <VBox prefHeight="520.0" prefWidth="374.0" spacing="20.0">
-                <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="271.0" text="Name" />
-                <Label fx:id="employeeBooleanLbl" text="Boolean" />
-                <Label fx:id="employeeCountryLbl" text="Country" />
-                <Label fx:id="employeeTeamLbl" text="Team" />
-                <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
-                <Label fx:id="dailyRateLbl" text="DailyRate" />
-                <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
-                <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
-                <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
-                <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
-                <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
+                <HBox>
+                    <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="271.0" text="Name">
+                        <font>
+                            <Font name="Comic Sans MS Bold" size="40.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeBooleanLbl" text="Boolean" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeCountryLbl" text="Country">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeTeamLbl" text="Team" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeDailyHourLbl" text="Daily Working Hours" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
+                </HBox>
+                <HBox>
+                    <Label text="RATES:" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="dailyRateLbl" text="DailyRate" />
+                </HBox>
+                <HBox prefHeight="45.0" prefWidth="374.0" spacing="20.0">
+                    <Label alignment="CENTER" text="Markup" />
+                    <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
+                    <Label alignment="CENTER" text="GM" />
+                    <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
+                </HBox>
+                <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="374.0">
+                    <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate Cost, Revenue and rates" />
+                </HBox>
+                <HBox prefHeight="46.0" prefWidth="374.0" spacing="80.0">
+                    <Label fx:id="employeeCostLbl" text="Cost" />
+                    <Label fx:id="employeeRevenueLbl" text="Revenue" />
+                </HBox>
             </VBox>
         </AnchorPane>
 

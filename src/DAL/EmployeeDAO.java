@@ -19,7 +19,7 @@ public class EmployeeDAO {
 
 
     public int createEmployee(Employee employee) throws SQLException {
-        String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost) " +
+        String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = connectionManager.getConnection();
@@ -32,6 +32,7 @@ public class EmployeeDAO {
             preparedStatement.setDouble(6, employee.getAnnualWorkingHours());
             preparedStatement.setDouble(7, employee.getUtilizationPercentage());
             preparedStatement.setBoolean(8, employee.isOverHeadCost());
+            preparedStatement.setInt(9, employee.getDailyHours());
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -51,7 +52,7 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee(Employee employee) throws SQLException {
-        String sql = "UPDATE Employee SET name = ?, annualSalary = ?, overheadMultPercent = ?, fixedAnnualAmount = ?, country = ?, annualWorkingHours = ?, utilizationPercentage = ?, isOverHeadCost = ? WHERE id = ?";
+        String sql = "UPDATE Employee SET name = ?, annualSalary = ?, overheadMultPercent = ?, fixedAnnualAmount = ?, country = ?, annualWorkingHours = ?, utilizationPercentage = ?, isOverHeadCost = ?, dailyHours = ? WHERE id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getName());
@@ -62,7 +63,8 @@ public class EmployeeDAO {
             preparedStatement.setDouble(6, employee.getAnnualWorkingHours());
             preparedStatement.setDouble(7, employee.getUtilizationPercentage());
             preparedStatement.setBoolean(8, employee.isOverHeadCost());
-            preparedStatement.setInt(9, employee.getId());
+            preparedStatement.setInt(9, employee.getDailyHours());
+            preparedStatement.setInt(10, employee.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -116,7 +118,8 @@ public class EmployeeDAO {
                String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
                String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
                boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
-               Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+               String dailyHours = String.valueOf(resultSet.getInt("dailyHours"));
+               Employee employee = new Employee(employeeId, name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours);
                 employeeList.add(employee);
             }
         } catch (SQLException e) {
@@ -173,7 +176,8 @@ public class EmployeeDAO {
                     String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
                     String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
                     boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
-                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost);
+                    String dailyHours = String.valueOf(resultSet.getInt("dailyHours"));
+                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours);
                     employees.add(employee);
                 }
             }
