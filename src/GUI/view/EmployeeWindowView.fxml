@@ -8,59 +8,95 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-Infinity" prefWidth="-Infinity" stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
-    <Button layoutX="124.0" layoutY="568.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
-    <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="119.0" prefHeight="434.0" prefWidth="356.0">
-        <columns>
-            <TableColumn fx:id="employeeNameColumn" prefWidth="204.0" text="Employees" />
-        </columns>
-    </TableView>
-    <AnchorPane layoutX="390.0" layoutY="30.0" prefHeight="520.0" prefWidth="445.0">
-        <VBox layoutX="97.0" layoutY="-4.0" prefHeight="520.0" prefWidth="374.0" spacing="20.0">
-            <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="271.0" text="Name" />
-            <Label fx:id="employeeBooleanLbl" text="Boolean" />
-            <Label fx:id="employeeCountryLbl" text="Country" />
-            <Label fx:id="employeeTeamLbl" text="Team" />
-            <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
-            <Label fx:id="dailyRateLbl" text="DailyRate" />
-            <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
-            <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
-            <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
-            <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
-            <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
+<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+    <GridPane hgap="10" vgap="10" alignment="CENTER" gridLinesVisible="true">
+        <VBox.margin>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </VBox.margin>
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <!--  Schneider logo -->
+        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1">
+            <ImageView fitHeight="79.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@Images/Logo_S_2_.png" />
+            </ImageView>
+            <ImageView fitHeight="79.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@Images/Schneider_Electric-Logo.wine.png" />
+            </ImageView>
+        </HBox>
+
+        <!-- Employee search -->
+        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2">
+            <TextField fx:id="searchTextField" prefHeight="33.0" />
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#toggleFilter">Search</Button>
+        </HBox>
+
+        <!-- Employee table -->
+        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" minWidth="300">
+            <TableView fx:id="employeeTableView">
+                <columns>
+                    <TableColumn fx:id="employeeNameColumn" text="Employees" minWidth="150" />
+                </columns>
+            </TableView>
+            <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
         </VBox>
-    </AnchorPane>
-    <ImageView fitHeight="88.0" fitWidth="72.0" layoutX="825.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@Images/1144760.png" />
-    </ImageView>
-    <ImageView fitHeight="79.0" fitWidth="143.0" layoutX="-11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@Images/Logo_S_2_.png" />
-    </ImageView>
-    <ImageView fitHeight="79.0" fitWidth="137.0" layoutX="86.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@Images/Schneider_Electric-Logo.wine.png" />
-    </ImageView>
-    <Button layoutX="30.0" layoutY="671.0" mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0">Add to Team</Button>
-    <Button layoutX="180.0" layoutY="671.0" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0">Remove from team</Button>
-    <TextField fx:id="searchTextField" layoutX="213.0" layoutY="81.0" prefHeight="33.0" prefWidth="153.0" />
-    <Button fx:id="searchBtn" layoutX="136.0" layoutY="78.0" mnemonicParsing="false" onAction="#toggleFilter" >Search</Button>
-    <TableView fx:id="teamsTableView" layoutX="931.0" layoutY="123.0" prefHeight="473.0" prefWidth="816.0">
-        <columns>
-            <TableColumn fx:id="teamNameColumn" prefWidth="137.0" text="Teams" />
-            <TableColumn fx:id="teamEmployeesColumn" prefWidth="320.0" text="Employees" />
-            <TableColumn fx:id="teamDailyRateColumn" prefWidth="140.0" text="Team Daily Rate" />
-        </columns>
-    </TableView>
-    <Button layoutX="1788.0" layoutY="130.0" mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
 
-    <TableView fx:id="countriesTableView" layoutX="1049.0" layoutY="660.0" prefHeight="200.0" prefWidth="600.0">
-        <columns>
-            <TableColumn fx:id="countryNameColumn" prefWidth="109.0" text="Country" />
-            <TableColumn fx:id="countryEmployeesColumn" prefWidth="336.0" text="Employees" />
-            <TableColumn fx:id="countryDailyRateColumn" prefWidth="153.0" text="Country Daily Rate" />
-        </columns>
-    </TableView>
-</AnchorPane>
+        <!-- Add/remove from team buttons -->
+        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0">Add to Team</Button>
+            <Button mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0">Remove from team</Button>
+        </HBox>
+
+        <!-- Employee profile information -->
+        <AnchorPane prefHeight="520.0" minWidth="300" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
+            <ImageView fitHeight="88.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@Images/1144760.png" />
+            </ImageView>
+            <VBox prefHeight="520.0" prefWidth="374.0" spacing="20.0">
+                <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" prefWidth="271.0" text="Name" />
+                <Label fx:id="employeeBooleanLbl" text="Boolean" />
+                <Label fx:id="employeeCountryLbl" text="Country" />
+                <Label fx:id="employeeTeamLbl" text="Team" />
+                <Label fx:id="hourRateLbl" prefHeight="25.0" prefWidth="210.0" text="HourlyRate" />
+                <Label fx:id="dailyRateLbl" text="DailyRate" />
+                <Label fx:id="employeeAnnSalLbl" text="Annual Salary" />
+                <Label fx:id="employeOverMultLbl" text="Overhead Multiplier Percent" />
+                <Label fx:id="employeeFixAmtLbl" text="Fixed Annual Amount" />
+                <Label fx:id="employeeEffectHoursLbl" text="Annual Effective Working Hours" />
+                <Label fx:id="employeeUtilizationLbl" text="Utilization Percentage" />
+            </VBox>
+        </AnchorPane>
+
+        <!-- Teams table -->
+        <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" minWidth="600">
+            <Button mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
+            <TableView fx:id="teamsTableView" prefHeight="473.0" >
+                <columns>
+                    <TableColumn fx:id="teamNameColumn" minWidth="250" text="Teams" />
+                    <TableColumn fx:id="teamEmployeesColumn" minWidth="250" text="Employees" />
+                    <TableColumn fx:id="teamDailyRateColumn" minWidth="100" text="Team Daily Rate" />
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Country table -->
+        <TableView fx:id="countriesTableView" prefHeight="300.0" minWidth="600.0" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4">
+            <columns>
+                <TableColumn fx:id="countryNameColumn" minWidth="200" text="Country" />
+                <TableColumn fx:id="countryEmployeesColumn" minWidth="200" text="Employees" />
+                <TableColumn fx:id="countryDailyRateColumn" minWidth="200" text="Country Daily Rate" />
+            </columns>
+        </TableView>
+    </GridPane>
+</VBox>

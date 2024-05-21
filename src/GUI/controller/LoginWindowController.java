@@ -26,6 +26,13 @@ public class LoginWindowController {
     private final ArrayList<User> users = new ArrayList<>();
     private final Model model = new Model();
 
+    public void initialize() {
+        try {
+            users.addAll(model.getUsersFromDB());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error initializing user data: " + e.getMessage(), e);
+        }
+    }
 
     @FXML
     private void clickLogin(ActionEvent actionEvent) {
@@ -53,18 +60,11 @@ public class LoginWindowController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
             ((Stage) usernameField.getScene().getWindow()).close();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    public void initialize() {
-        try {
-            users.addAll(model.getUsersFromDB());
-        } catch (SQLException e) {
-            throw new RuntimeException("Error initializing user data: " + e.getMessage(), e);
         }
     }
 

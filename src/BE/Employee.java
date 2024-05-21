@@ -66,7 +66,7 @@ public class Employee {
         double totalUtilization = utilizationPercentage /100.0;
         double hourlyRate = effectiveHourlyRate * totalUtilization * overheadMultPercent;
         DecimalFormat df = new DecimalFormat("#.##");
-        // hourlyRate = Double.parseDouble(df.format(hourlyRate));
+        //hourlyRate = Double.parseDouble(df.format(hourlyRate));
         return hourlyRate;
     }
 
@@ -76,9 +76,6 @@ public class Employee {
         double dailyRate = hourlyRate * hoursInADay;dailyRate = Math.round(dailyRate * 100.0) / 100.0;
         return dailyRate;
     }
-
-
-
 
     public int getId() {
         return id;
