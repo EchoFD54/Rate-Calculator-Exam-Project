@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<AnchorPane prefHeight="1000.0" prefWidth="1900.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/20.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
    <children>
       <Button layoutX="118.0" layoutY="611.0" mnemonicParsing="false" onAction="#openAddEmployee" text="New Employee" />
       <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="119.0" prefHeight="473.0" prefWidth="414.0">
