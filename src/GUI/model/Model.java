@@ -29,7 +29,7 @@ public class Model {
         return employeeManager.getAllEmployees();
     }
 
-    public List<String> GetTeamsFromDBUsingEmployee(int employeeId) throws SQLException {
+    public List<String> getTeamsFromDBUsingEmployee(int employeeId) throws SQLException {
         return employeeManager.getTeamNames(employeeId);
     }
 

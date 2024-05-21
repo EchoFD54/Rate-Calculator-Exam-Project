@@ -41,4 +41,9 @@ public class Team {
     public void setTeamDailyRate(double dailyRate) {
         this.teamDailyRate = dailyRate;
     }
+
+    @Override
+    public String toString() {
+        return teamName;
+    }
 }

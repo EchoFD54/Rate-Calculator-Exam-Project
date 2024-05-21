@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -65,6 +67,15 @@ public class LoginWindowController {
             users.addAll(model.getUsersFromDB());
         } catch (SQLException e) {
             throw new RuntimeException("Error initializing user data: " + e.getMessage(), e);
+        }
+
+        usernameField.setOnKeyPressed(this::handleKeyPress);
+        passwordField.setOnKeyPressed(this::handleKeyPress);
+    }
+
+    private void handleKeyPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            clickLogin(new ActionEvent());
         }
     }
 
