@@ -12,9 +12,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
-
-<!-- This VBox is a container for the GridPane which is needed for perimeter margins to exist -->
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 <VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane gridLinesVisible="false" hgap="10" vgap="10">
@@ -27,18 +26,18 @@
             <ColumnConstraints hgrow="ALWAYS" />
         </columnConstraints>
 
-        <!--  Schneider logo -->
-       <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
-           <HBox>
-               <ImageView fitHeight="140.0" pickOnBounds="true" preserveRatio="true">
-                   <Image url="@Images/FullLogo.png" />
-               </ImageView>
-           </HBox>
-           <HBox prefHeight="100.0" />
-       </VBox>
+        <!-- Schneider logo -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <HBox>
+                <ImageView fitHeight="140.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Images/FullLogo.png" />
+                </ImageView>
+            </HBox>
+            <HBox prefHeight="100.0" />
+        </VBox>
 
         <!-- Employee search -->
-        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1">
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
             <HBox prefHeight="10" />
             <HBox>
                 <HBox prefWidth="5" />
@@ -50,20 +49,20 @@
         </VBox>
 
         <!-- Employee table -->
-        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2">
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
             <TableView fx:id="employeeTableView">
                 <columns>
                     <TableColumn fx:id="employeeNameColumn" minWidth="231.0" prefWidth="231.0" text="Employees" />
                 </columns>
             </TableView>
             <HBox prefHeight="50" />
-
-            <!--Buttons New Employee   -->
-            <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
-                <HBox prefWidth="190" />
-                <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
-            </HBox>
         </VBox>
+
+        <!-- Buttons New Employee -->
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <HBox prefWidth="190" />
+            <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
+        </HBox>
 
         <!-- Employee Name -->
         <VBox prefWidth="500" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -71,9 +70,8 @@
         </VBox>
 
         <!-- Employee profile information -->
-        <VBox maxWidth="500" minWidth="500" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2">
+        <VBox maxWidth="500" minWidth="500" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane gridLinesVisible="true" styleClass="employee-info-table">
-
                 <!-- Vertical headers -->
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label styleClass="vertical-header" text="Country" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -99,28 +97,29 @@
                 <Label fx:id="employeeUtilizationLbl" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <Label fx:id="hourRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                 <Label fx:id="dailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
+
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
             </GridPane>
         </VBox>
 
         <!-- Markup + GM calculator -->
-        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
             <HBox prefHeight="45.0" prefWidth="374.0" spacing="20.0">
                 <Label alignment="CENTER" styleClass="vertical-header" text="Markup" />
                 <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
@@ -132,31 +131,30 @@
                 <Label styleClass="vertical-header" text="Cost:   " />
                 <Label fx:id="employeeCostLbl" />
             </HBox>
-                <HBox prefHeight="20.0" />
-                <HBox prefWidth="150">
+            <HBox prefHeight="20.0" />
+            <HBox prefWidth="150">
                 <Label styleClass="vertical-header" text="Revenue:   " />
                 <Label fx:id="employeeRevenueLbl" />
             </HBox>
-
-            <!--Calculator Button -->
-                <HBox prefHeight="50" />
-                <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate" />
+            <!-- Calculator Button -->
+            <HBox prefHeight="50" />
+            <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate" />
         </VBox>
 
-        <!--Buttons New Team/Add/Remove Teams   -->
+        <!-- Buttons New Team/Add/Remove Teams -->
         <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox>
                 <HBox prefWidth="80" />
-                <Button id="new-team-button" mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
+                <Button fx:id="newTeamButton" mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
                 <HBox prefWidth="62" />
-                <Button id="add-to-team-button" mnemonicParsing="false" onAction="#addToTeamBtn">Add to Team</Button>
+                <Button fx:id="addToTeamButton" mnemonicParsing="false" onAction="#addToTeamBtn">Add to Team</Button>
                 <HBox prefWidth="5" />
-                <Button id="remove-from-team-button" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">Remove from team</Button>
+                <Button fx:id="removeFromTeamButton" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">Remove from team</Button>
             </HBox>
         </VBox>
 
         <!-- Teams table -->
-        <VBox minWidth="300" prefHeight="300" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2">
+        <VBox minWidth="300" prefHeight="300" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <TableView fx:id="teamsTableView">
                 <columns>
                     <TableColumn fx:id="teamNameColumn" minWidth="100" text="Teams" />
@@ -167,19 +165,20 @@
         </VBox>
 
         <!-- Country table -->
-        <TableView fx:id="countriesTableView" minWidth="300" prefHeight="200" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3">
+        <TableView fx:id="countriesTableView" minWidth="300" prefHeight="200" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <columns>
                 <TableColumn fx:id="countryNameColumn" minWidth="100" text="Country" />
                 <TableColumn fx:id="countryEmployeesColumn" minWidth="200" text="Employees" />
                 <TableColumn fx:id="countryDailyRateColumn" minWidth="100" text="Country Daily Rate" />
             </columns>
         </TableView>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
+
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
     </GridPane>
 </VBox>
 

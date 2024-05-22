@@ -586,7 +586,10 @@ public class EmployeeWindowController {
     }
 
 
+    public void addToTeamBtn(ActionEvent actionEvent) {
+    }
 
-
+    public void removeEmployeeFromTeamBtn(ActionEvent actionEvent) {
+    }
 }
 

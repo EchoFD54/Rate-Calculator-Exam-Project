@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="527.0" prefWidth="671.0" stylesheets="@Styles/main.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
+<AnchorPane prefHeight="527.0" prefWidth="671.0" stylesheets="@Styles/addEmployeeView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
    <children>
       <TextField fx:id="empNameField" layoutX="316.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" />
       <TextField fx:id="empAnnSalaryField" layoutX="316.0" layoutY="90.0" prefHeight="36.0" prefWidth="166.0" />
