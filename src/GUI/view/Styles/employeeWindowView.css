@@ -1,5 +1,7 @@
 .root {
-    -fx-background-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-color: #FFF;
+    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
 }
 
 .button {
@@ -17,6 +19,8 @@
 
 #employeeNameLbl {
     -fx-font-size: 40px;
+    -fx-fit-to-width: true;
+    -fx-font-weight: bold;
 }
 
 .text-field {
@@ -46,4 +50,8 @@
 
 .employee-name-title {
     -fx-text-alignment: center;
+}
+
+.vertical-header {
+    -fx-font-weight: 700;
 }

@@ -7,18 +7,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 
 <!-- This VBox is a container for the GridPane which is needed for perimeter margins to exist -->
 <VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
-    <GridPane hgap="10" vgap="10" alignment="CENTER" gridLinesVisible="true">
+    <GridPane hgap="10" vgap="10" gridLinesVisible="false">
         <VBox.margin>
             <Insets top="20" right="20" bottom="20" left="20" />
         </VBox.margin>
@@ -29,49 +26,54 @@
         </columnConstraints>
 
         <!--  Schneider logo -->
-        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1">
-            <ImageView fitHeight="79.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@Images/Logo_S_2_.png" />
-            </ImageView>
-            <ImageView fitHeight="79.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@Images/Schneider_Electric-Logo.wine.png" />
-            </ImageView>
-        </HBox>
+       <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
+           <HBox>
+               <ImageView fitHeight="140.0" pickOnBounds="true" preserveRatio="true">
+                   <Image url="@Images/FullLogo.png" />
+               </ImageView>
+           </HBox>
+           <HBox prefHeight="100.0"/>
+       </VBox>
 
         <!-- Employee search -->
-        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2">
-            <TextField fx:id="searchTextField" prefHeight="33.0" />
-            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#toggleFilter">Search</Button>
-        </HBox>
-
-        <!-- Employee table -->
-        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" minWidth="300">
-            <TableView fx:id="employeeTableView">
-                <columns>
-                    <TableColumn fx:id="employeeNameColumn" text="Employees" minWidth="150" />
-                </columns>
-            </TableView>
-            <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
+        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1">
+            <HBox prefHeight="10"/>
+            <HBox>
+                <HBox prefWidth="5"/>
+                <TextField fx:id="searchTextField"/>
+                <HBox prefWidth="5"/>
+                <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#toggleFilter">Search</Button>
+            </HBox>
+            <HBox prefHeight="10"/>
         </VBox>
 
-        <!-- Add/remove from team buttons -->
-        <HBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4">
-            <Button mnemonicParsing="false" onAction="#addToTeamBtn" prefHeight="36.0" prefWidth="113.0">Add to Team</Button>
-            <Button mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" prefHeight="36.0" prefWidth="153.0">Remove from team</Button>
-        </HBox>
+        <!-- Employee table -->
+        <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2" >
+            <TableView fx:id="employeeTableView">
+                <columns>
+                    <TableColumn fx:id="employeeNameColumn" text="Employees" minWidth="360" prefWidth="360" />
+                </columns>
+            </TableView>
+            <HBox prefHeight="50"/>
+
+            <!--Buttons New Employee   -->
+            <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <HBox prefWidth="170"/>
+                <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
+            </HBox>
+        </VBox>
+
+        <!-- Employee Name -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="100">
+            <Label fx:id="employeeNameLbl" text="Select Employee to View Info" minWidth="100"/>
+        </VBox>
 
         <!-- Employee profile information -->
-        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
-            <Label fx:id="employeeNameLbl" alignment="CENTER" prefHeight="58.0" text="Name">
-                <font>
-                    <Font name="Comic Sans MS Bold" size="40.0" />
-                </font>
-            </Label>
-            <GridPane hgap="10" vgap="10">
+        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2">
+            <GridPane hgap="100.0" vgap="15.0">
+
                 <!-- Vertical headers -->
                 <Label
-                    styleClass="vertical-header"
-                    text="Overhead Cost"
                     GridPane.rowIndex="0"
                     GridPane.columnIndex="0"
                 />
@@ -195,26 +197,40 @@
             </GridPane>
         </VBox>
 
-        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4">
-            <!-- Markup + GM calculator -->
+        <!-- Markup + GM calculator -->
+        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3">
             <HBox prefHeight="45.0" prefWidth="374.0" spacing="20.0">
-                <Label alignment="CENTER" text="Markup" />
-                <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
-                <Label alignment="CENTER" text="GM" />
-                <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="33.0" prefWidth="60.0" />
+                <Label alignment="CENTER" text="Markup" styleClass="vertical-header"/>
+                <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
+                <HBox prefWidth="10"/>
+                <Label alignment="CENTER" text="GM" styleClass="vertical-header" />
+                <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="374.0">
-                <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate Cost, Revenue and rates" />
+            <HBox prefHeight="20.0">
+                <Label fx:id="employeeCostLbl" text="Cost" styleClass="vertical-header" />
+                <HBox prefWidth="160"/>
+                <Label fx:id="employeeRevenueLbl" text="Revenue" styleClass="vertical-header"/>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="374.0" spacing="80.0">
-                <Label fx:id="employeeCostLbl" text="Cost" />
-                <Label fx:id="employeeRevenueLbl" text="Revenue" />
+
+            <!--Calculator Button -->
+                <HBox prefHeight="50"/>
+                <Button mnemonicParsing="false" onAction="#calculateCostAndRevenue" text="Calculate"/>
+        </VBox>
+
+        <!--Buttons New Team/Add/Remove Teams   -->
+        <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <HBox>
+                <HBox prefWidth="80"/>
+                <Button id="new-team-button" mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
+                <HBox prefWidth="62"/>
+                <Button id="add-to-team-button" mnemonicParsing="false" onAction="#addToTeamBtn">Add to Team</Button>
+                <HBox prefWidth="5"/>
+                <Button id="remove-from-team-button" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">Remove from team</Button>
             </HBox>
         </VBox>
 
         <!-- Teams table -->
-        <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" minWidth="600">
-            <Button mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
+        <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" minWidth="600">
             <TableView fx:id="teamsTableView" prefHeight="473.0" >
                 <columns>
                     <TableColumn fx:id="teamNameColumn" minWidth="250" text="Teams" />
@@ -225,7 +241,7 @@
         </VBox>
 
         <!-- Country table -->
-        <TableView fx:id="countriesTableView" prefHeight="300.0" minWidth="600.0" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4">
+        <TableView fx:id="countriesTableView" prefHeight="300.0" minWidth="600.0" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3">
             <columns>
                 <TableColumn fx:id="countryNameColumn" minWidth="200" text="Country" />
                 <TableColumn fx:id="countryEmployeesColumn" minWidth="200" text="Employees" />

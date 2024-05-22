@@ -10,34 +10,30 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane minHeight="1080.0" minWidth="1920.0" stylesheets="@Styles/loginWindowView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
-   <children>
       <ImageView fitHeight="499.0" fitWidth="755.0" layoutX="575.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/IMG-20240507-WA0114-removebg-preview.png" />
-         </image>
+            <Image url="@Images/IMG-20240507-WA0114-removebg-preview.png"/>
       </ImageView>
       <ImageView fitHeight="76.0" fitWidth="119.0" layoutX="603.0" layoutY="466.0" pickOnBounds="true">
-         <image>
             <Image url="@Images/IMG-20240507-WA0107-removebg-preview.png" />
-         </image>
       </ImageView>
       <ImageView fitHeight="85.0" fitWidth="85.0" layoutX="622.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true">
-         <image>
             <Image url="@Images/IMG-20240507-WA0104-removebg-preview.png" />
-         </image>
       </ImageView>
       <TextField fx:id="usernameField" layoutX="721.0" layoutY="487.0" minHeight="55.0" minWidth="500.0" prefHeight="55.0" prefWidth="500.0" promptText="m.schneider@s.electric.dk">
          <font>
             <Font size="24.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <Button layoutX="825.0" layoutY="801.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="82.0" prefWidth="222.0" text="Login">
          <font>
             <Font size="62.0" />
-         </font></Button>
+         </font>
+      </Button>
       <PasswordField fx:id="passwordField" layoutX="722.0" layoutY="646.0" minHeight="55.0" minWidth="500.0" prefHeight="55.0" prefWidth="500.0" promptText="********">
          <font>
             <Font name="System Italic" size="36.0" />
-         </font></PasswordField>
+         </font>
+      </PasswordField>
       <Text layoutX="727.0" layoutY="623.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="214.13671875">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -48,5 +44,4 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-   </children>
 </AnchorPane>
