@@ -1,0 +1,57 @@
+.root {
+    -fx-border-width: 1px;
+    -fx-border-color: #FFF;
+    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
+}
+
+.button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 20;
+    -fx-padding: 8 16;
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+}
+
+#employeeNameLbl {
+    -fx-font-size: 40px;
+    -fx-fit-to-width: true;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e7f3e7);
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 5;
+}
+
+.table-column {
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+}
+
+.employee-name-title {
+    -fx-text-alignment: center;
+}
+
+.vertical-header {
+    -fx-font-weight: 700;
+}

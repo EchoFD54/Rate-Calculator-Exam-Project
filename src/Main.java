@@ -12,9 +12,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/view/LoginWindowView.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/view/EmployeeWindowView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }

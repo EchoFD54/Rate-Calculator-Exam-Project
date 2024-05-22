@@ -80,7 +80,6 @@ public class EmployeeWindowController {
         TableColumn<Employee, Void> actionColumn = new TableColumn<>("Actions");
         actionColumn.setCellFactory(EmployeeActionCell.forTableColumn(this));
         employeeTableView.getColumns().add(actionColumn);
-
     }
 
     public void displayTeamSelectionDialog(Employee employee) {
@@ -258,27 +257,27 @@ public class EmployeeWindowController {
         resetFields();
         //set Employees Information
         employeeNameLbl.setText(employee.getName());
-        employeeCountryLbl.setText("Country: " + employee.getCountry());
-        employeeAnnSalLbl.setText("Annual Salary: " + employee.getAnnualSalary());
-        employeOverMultLbl.setText("Overhead Multiplier Percentage: " + employee.getOverheadMultPercent());
-        employeeFixAmtLbl.setText("Fixed annual amount: " + employee.getFixedAnnualAmount());
-        employeeEffectHoursLbl.setText("Annual Effective Working Hours: " + employee.getAnnualWorkingHours());
-        employeeDailyHourLbl.setText("Daily Working Hours: " + employee.getDailyHours());
-        employeeUtilizationLbl.setText("Utilization Percentage: " + employee.getUtilizationPercentage());
+        employeeCountryLbl.setText(employee.getCountry());
+        employeeAnnSalLbl.setText(("" + employee.getAnnualSalary()));
+        employeOverMultLbl.setText("" + employee.getOverheadMultPercent());
+        employeeFixAmtLbl.setText("" + employee.getFixedAnnualAmount());
+        employeeEffectHoursLbl.setText("" + employee.getAnnualWorkingHours());
+        employeeDailyHourLbl.setText("" + employee.getDailyHours());
+        employeeUtilizationLbl.setText("" + employee.getUtilizationPercentage());
         if (employee.isOverHeadCost()) {
-            employeeBooleanLbl.setText("Overhead Cost");
+            employeeBooleanLbl.setText("");
         } else {
-            employeeBooleanLbl.setText("Production Resource");
+            employeeBooleanLbl.setText("");
         }
         //Get the teams that the employee belongs to
         List <String> teamNames = model.getTeamsFromDBUsingEmployee(employee.getId());
         String teamNamesString = String.join(", ", teamNames);
-        employeeTeamLbl.setText("Teams: " + teamNamesString);
+        employeeTeamLbl.setText(teamNamesString);
         //Display employee's rates
         String hourlyRate = String.valueOf(rateCalculator.calculateHourlyRate(employee));
-        hourRateLbl.setText("Hourly Rate: " + hourlyRate);
+        hourRateLbl.setText(hourlyRate);
         String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
-        dailyRateLbl.setText("Daily Rate: " + dailyRate);
+        dailyRateLbl.setText(dailyRate);
     }
 
     private FXMLLoader loadFXML(String path) {
