@@ -15,8 +15,7 @@ public class RateCalculator {
         double effectiveHourlyRate = totalAnnualSalary / employee.getAnnualWorkingHours();
         double overheadMultiplier = 1 + employee.getOverheadMultPercent() / 100.0;
         double hourlyRate = effectiveHourlyRate * overheadMultiplier;
-        DecimalFormat df = new DecimalFormat("#.##");
-        // hourlyRate = Double.parseDouble(df.format(hourlyRate));
+         hourlyRate = Math.round(hourlyRate * 100.0) / 100.0;
         return hourlyRate;
     }
 
