@@ -274,7 +274,7 @@ public class EmployeeWindowController {
         String teamNamesString = String.join(", ", teamNames);
         employeeTeamLbl.setText(teamNamesString);
         //Display employee's rates
-        String hourlyRate = String.valueOf(rateCalculator.calculateHourlyRate(employee));
+        String hourlyRate = String.format("%.2f", rateCalculator.calculateHourlyRate(employee));
         hourRateLbl.setText(hourlyRate);
         String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
         dailyRateLbl.setText(dailyRate);
@@ -551,8 +551,8 @@ public class EmployeeWindowController {
                 // Calculate cost and revenue
                 double cost = rateCalculator.calculateEmployeeCost(selectedEmployee);
                 double revenue = rateCalculator.calculateEmployeeRevenue(selectedEmployee, markupPercentage, grossMarginPercentage);
-                employeeCostLbl.setText("Cost: " + String.format("%.2f", cost));
-                employeeRevenueLbl.setText("Revenue: " + String.format("%.2f", revenue));
+                employeeCostLbl.setText(String.format("%.2f", cost));
+                employeeRevenueLbl.setText(String.format("%.2f", revenue));
 
                 // Calculate hourly and daily rates with multipliers applied
                 double hourlyRate = rateCalculator.calculateHourlyRate(selectedEmployee);
@@ -561,8 +561,8 @@ public class EmployeeWindowController {
                 double dailyRate = rateCalculator.calculateDailyRate(selectedEmployee);
                 double markedUpDailyRate = rateCalculator.applyMarkup(dailyRate, markupPercentage);
                 double dailyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpDailyRate, grossMarginPercentage);
-                hourRateLbl.setText("Hourly Rate: " + String.format("%.2f", hourlyRateWithMargin));
-                dailyRateLbl.setText("Daily Rate: " + String.format("%.2f", dailyRateWithMargin));
+                hourRateLbl.setText(String.format("%.2f", hourlyRateWithMargin));
+                dailyRateLbl.setText(String.format("%.2f", dailyRateWithMargin));
 
             } catch (NumberFormatException e) {
                 showAlert("Invalid numbers", "Please enter a number for Markup and GM multipliers");
@@ -579,10 +579,10 @@ public class EmployeeWindowController {
     private void resetFields() {
         markupTextField.setText("");
         gmTextField.setText("");
-        employeeCostLbl.setText("Cost: ");
-        employeeRevenueLbl.setText("Revenue: ");
-        hourRateLbl.setText("Hourly Rate: ");
-        dailyRateLbl.setText("Daily Rate: ");
+        employeeCostLbl.setText("");
+        employeeRevenueLbl.setText("");
+        hourRateLbl.setText("");
+        dailyRateLbl.setText("");
     }
 
 

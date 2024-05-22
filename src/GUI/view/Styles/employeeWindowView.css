@@ -18,7 +18,7 @@
 }
 
 #employeeNameLbl {
-    -fx-font-size: 40px;
+    -fx-font-size: 30px;
     -fx-fit-to-width: true;
     -fx-font-weight: bold;
 }
@@ -52,6 +52,13 @@
     -fx-text-alignment: center;
 }
 
-.vertical-header {
-    -fx-font-weight: 700;
+.employee-info-table .label{
+    -fx-padding: 10 20 0 5;
+
 }
+.vertical-header.label {
+    -fx-font-weight: 700;
+    -fx-padding: 0 20 0 5;
+
+}
+
