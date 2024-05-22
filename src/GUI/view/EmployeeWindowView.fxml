@@ -51,26 +51,26 @@
         <VBox GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2" >
             <TableView fx:id="employeeTableView">
                 <columns>
-                    <TableColumn fx:id="employeeNameColumn" text="Employees" minWidth="360" prefWidth="360" />
+                    <TableColumn fx:id="employeeNameColumn" text="Employees" minWidth="370" prefWidth="370" />
                 </columns>
             </TableView>
             <HBox prefHeight="50"/>
 
             <!--Buttons New Employee   -->
             <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
-                <HBox prefWidth="170"/>
+                <HBox prefWidth="190"/>
                 <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
             </HBox>
         </VBox>
 
         <!-- Employee Name -->
-        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="100">
-            <Label fx:id="employeeNameLbl" text="Select Employee to View Info" minWidth="100"/>
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="500">
+            <Label fx:id="employeeNameLbl" text="Select Employee to View Info" minWidth="500" maxWidth="500"/>
         </VBox>
 
         <!-- Employee profile information -->
-        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2">
-            <GridPane hgap="100.0" vgap="15.0">
+        <VBox GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2" minWidth="500" maxWidth="500">
+            <GridPane gridLinesVisible="true" styleClass="employee-info-table">
 
                 <!-- Vertical headers -->
                 <Label
@@ -207,9 +207,13 @@
                 <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
             </HBox>
             <HBox prefHeight="20.0">
-                <Label fx:id="employeeCostLbl" text="Cost" styleClass="vertical-header" />
-                <HBox prefWidth="160"/>
-                <Label fx:id="employeeRevenueLbl" text="Revenue" styleClass="vertical-header"/>
+                <Label text="Cost:   " styleClass="vertical-header" />
+                <Label fx:id="employeeCostLbl"/>
+            </HBox>
+                <HBox prefHeight="20.0"/>
+                <HBox prefWidth="150">
+                <Label text="Revenue:   " styleClass="vertical-header"/>
+                <Label fx:id="employeeRevenueLbl"/>
             </HBox>
 
             <!--Calculator Button -->
@@ -230,22 +234,22 @@
         </VBox>
 
         <!-- Teams table -->
-        <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" minWidth="600">
-            <TableView fx:id="teamsTableView" prefHeight="473.0" >
+        <VBox GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" prefHeight="300" minWidth="300" >
+            <TableView fx:id="teamsTableView">
                 <columns>
-                    <TableColumn fx:id="teamNameColumn" minWidth="250" text="Teams" />
-                    <TableColumn fx:id="teamEmployeesColumn" minWidth="250" text="Employees" />
+                    <TableColumn fx:id="teamNameColumn" minWidth="100" text="Teams" />
+                    <TableColumn fx:id="teamEmployeesColumn" minWidth="200" text="Employees" />
                     <TableColumn fx:id="teamDailyRateColumn" minWidth="100" text="Team Daily Rate" />
                 </columns>
             </TableView>
         </VBox>
 
         <!-- Country table -->
-        <TableView fx:id="countriesTableView" prefHeight="300.0" minWidth="600.0" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3">
+        <TableView fx:id="countriesTableView" prefHeight="200" minWidth="300" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3">
             <columns>
-                <TableColumn fx:id="countryNameColumn" minWidth="200" text="Country" />
+                <TableColumn fx:id="countryNameColumn" minWidth="100" text="Country" />
                 <TableColumn fx:id="countryEmployeesColumn" minWidth="200" text="Employees" />
-                <TableColumn fx:id="countryDailyRateColumn" minWidth="200" text="Country Daily Rate" />
+                <TableColumn fx:id="countryDailyRateColumn" minWidth="100" text="Country Daily Rate" />
             </columns>
         </TableView>
     </GridPane>
