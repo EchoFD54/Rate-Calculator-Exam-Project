@@ -8,12 +8,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 
 <VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane gridLinesVisible="false" hgap="10" vgap="10">
@@ -48,25 +47,19 @@
             <HBox prefHeight="10" />
         </VBox>
 
-        <!-- Employee table -->
-        <VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
-            <TableView fx:id="employeeTableView">
-                <columns>
-                    <TableColumn fx:id="employeeNameColumn" minWidth="231.0" prefWidth="231.0" text="Employees" />
-                </columns>
-            </TableView>
-            <HBox prefHeight="50" />
-        </VBox>
-
         <!-- Buttons New Employee -->
         <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
-            <HBox prefWidth="190" />
-            <Button mnemonicParsing="false" onAction="#openAddEmployee">New Employee</Button>
+            <HBox prefWidth="190">
+            <children>
+                   <Button fx:id="newTeamBtn" mnemonicParsing="false" onAction="#openAddTeam" />
+               <Button fx:id="editTeamBtn" mnemonicParsing="false" onAction="#openEditTeam" />
+               <Button fx:id="deleteTeamBtn" mnemonicParsing="false" onAction="#deleteTeam" />
+            </children></HBox>
         </HBox>
 
         <!-- Employee Name -->
         <VBox prefWidth="500" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <Label fx:id="employeeNameLbl" maxWidth="500" minWidth="500" text="Select Employee to View Info" />
+            <Label fx:id="teamNameLbl" maxWidth="500" minWidth="500" text="Select Team to View Info" />
         </VBox>
 
         <!-- Employee profile information -->
@@ -74,29 +67,29 @@
             <GridPane gridLinesVisible="true" styleClass="employee-info-table">
                 <!-- Vertical headers -->
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label styleClass="vertical-header" text="Country" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label styleClass="vertical-header" text="Teams" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label styleClass="vertical-header" text="Annual Salary" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Label styleClass="vertical-header" text="Overhead Multiplier (%)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label styleClass="vertical-header" text="Fixed Annual Amount" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                <Label styleClass="vertical-header" text="Annual Eff. Working Hours" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                <Label styleClass="vertical-header" text="Daily Working Hours" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                <Label styleClass="vertical-header" text="Utilization (%)" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                <Label styleClass="vertical-header" text="Hourly Rate" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-                <Label styleClass="vertical-header" text="Daily Rate" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                <Label styleClass="vertical-header" text="Team Hourly Rate" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label styleClass="vertical-header" text="Team Daily Rate" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label styleClass="vertical-header" text="Team Hourly Rate with multipliers" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label styleClass="vertical-header" text="Team Daily rate with multipliers" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label styleClass="vertical-header" text="Team Cost" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label styleClass="vertical-header" text="Team Revenue" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <Label styleClass="vertical-header" text="Team Cost with Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <Label styleClass="vertical-header" text="Team Revenue with multipliers" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <Label styleClass="vertical-header" text="Team daily hours" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <Label styleClass="vertical-header" text="Team Annual Hours" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
                 <!-- Data column -->
                 <Label fx:id="employeeBooleanLbl" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label fx:id="employeeCountryLbl" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="employeeTeamLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="employeeAnnSalLbl" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label fx:id="employeOverMultLbl" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label fx:id="employeeFixAmtLbl" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label fx:id="employeeEffectHoursLbl" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label fx:id="employeeDailyHourLbl" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <Label fx:id="employeeUtilizationLbl" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <Label fx:id="hourRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <Label fx:id="dailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="teamDailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="10" />
 
                 <columnConstraints>
                     <ColumnConstraints />
@@ -144,34 +137,38 @@
         <!-- Buttons New Team/Add/Remove Teams -->
         <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox>
-                <HBox prefWidth="80" />
-                <Button fx:id="newTeamButton" mnemonicParsing="false" onAction="#openAddTeam">New Team</Button>
-                <HBox prefWidth="62" />
-                <Button fx:id="addToTeamButton" mnemonicParsing="false" onAction="#addToTeamBtn">Add to Team</Button>
                 <HBox prefWidth="5" />
-                <Button fx:id="removeFromTeamButton" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">Remove from team</Button>
+               <Button fx:id="addEmployeeBtn" mnemonicParsing="false" onAction="#openAddEmployee" />
+            <Button fx:id="editEmployeeBtn" mnemonicParsing="false" onAction="#openEditEmployee" />
+            <Button fx:id="deleteEmployeeBtn" mnemonicParsing="false" onAction="#deleteEmployee" />
+                <Button fx:id="addToTeamBtn" mnemonicParsing="false" onAction="#addToTeamBtn" />
+                <Button fx:id="removeFromTeamBtn" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" />
             </HBox>
         </VBox>
 
         <!-- Teams table -->
-        <VBox minWidth="300" prefHeight="300" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <VBox minWidth="300" prefHeight="300" GridPane.rowIndex="2">
             <TableView fx:id="teamsTableView">
                 <columns>
-                    <TableColumn fx:id="teamNameColumn" minWidth="100" text="Teams" />
-                    <TableColumn fx:id="teamEmployeesColumn" minWidth="200" text="Employees" />
-                    <TableColumn fx:id="teamDailyRateColumn" minWidth="100" text="Team Daily Rate" />
+                    <TableColumn fx:id="teamNameColumn" minWidth="100" prefWidth="118.0" text="Teams" />
+                    <TableColumn fx:id="teamEmployeesColumn" minWidth="200" prefWidth="349.0" text="Employees" />
                 </columns>
             </TableView>
         </VBox>
-
-        <!-- Country table -->
-        <TableView fx:id="countriesTableView" minWidth="300" prefHeight="200" GridPane.columnIndex="2" GridPane.rowIndex="3">
-            <columns>
-                <TableColumn fx:id="countryNameColumn" minWidth="100" text="Country" />
-                <TableColumn fx:id="countryEmployeesColumn" minWidth="200" text="Employees" />
-                <TableColumn fx:id="countryDailyRateColumn" minWidth="100" text="Country Daily Rate" />
-            </columns>
-        </TableView>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <VBox>
+               <children>
+                  <TableView fx:id="employeeTableView">
+                     <columns>
+                        <TableColumn fx:id="employeeNameColumn" minWidth="231.0" prefWidth="485.0" text="Employees" />
+                     </columns>
+                  </TableView>
+                  <HBox prefHeight="50" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
 
         <rowConstraints>
             <RowConstraints />
@@ -181,4 +178,3 @@
         </rowConstraints>
     </GridPane>
 </VBox>
-

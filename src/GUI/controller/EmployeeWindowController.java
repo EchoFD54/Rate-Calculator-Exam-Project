@@ -1,6 +1,5 @@
 package GUI.controller;
 
-import BE.CountryInfo;
 import BE.Employee;
 import BE.Team;
 import GUI.model.Model;
@@ -16,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,25 +36,11 @@ public class EmployeeWindowController {
     @FXML
     private TableColumn<Team, String> teamEmployeesColumn;
     @FXML
-    private TableColumn<Team, Double> teamDailyRateColumn;
-    @FXML
-    private TableView<CountryInfo> countriesTableView;
-    @FXML
-    private TableColumn<CountryInfo, String> countryNameColumn;
-    @FXML
-    private TableColumn<CountryInfo, String> countryEmployeesColumn;
-    @FXML
-    private TableColumn<CountryInfo, Double> countryDailyRateColumn;
-    @FXML
-    private Label employeeNameLbl, employeeCountryLbl, employeeAnnSalLbl, employeOverMultLbl, employeeFixAmtLbl, employeeTeamLbl,
-            employeeEffectHoursLbl, employeeUtilizationLbl, employeeBooleanLbl, hourRateLbl, dailyRateLbl, employeeDailyHourLbl,
-            employeeCostLbl, employeeRevenueLbl;
+    private Label teamNameLbl, employeeCostLbl, employeeRevenueLbl, teamDailyRateLbl;
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
     @FXML
-    private Button searchBtn;
-
-    private ObservableList<CountryInfo> countryInfoList = FXCollections.observableArrayList();
+    private Button searchBtn, addEmployeeBtn, editEmployeeBtn, deleteEmployeeBtn, addToTeamBtn, removeFromTeamBtn, newTeamBtn, editTeamBtn, deleteTeamBtn;
 
     private final Model model = new Model();
 
@@ -68,18 +55,14 @@ public class EmployeeWindowController {
         setTeamsTableView();
         setDataBase();
         setTeamsDatabase();
-        setEmployeeTab();
+        setTeamTab();
         setButtons();
-        setCountriesTableView();
     }
 
     private void setEmployeeTableView() {
         TableColumn<Employee, String> employeeNameColumn = (TableColumn<Employee, String>) employeeTableView.getColumns().get(0);
         employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn<Employee, Void> actionColumn = new TableColumn<>("Actions");
-        actionColumn.setCellFactory(EmployeeActionCell.forTableColumn(this));
-        employeeTableView.getColumns().add(actionColumn);
     }
 
     public void displayTeamSelectionDialog(Employee employee) {
@@ -160,52 +143,9 @@ public class EmployeeWindowController {
             }
         });
 
-        teamDailyRateColumn.setCellValueFactory(cellData -> {
-            Team team = cellData.getValue();
-            try {
-                double dailyRate = rateCalculator.calculateTeamDailyRate(team.getTeamId());
-                team.setTeamDailyRate(dailyRate); 
-                return new SimpleDoubleProperty(dailyRate).asObject();
-            } catch (SQLException e) {
-                throw new RuntimeException("Error calculating daily rate for team: " + e.getMessage(), e);
-            }
-        });
-
-        TableColumn<Team, Void> actionColumn = new TableColumn<>("Actions");
-        actionColumn.setCellFactory(TeamActionCell.forTableColumn(this));
-        teamsTableView.getColumns().add(actionColumn);
     }
 
-    private void setCountriesTableView() {
-        countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
-        countryEmployeesColumn.setCellValueFactory(new PropertyValueFactory<>("employeesInCountry"));
-        countryDailyRateColumn.setCellValueFactory(new PropertyValueFactory<>("countryDailyRate"));
-        loadCountryInfo();
-        countriesTableView.setItems(countryInfoList);
-    }
 
-    private void loadCountryInfo() {
-       try {
-           List<String> countries = model.getAllCountriesFromDB();
-           for (String country : countries) {
-               List<Employee> employees = model.getEmployeesFromCountryInDB(country);
-               StringBuilder employeesInCountry = new StringBuilder();
-               double totalDailyRate = 0;
-               for (Employee employee : employees) {
-                   employeesInCountry.append(employee.getName()).append(", ");
-                   totalDailyRate = rateCalculator.calculateTotalDayRateByCountry(country);
-               }
-
-               if (!employeesInCountry.isEmpty()){
-                   employeesInCountry.deleteCharAt(employeesInCountry.length() - 2);
-               }
-
-               countryInfoList.add(new CountryInfo(country, employeesInCountry.toString(), totalDailyRate));
-           }
-       } catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
-    }
 
     private void setDataBase() throws SQLException {
         try {
@@ -225,8 +165,8 @@ public class EmployeeWindowController {
         }
     }
 
-    private void setEmployeeTab() {
-        employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+    private void setTeamTab() {
+        teamsTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 try {
                     updateLabels(newSelection); // update labels with information of the selected employee
@@ -249,35 +189,58 @@ public class EmployeeWindowController {
             }
         });
 
+        Image addImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/addEmployee_icon.png"));
+        Image editImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/edit_icon.png"));
+        Image deleteImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/delete_icon.png"));
+        Image addToTeamImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/addToTeam_icon.png"));
+        Image removeFromTeamImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/removeFromTeam_icon.png"));
+        ImageView addEmployeeImage = new ImageView(addImage);
+        ImageView editImageView = new ImageView(editImage);
+        ImageView deleteImageView = new ImageView(deleteImage);
+        ImageView addToTeamImageView = new ImageView(addToTeamImage);
+        ImageView removeFromTeamImageView = new ImageView(removeFromTeamImage);
+        addEmployeeImage.setFitWidth(25);
+        addEmployeeImage.setFitHeight(25);
+        editImageView.setFitWidth(25);
+        editImageView.setFitHeight(25);
+        deleteImageView.setFitWidth(25);
+        deleteImageView.setFitHeight(25);
+        addToTeamImageView.setFitWidth(25);
+        addToTeamImageView.setFitHeight(25);
+        removeFromTeamImageView.setFitWidth(25);
+        removeFromTeamImageView.setFitHeight(25);
+        addEmployeeBtn.setGraphic(addEmployeeImage);
+        editEmployeeBtn.setGraphic(editImageView);
+        deleteEmployeeBtn.setGraphic(deleteImageView);
+        addToTeamBtn.setGraphic(addToTeamImageView);
+        removeFromTeamBtn.setGraphic(removeFromTeamImageView);
+        ImageView newTeamImageView = new ImageView(addToTeamImage);
+        ImageView editTeamImageView = new ImageView(editImage);
+        ImageView deleteTeamImageView = new ImageView(deleteImage);
+
+        newTeamImageView.setFitWidth(25);
+        newTeamImageView.setFitHeight(25);
+        editTeamImageView.setFitWidth(25);
+        editTeamImageView.setFitHeight(25);
+        deleteTeamImageView.setFitWidth(25);
+        deleteTeamImageView.setFitHeight(25);
+
+        newTeamBtn.setGraphic(newTeamImageView);
+        editTeamBtn.setGraphic(editTeamImageView);
+        deleteTeamBtn.setGraphic(deleteTeamImageView);
     }
 
 
 
-    private void updateLabels(Employee employee) throws SQLException {
+    private void updateLabels(Team team) throws SQLException {
         resetFields();
-        //set Employees Information
-        employeeNameLbl.setText(employee.getName());
-        employeeCountryLbl.setText(employee.getCountry());
-        employeeAnnSalLbl.setText(("" + employee.getAnnualSalary()));
-        employeOverMultLbl.setText("" + employee.getOverheadMultPercent());
-        employeeFixAmtLbl.setText("" + employee.getFixedAnnualAmount());
-        employeeEffectHoursLbl.setText("" + employee.getAnnualWorkingHours());
-        employeeDailyHourLbl.setText("" + employee.getDailyHours());
-        employeeUtilizationLbl.setText("" + employee.getUtilizationPercentage());
-        if (employee.isOverHeadCost()) {
-            employeeBooleanLbl.setText("");
-        } else {
-            employeeBooleanLbl.setText("");
-        }
-        //Get the teams that the employee belongs to
-        List <String> teamNames = model.getTeamsFromDBUsingEmployee(employee.getId());
-        String teamNamesString = String.join(", ", teamNames);
-        employeeTeamLbl.setText(teamNamesString);
-        //Display employee's rates
-        String hourlyRate = String.format("%.2f", rateCalculator.calculateHourlyRate(employee));
-        hourRateLbl.setText(hourlyRate);
-        String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
-        dailyRateLbl.setText(dailyRate);
+        //set Teams Information
+        teamNameLbl.setText(team.getName());
+
+        //Display Teams' rates
+        String dailyRate = String.format("%.2f", rateCalculator.calculateTeamDailyRate(team.getTeamId()));
+        teamDailyRateLbl.setText(dailyRate);
+
     }
 
     private FXMLLoader loadFXML(String path) {
@@ -323,7 +286,8 @@ public class EmployeeWindowController {
         openAddOrEditEmployee("Add Employee", new Employee());
     }
 
-    public void openEditEmployee(Employee employee) {
+    public void openEditEmployee(ActionEvent actionEvent) {
+        Employee employee = getSelectedEmployee();
         if (employee != null) {
             openAddOrEditEmployee("Edit Employee", employee);
         } else {
@@ -352,7 +316,6 @@ public class EmployeeWindowController {
                 //refresh related things
                 refreshEmployeeTable(existingEmployee);
                 refreshTeamsTableView();
-                refreshCountriesTableView();
                 employeeExists = true;
                 break;
             }
@@ -365,7 +328,6 @@ public class EmployeeWindowController {
             int employeeID = model.createEmployeeInDB(newEmployee);
             newEmployee.setId(employeeID);
             employeeTableView.getItems().add(newEmployee);
-            refreshCountriesTableView();
         }
 
     }
@@ -378,7 +340,8 @@ public class EmployeeWindowController {
         }
     }
 
-    public void deleteEmployee(Employee employee) {
+    public void deleteEmployee(ActionEvent actionEvent) {
+        Employee employee = getSelectedEmployee();
         if (employee != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
@@ -391,7 +354,6 @@ public class EmployeeWindowController {
                     try {
                         model.deleteEmployeeFromDB(employee.getId());
                         refreshTeamsTableView();
-                        refreshCountriesTableView();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -426,7 +388,8 @@ public class EmployeeWindowController {
         openAddOrEditTeam("Add Team", new Team());
     }
 
-    public void openEditTeam(Team team) {
+    public void openEditTeam(ActionEvent actionEvent) {
+        Team team = getSelectedTeam();
         if (team != null) {
             openAddOrEditTeam("Edit Team", team);
         } else {
@@ -462,7 +425,8 @@ public class EmployeeWindowController {
 
     }
 
-    public void deleteTeam(Team team) {
+    public void deleteTeam(ActionEvent actionEvent) {
+        Team team = getSelectedTeam();
         if (team != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
@@ -529,11 +493,7 @@ public class EmployeeWindowController {
         teamsTableView.getItems().addAll(allTeams);
     }
 
-    private void refreshCountriesTableView() throws SQLException {
-        countriesTableView.getItems().clear();
-        loadCountryInfo();
-        countriesTableView.setItems(countryInfoList);
-    }
+
 
     public void calculateCostAndRevenue(ActionEvent actionEvent) {
         Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
@@ -561,8 +521,6 @@ public class EmployeeWindowController {
                 double dailyRate = rateCalculator.calculateDailyRate(selectedEmployee);
                 double markedUpDailyRate = rateCalculator.applyMarkup(dailyRate, markupPercentage);
                 double dailyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpDailyRate, grossMarginPercentage);
-                hourRateLbl.setText(String.format("%.2f", hourlyRateWithMargin));
-                dailyRateLbl.setText(String.format("%.2f", dailyRateWithMargin));
 
             } catch (NumberFormatException e) {
                 showAlert("Invalid numbers", "Please enter a number for Markup and GM multipliers");
@@ -579,17 +537,36 @@ public class EmployeeWindowController {
     private void resetFields() {
         markupTextField.setText("");
         gmTextField.setText("");
-        employeeCostLbl.setText("");
-        employeeRevenueLbl.setText("");
-        hourRateLbl.setText("");
-        dailyRateLbl.setText("");
     }
 
 
     public void addToTeamBtn(ActionEvent actionEvent) {
+        Employee selectedEmployee = getSelectedEmployee();
+
+            if (selectedEmployee != null) {
+                displayTeamSelectionDialog(selectedEmployee);
+            } else {
+                showAlert("Employee not selected", "Please select an employee to add to a team");
+            }
+
+
     }
 
     public void removeEmployeeFromTeamBtn(ActionEvent actionEvent) {
+        Employee selectedEmployee = getSelectedEmployee();
+       if (selectedEmployee != null) {
+           displayRemoveTeamSelectionDialog(selectedEmployee);
+       } else {
+           showAlert("Employee not selected", "Please select an employee to remove from a team");
+       }
+    }
+
+    private Employee getSelectedEmployee(){
+        return employeeTableView.getSelectionModel().getSelectedItem();
+    }
+
+    private Team getSelectedTeam(){
+        return teamsTableView.getSelectionModel().getSelectedItem();
     }
 }
 
