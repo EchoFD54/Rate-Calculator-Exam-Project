@@ -55,6 +55,7 @@ public class LoginWindowController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
             ((Stage) usernameField.getScene().getWindow()).close();
         } catch (IOException e) {
