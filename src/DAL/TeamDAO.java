@@ -239,6 +239,23 @@ public class TeamDAO {
         return false;
     }
 
+    public double getTotalHoursForEmployee(int employeeId) throws SQLException {
+        String sql = "SELECT SUM(hours) as totalEmployeeHours FROM EmployeeInTeam WHERE employee_id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("totalEmployeeHours");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException("Error retrieving total hours: " + e.getMessage(), e);
+        }
+        return 0;
+    }
+
 
 
 

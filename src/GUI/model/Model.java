@@ -33,16 +33,7 @@ public class Model {
     public List<String> getTeamsFromDBUsingEmployee(int employeeId) throws SQLException {
         return employeeManager.getTeamNames(employeeId);
     }
-
-    public List<String> getAllCountriesFromDB() throws SQLException {
-        return employeeManager.getAllCountries();
-    }
-
-    public List<Employee> getEmployeesFromCountryInDB(String country) throws SQLException {
-        return employeeManager.getEmployeesByCountry(country);
-    }
-
-
+    
     public void deleteEmployeeFromDB(int employeeId) throws SQLException {
         employeeManager.deleteEmployee(employeeId);
     }
@@ -86,6 +77,10 @@ public class Model {
 
     public double getTotalCostPercentageForEmployee(int employeeId) throws SQLException {
         return teamManager.getTotalCostPercentageForEmployee(employeeId);
+    }
+
+    public double getTotalHoursForEmployee(int employeeId) throws SQLException {
+        return teamManager.getTotalHoursForEmployee(employeeId);
     }
 
     public void updateEmployeeInTeam(int teamId, EmployeeInTeam employeeInTeam) throws SQLException {

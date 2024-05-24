@@ -46,6 +46,10 @@ public class TeamManager {
         return teamDAO.getTotalCostPercentageForEmployee(employeeId);
     }
 
+    public double getTotalHoursForEmployee(int employeeId) throws SQLException {
+        return teamDAO.getTotalHoursForEmployee(employeeId);
+    }
+
     public void updateEmployeeInTeam(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
         teamDAO.updateEmployeeInTeam(employeeId, teamId, hours, costPercentage);
     }
@@ -53,6 +57,8 @@ public class TeamManager {
     public boolean employeeExistsInTeam(int employeeId, int teamId) throws SQLException {
         return teamDAO.employeeExistsInTeam(employeeId, teamId);
     }
+
+
 
 
 }

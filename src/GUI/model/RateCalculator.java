@@ -55,6 +55,7 @@ public class RateCalculator {
         double markedUpRate = applyMarkup(hourlyRate, markupPercentage);
         double rateWithMargin = calculateRateWithGrossMargin(markedUpRate, grossMarginPercentage);
         double utilizationFactor = employee.getUtilizationPercentage() / 100.0;
+
         return rateWithMargin * employee.getAnnualWorkingHours() * utilizationFactor;
     }
 

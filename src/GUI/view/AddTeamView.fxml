@@ -61,8 +61,8 @@
       <TableView fx:id="employeeTableView" layoutX="56.0" layoutY="251.0" prefHeight="331.0" prefWidth="617.0">
         <columns>
           <TableColumn fx:id="employeeNameColumn" prefWidth="236.0" text="Employee" />
-          <TableColumn fx:id="employeeHoursColumn" prefWidth="196.0" text="Hours" />
-            <TableColumn fx:id="employeeCostColumn" prefWidth="184.0" text="Cost" />
+          <TableColumn fx:id="employeeHoursColumn" prefWidth="245.0" text="Daily Hours" />
+            <TableColumn fx:id="employeeCostColumn" prefWidth="135.0" text="Cost %" />
         </columns>
       </TableView>
    </children>

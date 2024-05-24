@@ -47,7 +47,19 @@ public class AddTeamController {
 
         employeeHoursColumn.setOnEditCommit(event -> {
             EmployeeInTeam employeeInTeam = event.getRowValue();
-            employeeInTeam.setHours(event.getNewValue());
+            double newHours = event.getNewValue();
+            double totalAssignedHours = 0;
+            try {
+                totalAssignedHours = model.getTotalHoursForEmployee(employeeInTeam.getEmployee().getId()) - employeeInTeam.getHours() + newHours;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (totalAssignedHours <= employeeInTeam.getEmployee().getDailyHours()) {
+                employeeInTeam.setHours(newHours);
+            } else {
+                showAlert("Invalid Hours", "Total assigned hours for this employee exceed the daily hours limit");
+                employeeTableView.refresh();
+            }
         });
 
         employeeCostColumn.setOnEditCommit(event -> {
@@ -108,4 +120,6 @@ public class AddTeamController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
 }
