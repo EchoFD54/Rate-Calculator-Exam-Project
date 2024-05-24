@@ -169,7 +169,7 @@ public class EmployeeWindowController {
         teamsTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 try {
-                    updateLabels(newSelection); // update labels with information of the selected employee
+                    updateTeamLabels(newSelection); // update labels with information of the selected Team
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -232,7 +232,7 @@ public class EmployeeWindowController {
 
 
 
-    private void updateLabels(Team team) throws SQLException {
+    private void updateTeamLabels(Team team) throws SQLException {
         resetFields();
         //set Teams Information
         teamNameLbl.setText(team.getName());
