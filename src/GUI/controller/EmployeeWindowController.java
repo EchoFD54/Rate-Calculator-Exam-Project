@@ -5,7 +5,6 @@ import BE.EmployeeInTeam;
 import BE.Team;
 import GUI.model.Model;
 import GUI.model.RateCalculator;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +33,7 @@ public class EmployeeWindowController {
     @FXML
     private TableColumn<Team, String> teamEmployeesColumn;
     @FXML
-    private Label teamNameLbl, employeeCostLbl, employeeRevenueLbl, teamDailyRateLbl, teamCostLbl;
+    private Label teamNameLbl, teamDailyRateLbl, teamCostLbl, teamHourlyRateLbl, teamRevenueLbl, teamHourRateWithMultLbl, teamDayRateWithMultLbl, teamCostWithMultiLbl, teamRevenueWithMultiLbl;
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
     @FXML
@@ -232,15 +231,22 @@ public class EmployeeWindowController {
 
     private void updateTeamLabels(Team team) throws SQLException {
         resetFields();
+        List<EmployeeInTeam> employeeInTeams = model.getEmployeesInTeamFromDB(team.getTeamId());
+
         //set Teams Information
         teamNameLbl.setText(team.getName());
-        List<EmployeeInTeam> employeeInTeams = model.getEmployeesInTeamFromDB(team.getTeamId());
-        String teamCost = String.valueOf(rateCalculator.calculateTeamCost(employeeInTeams));
-        teamCostLbl.setText(teamCost);
 
         //Display Teams' rates
+        String hourlyRate  = String.format("%.2f", rateCalculator.calculateTeamHourlyRate(team.getTeamId()));
+        teamHourlyRateLbl.setText(hourlyRate);
         String dailyRate = String.format("%.2f", rateCalculator.calculateTeamDailyRate(team.getTeamId()));
         teamDailyRateLbl.setText(dailyRate);
+
+        //Display base cost and revenue
+        String baseTeamCost = String.valueOf(rateCalculator.calculateTeamCost(employeeInTeams));
+        teamCostLbl.setText(baseTeamCost);
+        String baseTeamRevenue = String.valueOf(rateCalculator.calculateTeamRevenueWithoutMultipliers(employeeInTeams));
+        teamRevenueLbl.setText(baseTeamRevenue);
 
     }
 
@@ -500,9 +506,9 @@ public class EmployeeWindowController {
 
 
     public void calculateCostAndRevenue(ActionEvent actionEvent) {
-        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+        Team selectedTeam = getSelectedTeam();
 
-        if (selectedEmployee != null) {
+        if (selectedTeam != null) {
             try {
                 // If fields are empty, make the values 0
                 double markupPercentage = markupTextField.getText().isEmpty() ? 0 : Double.parseDouble(markupTextField.getText());
@@ -512,19 +518,29 @@ public class EmployeeWindowController {
                     throw new IllegalArgumentException("Markup and Gross Margin percentages must be between 0 and 100.");
                 }
 
-                // Calculate cost and revenue
-                double cost = rateCalculator.calculateEmployeeCost(selectedEmployee);
-                double revenue = rateCalculator.calculateEmployeeRevenue(selectedEmployee, markupPercentage, grossMarginPercentage);
-                employeeCostLbl.setText(String.format("%.2f", cost));
-                employeeRevenueLbl.setText(String.format("%.2f", revenue));
+                // Calculate cost and revenue with the multipliers
+                double teamCostWithMarkup = rateCalculator.calculateTeamCostWithMarkup(model.getEmployeesInTeamFromDB(selectedTeam.getTeamId()), markupPercentage);
+                double revenueWithMarkup = rateCalculator.calculateTeamRevenueWithGM(model.getEmployeesInTeamFromDB(selectedTeam.getTeamId()), markupPercentage);
+
 
                 // Calculate hourly and daily rates with multipliers applied
-                double hourlyRate = rateCalculator.calculateHourlyRate(selectedEmployee);
-                double markedUpHourlyRate = rateCalculator.applyMarkup(hourlyRate, markupPercentage);
-                double hourlyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpHourlyRate, grossMarginPercentage);
-                double dailyRate = rateCalculator.calculateDailyRate(selectedEmployee);
-                double markedUpDailyRate = rateCalculator.applyMarkup(dailyRate, markupPercentage);
-                double dailyRateWithMargin = rateCalculator.calculateRateWithGrossMargin(markedUpDailyRate, grossMarginPercentage);
+                double hourlyRateWithMultipliers = rateCalculator.calculateTeamHourlyRateWithMultipliers(selectedTeam.getTeamId(), markupPercentage, grossMarginPercentage);
+                double dailyRateWithMultipliers = rateCalculator.calculateTeamDailyRateWithMultipliers(selectedTeam.getTeamId(), markupPercentage, grossMarginPercentage);
+
+                // Update UI labels with calculated values
+                String hourlyRateStr = String.format("%.2f", hourlyRateWithMultipliers);
+                teamHourRateWithMultLbl.setText(hourlyRateStr);
+
+                String dailyRateStr = String.format("%.2f", dailyRateWithMultipliers);
+                teamDayRateWithMultLbl.setText(dailyRateStr);
+
+                String costWithMarkupStr = String.format("%.2f", teamCostWithMarkup);
+                teamCostWithMultiLbl.setText(costWithMarkupStr);
+
+                String revenueWithMarkupStr = String.format("%.2f", revenueWithMarkup);
+                teamRevenueWithMultiLbl.setText(revenueWithMarkupStr);
+
+
 
             } catch (NumberFormatException e) {
                 showAlert("Invalid numbers", "Please enter a number for Markup and GM multipliers");
@@ -532,6 +548,8 @@ public class EmployeeWindowController {
             } catch (IllegalArgumentException e) {
                 showAlert("Invalid numbers", "Please enter a number between 0 and 100");
                 e.printStackTrace();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } else {
             showAlert("No employee selected", "Please select an employee to make calculations.");
@@ -541,6 +559,10 @@ public class EmployeeWindowController {
     private void resetFields() {
         markupTextField.setText("");
         gmTextField.setText("");
+        teamDayRateWithMultLbl.setText("");
+        teamHourRateWithMultLbl.setText("");
+        teamCostWithMultiLbl.setText("");
+        teamRevenueWithMultiLbl.setText("");
     }
 
 

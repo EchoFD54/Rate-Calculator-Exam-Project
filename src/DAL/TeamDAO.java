@@ -99,7 +99,7 @@ public class TeamDAO {
     }
 
     public void addEmployeeToTeam(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
-        String sql = "INSERT INTO EmployeeInTeam (team_Id, employee_Id, hours, cost_Percentage) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO EmployeeInTeam (employee_id, team_id, hours, cost_Percentage) VALUES (?, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeId);

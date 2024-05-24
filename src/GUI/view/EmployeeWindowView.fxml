@@ -80,14 +80,14 @@
 
                 <!-- Data column -->
                 <Label fx:id="employeeBooleanLbl" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="teamHourlyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="teamDailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label fx:id="teamHourRateWithMultLbl" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="teamDayRateWithMultLbl" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Label fx:id="teamCostLbl" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <Label fx:id="teamRevenueLbl" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label fx:id="teamCostWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label fx:id="teamRevenueWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="9" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="10" />
 
