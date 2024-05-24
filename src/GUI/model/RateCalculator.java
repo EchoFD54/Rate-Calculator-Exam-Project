@@ -26,15 +26,6 @@ public class RateCalculator {
         return dailyRate;
     }
 
-    public double calculateTotalDayRateByCountry(String country) throws SQLException {
-        List<Employee> employees = model.getEmployeesFromCountryInDB(country);
-        double totalDayRate = 0;
-        for (Employee employee : employees) {
-            totalDayRate += calculateDailyRate(employee);
-        }
-        return totalDayRate;
-    }
-
     public double calculateTeamDailyRate(int teamId) throws SQLException {
         List<Employee> employees = model.getEmployeesFromTeamInDB(teamId);
         double totalDayRate = 0;
