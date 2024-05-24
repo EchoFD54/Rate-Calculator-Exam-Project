@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Employee;
+import BE.EmployeeInTeam;
 import BE.Team;
 import DAL.TeamDAO;
 
@@ -25,8 +26,8 @@ public class TeamManager {
         teamDAO.deleteTeam(teamId);
     }
 
-    public void addEmployeeToTeam(int employeeId, int teamId) throws SQLException {
-        teamDAO.addEmployeeToTeam(employeeId, teamId);
+    public void addEmployeeToTeam(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
+        teamDAO.addEmployeeToTeam(employeeId, teamId, hours, costPercentage);
     }
 
     public List<Employee> getEmployeesFromTeam(int teamId) throws SQLException {
@@ -35,6 +36,22 @@ public class TeamManager {
 
     public void removeEmployeeFromTeam(int employeeId, int teamId) throws SQLException {
         teamDAO.removeEmployeeFromTeam(employeeId, teamId);
+    }
+
+    public List<EmployeeInTeam> getEmployeesInTeam(int teamId) throws SQLException {
+        return teamDAO.getEmployeesInTeam(teamId);
+    }
+
+    public double getTotalCostPercentageForEmployee(int employeeId) throws SQLException {
+        return teamDAO.getTotalCostPercentageForEmployee(employeeId);
+    }
+
+    public void updateEmployeeInTeam(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
+        teamDAO.updateEmployeeInTeam(employeeId, teamId, hours, costPercentage);
+    }
+
+    public boolean employeeExistsInTeam(int employeeId, int teamId) throws SQLException {
+        return teamDAO.employeeExistsInTeam(employeeId, teamId);
     }
 
 

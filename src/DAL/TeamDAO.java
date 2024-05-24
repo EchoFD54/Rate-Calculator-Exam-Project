@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Employee;
+import BE.EmployeeInTeam;
 import BE.Team;
 
 import java.sql.Connection;
@@ -97,12 +98,14 @@ public class TeamDAO {
         }
     }
 
-    public void addEmployeeToTeam(int employeeId, int teamId) throws SQLException {
-        String sql = "INSERT INTO EmployeeInTeam(employee_id, team_id) VALUES(?,?)";
+    public void addEmployeeToTeam(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
+        String sql = "INSERT INTO EmployeeInTeam (team_Id, employee_Id, hours, cost_Percentage) VALUES (?, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeId);
             preparedStatement.setInt(2, teamId);
+            preparedStatement.setDouble(3, hours);
+            preparedStatement.setDouble(4, costPercentage);
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -142,6 +145,39 @@ public class TeamDAO {
         return employeeList;
     }
 
+    public List<EmployeeInTeam> getEmployeesInTeam(int teamId) throws SQLException {
+        String sql = "SELECT e.*, eit.hours, eit.cost_Percentage FROM Employee e INNER JOIN EmployeeInTeam eit ON e.id = eit.employee_Id WHERE eit.team_Id = ?";
+        List<EmployeeInTeam> employeesInTeam = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, teamId);
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String annualSalary = String.valueOf(resultSet.getDouble("annualSalary"));
+                    String overheadMultPercent = String.valueOf(resultSet.getDouble("overheadMultPercent"));
+                    String fixedAnnualAmount = String.valueOf(resultSet.getDouble("fixedAnnualAmount"));
+                    String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
+                    String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
+                    boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
+                    String dailyHours = String.valueOf(resultSet.getInt("dailyHours"));
+                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours);
+                    EmployeeInTeam employeeInTeam = new EmployeeInTeam(
+                            teamId,
+                            employee,
+                            resultSet.getDouble("hours"),
+                            resultSet.getDouble("cost_Percentage")
+                    );
+                    employeesInTeam.add(employeeInTeam);
+                }
+            }
+        }catch (SQLException e) {
+            throw new SQLException("Error retrieving employees by team: " + e.getMessage(), e);
+        }
+        return employeesInTeam;
+    }
+
     public void removeEmployeeFromTeam(int employeeId, int teamId) throws SQLException {
         String sql = "DELETE FROM EmployeeInTeam WHERE employee_id = ? AND team_id = ?";
         try (Connection connection = connectionManager.getConnection();
@@ -158,6 +194,50 @@ public class TeamDAO {
         }
     }
 
+
+    public double getTotalCostPercentageForEmployee(int employeeId) throws SQLException {
+        String sql = "SELECT SUM(cost_Percentage) as totalCostPercentage FROM EmployeeInTeam WHERE employee_id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("totalCostPercentage");
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error retrieving total cost percentage: " + e.getMessage(), e);
+        }
+        return 0;
+    }
+
+    public void updateEmployeeInTeam(int teamId, int employeeId, double hours, double costPercentage) throws SQLException {
+        String sql = "UPDATE EmployeeInTeam SET hours = ?, cost_Percentage = ? WHERE team_Id = ? AND employee_Id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setDouble(1, hours);
+            pstmt.setDouble(2, costPercentage);
+            pstmt.setInt(3, teamId);
+            pstmt.setInt(4, employeeId);
+            pstmt.executeUpdate();
+        }
+    }
+
+
+    public boolean employeeExistsInTeam(int employeeId, int teamId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM EmployeeInTeam WHERE employee_Id = ? AND team_Id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, employeeId);
+            pstmt.setInt(2, teamId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
 
 
 

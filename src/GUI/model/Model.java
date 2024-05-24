@@ -1,6 +1,7 @@
 package GUI.model;
 
 import BE.Employee;
+import BE.EmployeeInTeam;
 import BE.Team;
 import BE.User;
 import BLL.EmployeeManager;
@@ -58,8 +59,8 @@ public class Model {
         teamManager.updateTeam(team);
     }
 
-    public void addEmployeeToTeamInDB(int employeeId, int teamId) throws SQLException {
-        teamManager.addEmployeeToTeam(employeeId, teamId);
+    public void addEmployeeToTeamInDB(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
+        teamManager.addEmployeeToTeam(employeeId, teamId, hours, costPercentage);
     }
 
     public List<Employee> getEmployeesFromTeamInDB(int teamId) throws SQLException {
@@ -77,6 +78,22 @@ public class Model {
 
     public List<User> getUsersFromDB() throws SQLException {
        return userManager.getAllUsers();
+    }
+
+    public List<EmployeeInTeam> getEmployeesInTeamFromDB(int teamId) throws SQLException {
+        return teamManager.getEmployeesInTeam(teamId);
+    }
+
+    public double getTotalCostPercentageForEmployee(int employeeId) throws SQLException {
+        return teamManager.getTotalCostPercentageForEmployee(employeeId);
+    }
+
+    public void updateEmployeeInTeam(int teamId, EmployeeInTeam employeeInTeam) throws SQLException {
+        if (teamManager.employeeExistsInTeam(employeeInTeam.getEmployee().getId(), teamId)) {
+            teamManager.updateEmployeeInTeam(teamId, employeeInTeam.getEmployee().getId(), employeeInTeam.getHours(), employeeInTeam.getCostPercentage());
+        } else {
+            teamManager.addEmployeeToTeam(teamId, employeeInTeam.getEmployee().getId(), employeeInTeam.getHours(), employeeInTeam.getCostPercentage());
+        }
     }
 
 }

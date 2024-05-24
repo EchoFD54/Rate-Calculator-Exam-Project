@@ -75,7 +75,7 @@
                 <Label styleClass="vertical-header" text="Team Revenue" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                 <Label styleClass="vertical-header" text="Team Cost with Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="7" />
                 <Label styleClass="vertical-header" text="Team Revenue with multipliers" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                <Label styleClass="vertical-header" text="Team Total Salary" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <Label styleClass="vertical-header" text="Team Daily Hours" GridPane.columnIndex="0" GridPane.rowIndex="9" />
                 <Label styleClass="vertical-header" text="Team Annual Hours" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
                 <!-- Data column -->
@@ -84,7 +84,7 @@
                 <Label fx:id="teamDailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label fx:id="teamCostLbl" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label GridPane.columnIndex="1" GridPane.rowIndex="8" />

@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Employee;
+import BE.EmployeeInTeam;
 import BE.Team;
 import GUI.model.Model;
 import GUI.model.RateCalculator;
@@ -21,10 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class EmployeeWindowController {
     @FXML
@@ -36,7 +34,7 @@ public class EmployeeWindowController {
     @FXML
     private TableColumn<Team, String> teamEmployeesColumn;
     @FXML
-    private Label teamNameLbl, employeeCostLbl, employeeRevenueLbl, teamDailyRateLbl;
+    private Label teamNameLbl, employeeCostLbl, employeeRevenueLbl, teamDailyRateLbl, teamCostLbl;
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
     @FXML
@@ -84,7 +82,7 @@ public class EmployeeWindowController {
                 if (currentTeams.contains(selectedTeam.getName())) {
                     showAlert("Employee Already in Team", employee.getName() + " is already a member of the selected team.");
                 } else {
-                    model.addEmployeeToTeamInDB(employee.getId(), selectedTeam.getTeamId());
+                   model.addEmployeeToTeamInDB(employee.getId(), selectedTeam.getTeamId(), 0, 0);
                     refreshTeamsTableView();
                 }
             } catch (SQLException e) {
@@ -236,6 +234,9 @@ public class EmployeeWindowController {
         resetFields();
         //set Teams Information
         teamNameLbl.setText(team.getName());
+        List<EmployeeInTeam> employeeInTeams = model.getEmployeesInTeamFromDB(team.getTeamId());
+        String teamCost = String.valueOf(rateCalculator.calculateTeamCost(employeeInTeams));
+        teamCostLbl.setText(teamCost);
 
         //Display Teams' rates
         String dailyRate = String.format("%.2f", rateCalculator.calculateTeamDailyRate(team.getTeamId()));
@@ -397,31 +398,34 @@ public class EmployeeWindowController {
         }
     }
 
-    public void updateTeamProperties(int teamId, String name) throws SQLException {
+    public void updateTeamProperties(int teamId, String name, List<EmployeeInTeam> employeesInTeam) throws SQLException {
         boolean teamExists = false;
         Team existingTeam = null;
-        //edit existing team
+        // Edit existing team
         for (Team team : teamsTableView.getItems()) {
-            if (team.getTeamId() == teamId){
+            if (team.getTeamId() == teamId) {
                 existingTeam = team;
                 existingTeam.setName(name);
-                //update team on database and refresh tableview
+                // Update team on database
                 model.updateTeamInDB(existingTeam);
-                refreshTeamsTableView();
                 teamExists = true;
                 break;
             }
         }
 
-        //create a new team
-        if (!teamExists){
-            Team newTeam = new Team(name);
-            int teamID = model.createTeamInDB(newTeam);
-            newTeam.setTeamId(teamID);
-            teamsTableView.getItems().add(newTeam);
-            refreshTeamsTableView();
-
+        if (!teamExists) {
+            existingTeam = new Team(teamId, name);
+            // Add new team to database
+            model.createTeamInDB(existingTeam);
+            teamsTableView.getItems().add(existingTeam);
         }
+
+        // Update employees in team in the database
+        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
+            model.updateEmployeeInTeam(existingTeam.getTeamId(), employeeInTeam);
+        }
+
+        refreshTeamsTableView();
 
     }
 

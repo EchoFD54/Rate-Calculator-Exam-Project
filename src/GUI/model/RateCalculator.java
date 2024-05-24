@@ -1,6 +1,7 @@
 package GUI.model;
 
 import BE.Employee;
+import BE.EmployeeInTeam;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -55,6 +56,16 @@ public class RateCalculator {
         double rateWithMargin = calculateRateWithGrossMargin(markedUpRate, grossMarginPercentage);
         double utilizationFactor = employee.getUtilizationPercentage() / 100.0;
         return rateWithMargin * employee.getAnnualWorkingHours() * utilizationFactor;
+    }
+
+    public double calculateTeamCost(List<EmployeeInTeam> employeesInTeam) {
+        double totalCost = 0;
+        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
+            double employeeCost = calculateEmployeeCost(employeeInTeam.getEmployee());
+            double costPercentage = employeeInTeam.getCostPercentage() / 100.0;
+            totalCost += employeeCost * costPercentage;
+        }
+        return totalCost;
     }
 
 }
