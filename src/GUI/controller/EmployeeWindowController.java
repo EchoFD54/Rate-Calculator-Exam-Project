@@ -520,7 +520,7 @@ public class EmployeeWindowController {
 
                 // Calculate cost and revenue with the multipliers
                 double teamCostWithMarkup = rateCalculator.calculateTeamCostWithMarkup(model.getEmployeesInTeamFromDB(selectedTeam.getTeamId()), markupPercentage);
-                double revenueWithMarkup = rateCalculator.calculateTeamRevenueWithGM(model.getEmployeesInTeamFromDB(selectedTeam.getTeamId()), markupPercentage);
+                double revenueWithMarkup = rateCalculator.calculateTeamRevenueWithGM(model.getEmployeesInTeamFromDB(selectedTeam.getTeamId()), grossMarginPercentage);
 
 
                 // Calculate hourly and daily rates with multipliers applied

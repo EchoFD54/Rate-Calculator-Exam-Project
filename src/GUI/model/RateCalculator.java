@@ -16,7 +16,7 @@ public class RateCalculator {
         double overheadMultiplier = 1 + employee.getOverheadMultPercent() / 100.0;
         double hourlyRate = effectiveHourlyRate * overheadMultiplier;
         double utilizationPercentage = employee.getUtilizationPercentage() / 100.0;
-        hourlyRate = hourlyRate * utilizationPercentage; // Adjust for utilization percentage
+        hourlyRate = hourlyRate * utilizationPercentage; 
         hourlyRate = Math.round(hourlyRate * 100.0) / 100.0;
         return hourlyRate;
     }
@@ -60,7 +60,10 @@ public class RateCalculator {
 
     public double calculateEmployeeRevenue(Employee employee) {
         double hourlyRate = calculateHourlyRate(employee);
-        return hourlyRate * employee.getAnnualWorkingHours();
+        double effectiveWorkingHours = employee.getAnnualWorkingHours();
+        double annualRevenue = hourlyRate * effectiveWorkingHours;
+        annualRevenue = Math.round(annualRevenue * 100.0) / 100.0;
+        return annualRevenue;
     }
 
     public double calculateTeamCost(List<EmployeeInTeam> employeesInTeam) {
@@ -79,21 +82,22 @@ public class RateCalculator {
     }
 
     public double calculateTeamRevenueWithGM(List<EmployeeInTeam> employeesInTeam, double grossMarginPercentage) {
-        double totalRevenue = 0;
-        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
-            double employeeRevenue = calculateEmployeeRevenue(employeeInTeam.getEmployee());
-            double revenueWithGM = applyGrossMargin(employeeRevenue, grossMarginPercentage);
-            totalRevenue += revenueWithGM;
-        }
-        return totalRevenue;
+        double baseRevenue = calculateTeamRevenueWithoutMultipliers(employeesInTeam);
+        return applyGrossMargin(baseRevenue, grossMarginPercentage);
     }
 
     public double calculateTeamRevenueWithoutMultipliers(List<EmployeeInTeam> employeesInTeam) {
         double totalRevenue = 0;
         for (EmployeeInTeam employeeInTeam : employeesInTeam) {
-            double employeeRevenue = calculateEmployeeRevenue(employeeInTeam.getEmployee());
-            totalRevenue += employeeRevenue;
+            Employee employee = employeeInTeam.getEmployee();
+            double annualEmployeeRevenue = calculateEmployeeRevenue(employee);
+            double annualEmployeeHours = employee.getAnnualWorkingHours();
+            double employeeHoursProportion = employeeInTeam.getHours() / employee.getDailyHours();
+            double annualEmployeeHoursOnTeam = annualEmployeeHours*employeeHoursProportion;
+            double employeeTeamRevenue = (annualEmployeeRevenue*annualEmployeeHoursOnTeam)/annualEmployeeHours;
+            totalRevenue += employeeTeamRevenue;
         }
+        totalRevenue = Math.round(totalRevenue * 100.0) / 100.0;
         return totalRevenue;
     }
 
