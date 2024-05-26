@@ -7,8 +7,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RateCalculator {
+    private static RateCalculator instance;
 
-    private final Model model = new Model();
+    private final Model model = Model.getInstance();
+
+    private RateCalculator() {
+
+    }
+
+    public static RateCalculator getInstance() {
+        if (instance == null) {
+            synchronized (RateCalculator.class) {
+                if (instance == null) {
+                    instance = new RateCalculator();
+                }
+            }
+        }
+        return instance;
+    }
 
     public  double calculateHourlyRate(Employee employee){
         double totalAnnualSalary = employee.getAnnualSalary() + employee.getFixedAnnualAmount();

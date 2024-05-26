@@ -24,7 +24,7 @@ public class RateCalculatorTest {
     private EmployeeInTeam employeeInTeam2;
 
     @Mock
-    private Model model;
+    private  final Model model = Model.getInstance();
 
     @InjectMocks
     private RateCalculator rateCalculator;

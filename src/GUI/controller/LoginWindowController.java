@@ -26,7 +26,7 @@ public class LoginWindowController {
     private PasswordField passwordField;
 
     private final ArrayList<User> users = new ArrayList<>();
-    private final Model model = new Model();
+    private final Model model = Model.getInstance();
 
 
     @FXML

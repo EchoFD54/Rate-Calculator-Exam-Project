@@ -32,7 +32,7 @@ public class AddTeamController {
     private EmployeeWindowController employeeWindowController;
     private Team team;
 
-    private final Model model = new Model();
+    private final Model model = Model.getInstance();
 
     @FXML
     private void initialize() {

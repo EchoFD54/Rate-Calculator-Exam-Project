@@ -39,9 +39,9 @@ public class EmployeeWindowController {
     @FXML
     private Button searchBtn, addEmployeeBtn, editEmployeeBtn, deleteEmployeeBtn, addToTeamBtn, removeFromTeamBtn, newTeamBtn, editTeamBtn, deleteTeamBtn;
 
-    private final Model model = new Model();
+    private final Model model = Model.getInstance();
 
-    private final RateCalculator rateCalculator = new RateCalculator();
+    private final RateCalculator rateCalculator = RateCalculator.getInstance();
 
     private Boolean isFilterActive = false;
 
@@ -62,66 +62,7 @@ public class EmployeeWindowController {
 
     }
 
-    public void displayTeamSelectionDialog(Employee employee) {
-        ChoiceDialog<Team> dialog = new ChoiceDialog<>();
-        dialog.setTitle("Select Team");
-        dialog.setHeaderText("Select a team to add " + employee.getName() + " to:");
 
-        try {
-            List<Team> teams = model.getTeamsFromDB();
-            dialog.getItems().addAll(teams);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        dialog.showAndWait().ifPresent(selectedTeam -> {
-            try {
-                // Check if the employee is already part of the selected team and show alert if thats the case
-                List<String> currentTeams = model.getTeamsFromDBUsingEmployee(employee.getId());
-                if (currentTeams.contains(selectedTeam.getName())) {
-                    showAlert("Employee Already in Team", employee.getName() + " is already a member of the selected team.");
-                } else {
-                   model.addEmployeeToTeamInDB(employee.getId(), selectedTeam.getTeamId(), 0, 0);
-                    refreshTeamsTableView();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    public void displayRemoveTeamSelectionDialog(Employee employee) {
-        ChoiceDialog<String> dialog = new ChoiceDialog<>();
-        dialog.setTitle("Select Team");
-        dialog.setHeaderText("Select a team to remove " + employee.getName() + " from:");
-
-        Map<String, Integer> teamMap = new HashMap<>();
-
-        try {
-            List<Team> allTeams = model.getTeamsFromDB();
-            for (Team team : allTeams) {
-                teamMap.put(team.getName(), team.getTeamId());
-            }
-            List<String> teamNames = model.getTeamsFromDBUsingEmployee(employee.getId());
-            dialog.getItems().addAll(teamNames);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        dialog.showAndWait().ifPresent(selectedTeamName -> {
-            try {
-                Integer teamId = teamMap.get(selectedTeamName);
-                if (teamId != null) {
-                    model.deleteEmployeeFromTeamInDB(employee.getId(), teamId);
-                    refreshTeamsTableView();
-                } else {
-                    showAlert("Team Not Found", "Selected team not found in the database.");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     private void setTeamsTableView() {
         teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -144,7 +85,7 @@ public class EmployeeWindowController {
 
 
 
-    private void setDataBase() throws SQLException {
+    private void setDataBase() {
         try {
             for (Employee employee : model.getEmployeesFromDB()) {
                 employeeTableView.getItems().add(employee);
@@ -154,7 +95,7 @@ public class EmployeeWindowController {
         }
     }
 
-    private void setTeamsDatabase() throws SQLException {
+    private void setTeamsDatabase() {
         try {
             teamsTableView.getItems().addAll(model.getTeamsFromDB());
         } catch (SQLException e) {
@@ -296,11 +237,13 @@ public class EmployeeWindowController {
         }
     }
 
-    public void openAddEmployee(ActionEvent actionEvent) {
+    @FXML
+    private void openAddEmployee(ActionEvent actionEvent) {
         openAddOrEditEmployee("Add Employee", new Employee());
     }
 
-    public void openEditEmployee(ActionEvent actionEvent) {
+    @FXML
+    private void openEditEmployee(ActionEvent actionEvent) {
         Employee employee = getSelectedEmployee();
         if (employee != null) {
             openAddOrEditEmployee("Edit Employee", employee);
@@ -346,7 +289,7 @@ public class EmployeeWindowController {
 
     }
 
-    public void refreshEmployeeTable(Employee updatedEmployee) {
+    private void refreshEmployeeTable(Employee updatedEmployee) {
         ObservableList<Employee> items = employeeTableView.getItems();
         int index = items.indexOf(updatedEmployee);
         if (index >= 0) {
@@ -354,7 +297,8 @@ public class EmployeeWindowController {
         }
     }
 
-    public void deleteEmployee(ActionEvent actionEvent) {
+    @FXML
+    private void deleteEmployee(ActionEvent actionEvent) {
         Employee employee = getSelectedEmployee();
         if (employee != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -398,11 +342,13 @@ public class EmployeeWindowController {
     }
 
 
-    public void openAddTeam(ActionEvent actionEvent) {
+    @FXML
+    private void openAddTeam(ActionEvent actionEvent) {
         openAddOrEditTeam("Add Team", new Team());
     }
 
-    public void openEditTeam(ActionEvent actionEvent) {
+    @FXML
+    private void openEditTeam(ActionEvent actionEvent) {
         Team team = getSelectedTeam();
         if (team != null) {
             openAddOrEditTeam("Edit Team", team);
@@ -411,7 +357,7 @@ public class EmployeeWindowController {
         }
     }
 
-    public void updateTeamProperties(int teamId, String name, List<EmployeeInTeam> employeesInTeam) throws SQLException {
+    protected void updateTeamProperties(int teamId, String name, List<EmployeeInTeam> employeesInTeam) throws SQLException {
         boolean teamExists = false;
         Team existingTeam = null;
         // Edit existing team
@@ -443,7 +389,8 @@ public class EmployeeWindowController {
 
     }
 
-    public void deleteTeam(ActionEvent actionEvent) {
+    @FXML
+    private void deleteTeam(ActionEvent actionEvent) {
         Team team = getSelectedTeam();
         if (team != null){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -453,7 +400,6 @@ public class EmployeeWindowController {
             loadAlertStyle(alert);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    int selectedIndex = teamsTableView.getSelectionModel().getSelectedIndex();
                     try {
                         model.deleteTeamFromDB(team.getTeamId());
                         refreshTeamsTableView();
@@ -475,7 +421,8 @@ public class EmployeeWindowController {
     }
 
 
-    public void toggleFilter(ActionEvent actionEvent) throws SQLException {
+    @FXML
+    private void toggleFilter(ActionEvent actionEvent) throws SQLException {
          if (isFilterActive){
            clearFilter();
         } else {
@@ -513,7 +460,8 @@ public class EmployeeWindowController {
 
 
 
-    public void calculateCostAndRevenue(ActionEvent actionEvent) {
+    @FXML
+    private void calculateCostAndRevenue(ActionEvent actionEvent) {
         Team selectedTeam = getSelectedTeam();
 
         if (selectedTeam != null) {
@@ -585,7 +533,8 @@ public class EmployeeWindowController {
     }
 
 
-    public void addToTeamBtn(ActionEvent actionEvent) {
+    @FXML
+    private void addToTeamBtn(ActionEvent actionEvent) {
         Employee selectedEmployee = getSelectedEmployee();
 
             if (selectedEmployee != null) {
@@ -597,13 +546,75 @@ public class EmployeeWindowController {
 
     }
 
-    public void removeEmployeeFromTeamBtn(ActionEvent actionEvent) {
+    @FXML
+    private void removeEmployeeFromTeamBtn(ActionEvent actionEvent) {
         Employee selectedEmployee = getSelectedEmployee();
        if (selectedEmployee != null) {
            displayRemoveTeamSelectionDialog(selectedEmployee);
        } else {
            showAlert("Employee not selected", "Please select an employee to remove from a team");
        }
+    }
+
+    private void displayTeamSelectionDialog(Employee employee) {
+        ChoiceDialog<Team> dialog = new ChoiceDialog<>();
+        dialog.setTitle("Select Team");
+        dialog.setHeaderText("Select a team to add " + employee.getName() + " to:");
+
+        try {
+            List<Team> teams = model.getTeamsFromDB();
+            dialog.getItems().addAll(teams);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        dialog.showAndWait().ifPresent(selectedTeam -> {
+            try {
+                // Check if the employee is already part of the selected team and show alert if thats the case
+                List<String> currentTeams = model.getTeamsFromDBUsingEmployee(employee.getId());
+                if (currentTeams.contains(selectedTeam.getName())) {
+                    showAlert("Employee Already in Team", employee.getName() + " is already a member of the selected team.");
+                } else {
+                    model.addEmployeeToTeamInDB(employee.getId(), selectedTeam.getTeamId(), 0, 0);
+                    refreshTeamsTableView();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void displayRemoveTeamSelectionDialog(Employee employee) {
+        ChoiceDialog<String> dialog = new ChoiceDialog<>();
+        dialog.setTitle("Select Team");
+        dialog.setHeaderText("Select a team to remove " + employee.getName() + " from:");
+
+        Map<String, Integer> teamMap = new HashMap<>();
+
+        try {
+            List<Team> allTeams = model.getTeamsFromDB();
+            for (Team team : allTeams) {
+                teamMap.put(team.getName(), team.getTeamId());
+            }
+            List<String> teamNames = model.getTeamsFromDBUsingEmployee(employee.getId());
+            dialog.getItems().addAll(teamNames);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        dialog.showAndWait().ifPresent(selectedTeamName -> {
+            try {
+                Integer teamId = teamMap.get(selectedTeamName);
+                if (teamId != null) {
+                    model.deleteEmployeeFromTeamInDB(employee.getId(), teamId);
+                    refreshTeamsTableView();
+                } else {
+                    showAlert("Team Not Found", "Selected team not found in the database.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private Employee getSelectedEmployee(){
