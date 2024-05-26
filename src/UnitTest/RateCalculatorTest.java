@@ -27,7 +27,7 @@ public class RateCalculatorTest {
     private  final Model model = Model.getInstance();
 
     @InjectMocks
-    private RateCalculator rateCalculator;
+    private  final RateCalculator rateCalculator = RateCalculator.getInstance();
 
     @Before
     public void setUp() {
