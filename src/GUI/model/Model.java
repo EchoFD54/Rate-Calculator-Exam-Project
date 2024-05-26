@@ -50,6 +50,10 @@ public class Model {
         teamManager.updateTeam(team);
     }
 
+    public void updateTeamMultipliersInDB(Team team) throws SQLException {
+        teamManager.updateTeamMultipliers(team);
+    }
+
     public void addEmployeeToTeamInDB(int employeeId, int teamId, double hours, double costPercentage) throws SQLException {
         teamManager.addEmployeeToTeam(employeeId, teamId, hours, costPercentage);
     }

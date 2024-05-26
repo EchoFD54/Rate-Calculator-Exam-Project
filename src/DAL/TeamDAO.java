@@ -61,6 +61,24 @@ public class TeamDAO {
         }
     }
 
+    public void updateTeamMultipliers(Team team)  throws SQLException {
+        String sql = "UPDATE Team SET markup = ?, gm = ? WHERE team_id = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setDouble(1, team.getTeamMarkup());
+            preparedStatement.setDouble(2, team.getTeamGm());
+            preparedStatement.setInt(3, team.getTeamId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating team failed, no rows affected.");
+            }
+            System.out.println("TEam with ID " + team.getTeamId() + "  multipliers updated successfully.");
+        } catch (SQLException e) {
+            throw new SQLException("Error updating team: " + e.getMessage(), e);
+        }
+    }
+
     public List<Team> getTeamList() throws SQLException {
         List<Team> teamList = new ArrayList<>();
         String sql = "SELECT * FROM Team";
@@ -70,7 +88,10 @@ public class TeamDAO {
             while (resultSet.next()) {
                 int teamId = resultSet.getInt("team_id");
                 String name = resultSet.getString("team_name");
-                Team team = new Team(teamId, name);
+                String markup = String.valueOf(resultSet.getDouble("markup"));
+                String gm = String.valueOf(resultSet.getDouble("gm"));
+
+                Team team = new Team(teamId, name, markup,gm);
                 teamList.add(team);
 
             }

@@ -22,6 +22,10 @@ public class TeamManager {
         teamDAO.updateTeam(team);
     }
 
+    public void updateTeamMultipliers(Team team) throws SQLException {
+        teamDAO.updateTeamMultipliers(team);
+    }
+
     public void deleteTeam(int teamId) throws SQLException {
         teamDAO.deleteTeam(teamId);
     }

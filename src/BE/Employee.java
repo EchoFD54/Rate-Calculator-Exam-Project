@@ -9,11 +9,10 @@ public class Employee {
     private double overheadMultPercent;
     private double fixedAnnualAmount;
     private String country;
-    private String employeeTeam;
     private double annualWorkingHours;
     private double utilizationPercentage;
     private boolean isOverHeadCost;
-    private int employeeTeamId;;
+
     private int dailyHours;
 
     public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost, String dailyHours) {
@@ -113,14 +112,6 @@ public class Employee {
         this.fixedAnnualAmount = fixedAnnualAmount;
     }
 
-    public String getEmployeeTeam() {
-        return employeeTeam;
-    }
-
-    public void setEmployeeTeam(String employeeTeam) {
-        this.employeeTeam = employeeTeam;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -144,17 +135,6 @@ public class Employee {
     public void setUtilizationPercentage(double utilizationPercentage) {
         this.utilizationPercentage = utilizationPercentage;
     }
-
-
-    public int getEmployeeTeamId() {
-        return employeeTeamId;
-    }
-
-    public void setEmployeeTeamId(int employeeTeamId) {
-        this.employeeTeamId = employeeTeamId;
-    }
-
-
 
     public int getDailyHours() {
         return dailyHours;

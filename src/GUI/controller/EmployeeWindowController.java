@@ -248,7 +248,14 @@ public class EmployeeWindowController {
         String baseTeamRevenue = String.valueOf(rateCalculator.calculateTeamRevenueWithoutMultipliers(employeeInTeams));
         teamRevenueLbl.setText(baseTeamRevenue);
 
+        //Display Team multipliers
+        String markup = String.valueOf(team.getTeamMarkup());
+        markupTextField.setText(markup);
+        String gm = String.valueOf(team.getTeamGm());
+        gmTextField.setText(gm);
+
     }
+
 
     private FXMLLoader loadFXML(String path) {
         return new FXMLLoader(getClass().getResource(path));
@@ -516,6 +523,17 @@ public class EmployeeWindowController {
 
                 if (markupPercentage < 0 || markupPercentage > 100 || grossMarginPercentage < 0 || grossMarginPercentage > 100) {
                     throw new IllegalArgumentException("Markup and Gross Margin percentages must be between 0 and 100.");
+                }
+
+                //update multipliers in database
+                for (Team team : teamsTableView.getItems()) {
+                    if (team.getTeamId() == selectedTeam.getTeamId()) {
+                        selectedTeam = team;
+                        selectedTeam.setTeamMarkup(markupPercentage);
+                        selectedTeam.setTeamGm(grossMarginPercentage);
+                        model.updateTeamMultipliersInDB(selectedTeam);
+                        break;
+                    }
                 }
 
                 // Calculate cost and revenue with the multipliers
