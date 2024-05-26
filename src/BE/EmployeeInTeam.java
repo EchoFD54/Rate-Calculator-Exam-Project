@@ -13,6 +13,12 @@ public class EmployeeInTeam {
         this.costPercentage = costPercentage;
     }
 
+    public EmployeeInTeam(Employee employee, double hours, double costPercentage) {
+        this.employee = employee;
+        this.hours = hours;
+        this.costPercentage = costPercentage;
+    }
+
     public int getTeamId() {
         return teamId;
     }

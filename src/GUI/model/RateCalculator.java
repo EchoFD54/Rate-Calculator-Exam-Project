@@ -21,28 +21,6 @@ public class RateCalculator {
         return hourlyRate;
     }
 
-    public double calculateDailyRate(Employee employee){
-        int hoursInADay = employee.getDailyHours();
-        double hourlyRate = calculateHourlyRate(employee);
-        double dailyRate = hourlyRate * hoursInADay;
-        dailyRate = Math.round(dailyRate * 100.0) / 100.0;
-        return dailyRate;
-    }
-
-    public double calculateTeamDailyRate(int teamId) throws SQLException {
-        List<EmployeeInTeam> employeesInTeam = model.getEmployeesInTeamFromDB(teamId);
-        double totalDailyRate = 0;
-
-        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
-            double hoursAssigned = employeeInTeam.getHours();
-            if (hoursAssigned > 0) {
-                double hourlyRate = calculateHourlyRate(employeeInTeam.getEmployee());
-                totalDailyRate += hourlyRate * hoursAssigned;
-            }
-        }
-
-        return totalDailyRate;
-    }
 
     public double applyMarkup(double rate, double markupPercentage) {
         return rate * (1 + markupPercentage / 100.0);
@@ -101,6 +79,20 @@ public class RateCalculator {
         return totalRevenue;
     }
 
+    public double calculateTeamDailyRate(int teamId) throws SQLException {
+        List<EmployeeInTeam> employeesInTeam = model.getEmployeesInTeamFromDB(teamId);
+        double totalDailyRate = 0;
+
+        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
+            double hoursAssigned = employeeInTeam.getHours();
+            if (hoursAssigned > 0) {
+                double hourlyRate = calculateHourlyRate(employeeInTeam.getEmployee());
+                totalDailyRate += hourlyRate * hoursAssigned;
+            }
+        }
+
+        return totalDailyRate;
+    }
     public double calculateTeamDailyRateWithMultipliers(int teamId, double markupPercentage, double grossMarginPercentage) throws SQLException {
         List<EmployeeInTeam> employeesInTeam = model.getEmployeesInTeamFromDB(teamId);
         double totalDailyRate = 0;

@@ -58,10 +58,6 @@ public class Model {
         teamManager.addEmployeeToTeam(employeeId, teamId, hours, costPercentage);
     }
 
-    public List<Employee> getEmployeesFromTeamInDB(int teamId) throws SQLException {
-        return teamManager.getEmployeesFromTeam(teamId);
-    }
-
     public void deleteEmployeeFromTeamInDB(int employeeId, int teamId) throws SQLException {
         teamManager.removeEmployeeFromTeam(employeeId, teamId);
     }

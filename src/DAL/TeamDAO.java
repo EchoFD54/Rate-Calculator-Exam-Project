@@ -139,33 +139,6 @@ public class TeamDAO {
         }
     }
 
-    public List<Employee> getEmployeesByTeam(int teamId) throws SQLException {
-        List<Employee> employeeList = new ArrayList<>();
-        String sql = "SELECT e.* FROM Employee e INNER JOIN EmployeeInTeam et ON e.id = et.employee_id WHERE et.team_id = ?";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, teamId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
-                    String annualSalary = String.valueOf(resultSet.getDouble("annualSalary"));
-                    String overheadMultPercent = String.valueOf(resultSet.getDouble("overheadMultPercent"));
-                    String fixedAnnualAmount = String.valueOf(resultSet.getDouble("fixedAnnualAmount"));
-                    String annualWorkingHours = String.valueOf(resultSet.getDouble("annualWorkingHours"));
-                    String utilizationPercentage = String.valueOf(resultSet.getDouble("utilizationPercentage"));
-                    boolean isOverHeadCost = resultSet.getBoolean("isOverHeadCost");
-                    String dailyHours = String.valueOf(resultSet.getInt("dailyHours"));
-                    Employee employee = new Employee(id, name, annualSalary, overheadMultPercent, fixedAnnualAmount, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours);
-                    employeeList.add(employee);
-                }
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Error retrieving employees by team: " + e.getMessage(), e);
-        }
-        return employeeList;
-    }
-
     public List<EmployeeInTeam> getEmployeesInTeam(int teamId) throws SQLException {
         String sql = "SELECT e.*, eit.hours, eit.cost_Percentage FROM Employee e INNER JOIN EmployeeInTeam eit ON e.id = eit.employee_Id WHERE eit.team_Id = ?";
         List<EmployeeInTeam> employeesInTeam = new ArrayList<>();

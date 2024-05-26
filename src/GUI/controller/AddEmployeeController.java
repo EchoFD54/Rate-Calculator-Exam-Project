@@ -81,9 +81,12 @@ public class AddEmployeeController {
         } else if (!isValidDouble(utilization) || !isValidUtilization(utilization)) {
             isValidInput = false;
             invalidField = "Utilization";
+        } else if (!isValidDouble(dayHours) || !isValidDailyHours(dayHours)) {
+            isValidInput = false;
+            invalidField = "Daily Hours";
         }
 
-        if (isValidInput){
+        if (isValidInput) {
             // Add employee to database and tableview if input is valid
             employeeWindowController.updateEmployeeProperties(id, name, annSalary, multPer, fixedAnnAmt, country, workHours, utilization, isOverheadCost, dayHours);
             ((Stage) empNameField.getScene().getWindow()).close();
@@ -101,6 +104,15 @@ public class AddEmployeeController {
         try {
             double utilizationValue = Double.parseDouble(utilization);
             return utilizationValue >= 0 && utilizationValue <= 100;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidDailyHours(String dayHours) {
+        try {
+            double dayHoursValue = Double.parseDouble(dayHours);
+            return dayHoursValue >= 0 && dayHoursValue <= 24;
         } catch (NumberFormatException e) {
             return false;
         }

@@ -129,10 +129,10 @@ public class EmployeeWindowController {
         teamEmployeesColumn.setCellValueFactory(cellData -> {
             Team team = cellData.getValue();
             try {
-                List<Employee> employees = model.getEmployeesFromTeamInDB(team.getTeamId());
+                List<EmployeeInTeam> employees = model.getEmployeesInTeamFromDB(team.getTeamId());
                 StringJoiner employeeNames = new StringJoiner(", ");
-                for (Employee employee : employees) {
-                    employeeNames.add(employee.getName());
+                for (EmployeeInTeam employee : employees) {
+                    employeeNames.add(employee.getEmployee().getName());
                 }
                 return new SimpleStringProperty(employeeNames.toString());
             } catch (SQLException e) {
@@ -427,10 +427,11 @@ public class EmployeeWindowController {
         }
 
         if (!teamExists) {
-            existingTeam = new Team(teamId, name);
+            Team newTeam = new Team(teamId, name);
             // Add new team to database
-            model.createTeamInDB(existingTeam);
-            teamsTableView.getItems().add(existingTeam);
+            int teamID = model.createTeamInDB(newTeam);
+            newTeam.setTeamId(teamID);
+            teamsTableView.getItems().add(newTeam);
         }
 
         // Update employees in team in the database

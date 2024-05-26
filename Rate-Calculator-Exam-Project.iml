@@ -9,5 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mssql-jdbc-12.6.1.jre8-sources" level="project" />
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="mockito.core" level="project" />
   </component>
 </module>
