@@ -37,6 +37,14 @@ public class RateCalculator {
         return hourlyRate;
     }
 
+    public double calculateDailyRate(Employee employee){
+        int hoursInADay = employee.getDailyHours();
+        double hourlyRate = calculateHourlyRate(employee);
+        double dailyRate = hourlyRate * hoursInADay;
+        dailyRate = Math.round(dailyRate * 100.0) / 100.0;
+        return dailyRate;
+    }
+
 
     public double applyMarkup(double rate, double markupPercentage) {
         return rate * (1 + markupPercentage / 100.0);

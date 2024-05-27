@@ -77,9 +77,6 @@
                 <Label styleClass="vertical-header" text="Team Revenue with multipliers" GridPane.columnIndex="0" GridPane.rowIndex="8" />
                 <Label styleClass="vertical-header" text="Team Daily Hours" GridPane.columnIndex="0" GridPane.rowIndex="9" />
                 <Label styleClass="vertical-header" text="Team Annual Hours" GridPane.columnIndex="0" GridPane.rowIndex="10" />
-
-                <!-- Data column -->
-                <Label fx:id="employeeBooleanLbl" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label fx:id="teamHourlyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="teamDailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label fx:id="teamHourRateWithMultLbl" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -121,12 +118,10 @@
                 <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
             </HBox>
             <HBox prefHeight="20.0">
-                <Label styleClass="vertical-header" text="Cost:   " />
                 <Label fx:id="employeeCostLbl" />
             </HBox>
             <HBox prefHeight="20.0" />
             <HBox prefWidth="150">
-                <Label styleClass="vertical-header" text="Revenue:   " />
                 <Label fx:id="employeeRevenueLbl" />
             </HBox>
             <!-- Calculator Button -->

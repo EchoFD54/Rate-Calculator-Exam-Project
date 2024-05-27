@@ -32,8 +32,11 @@ public class EmployeeWindowController {
     private TableColumn<Team, String> teamNameColumn;
     @FXML
     private TableColumn<Team, String> teamEmployeesColumn;
+    //Team labels
     @FXML
     private Label teamNameLbl, teamDailyRateLbl, teamCostLbl, teamHourlyRateLbl, teamRevenueLbl, teamHourRateWithMultLbl, teamDayRateWithMultLbl, teamCostWithMultiLbl, teamRevenueWithMultiLbl;
+    //Employee labels
+    public Label nameLbl, booleanLbl, teamsLbl, countryLbl, hourlyRateLbl, dailyRateLbl, annualSalaryLbl, overheadMultiLbl, fixedAmountLbl, annualHoursLbl, utilizationLbl;
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
     @FXML
@@ -52,6 +55,7 @@ public class EmployeeWindowController {
         setTeamsTableView();
         setDataBase();
         setTeamsDatabase();
+        //setEmployeeTab();
         setTeamTab();
         setButtons();
     }
@@ -101,6 +105,19 @@ public class EmployeeWindowController {
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving teams: " + e.getMessage(), e);
         }
+    }
+
+    private void setEmployeeTab() {
+        employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                try {
+                    updateEmployeeLabels(newSelection); // update labels with information of the selected Employee
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 
     private void setTeamTab() {
@@ -166,6 +183,23 @@ public class EmployeeWindowController {
         newTeamBtn.setGraphic(newTeamImageView);
         editTeamBtn.setGraphic(editTeamImageView);
         deleteTeamBtn.setGraphic(deleteTeamImageView);
+    }
+
+    private void updateEmployeeLabels(Employee employee) throws SQLException {
+        List<String> employeeInTeams = model.getTeamsFromDBUsingEmployee(employee.getId());
+        nameLbl.setText(employee.getName());
+        booleanLbl.setText(String.valueOf(employee.isOverHeadCost()));
+        teamsLbl.setText(String.valueOf(employeeInTeams));
+        countryLbl.setText(employee.getCountry());
+        String hourlyRate = String.valueOf(rateCalculator.calculateHourlyRate(employee));
+        hourlyRateLbl.setText(hourlyRate);
+        String dailyRate = String.valueOf(rateCalculator.calculateDailyRate(employee));
+        dailyRateLbl.setText(dailyRate);
+        annualSalaryLbl.setText(String.valueOf(employee.getAnnualSalary()));
+        overheadMultiLbl.setText(String.valueOf(employee.getOverheadMultPercent()));
+        fixedAmountLbl.setText(String.valueOf(employee.getFixedAnnualAmount()));
+        annualHoursLbl.setText(String.valueOf(employee.getAnnualWorkingHours()));
+        utilizationLbl.setText(String.valueOf(employee.getUtilizationPercentage()));
     }
 
 
