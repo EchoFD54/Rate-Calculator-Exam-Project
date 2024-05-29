@@ -38,11 +38,12 @@ public class EmployeeWindowController {
     @FXML
     private Label teamNameLbl, teamDailyRateLbl, teamCostLbl, teamHourlyRateLbl, teamRevenueLbl, teamHourRateWithMultLbl, teamDayRateWithMultLbl, teamCostWithMultiLbl, teamRevenueWithMultiLbl;
     //Employee labels
-    public Label nameLbl, booleanLbl, teamsLbl, countryLbl, hourlyRateLbl, dailyRateLbl, annualSalaryLbl, overheadMultiLbl, fixedAmountLbl, annualHoursLbl, utilizationLbl;
+    public Label booleanLbl, nameLbl, teamsLbl, countryLbl, hourlyRateLbl, dailyRateLbl, annualSalaryLbl, overheadMultiLbl, fixedAmountLbl, annualHoursLbl, utilizationLbl;
+
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
     @FXML
-    private Button searchBtn, addEmployeeBtn, editEmployeeBtn, deleteEmployeeBtn, addToTeamBtn, removeFromTeamBtn, newTeamBtn, editTeamBtn, deleteTeamBtn;
+    private Button searchBtn;
 
     private final Model model = Model.getInstance();
 
@@ -57,7 +58,7 @@ public class EmployeeWindowController {
         setTeamsTableView();
         setDataBase();
         setTeamsDatabase();
-        //setEmployeeTab();
+        setEmployeeTab();
         setTeamTab();
         setButtons();
     }
@@ -139,46 +140,6 @@ public class EmployeeWindowController {
                 }
             }
         });
-
-        Image addImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/addEmployee_icon.png"));
-        Image editImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/edit_icon.png"));
-        Image deleteImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/delete_icon.png"));
-        Image addToTeamImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/addToTeam_icon.png"));
-        Image removeFromTeamImage = new Image(getClass().getResourceAsStream("/GUI/view/Images/removeFromTeam_icon.png"));
-        ImageView addEmployeeImage = new ImageView(addImage);
-        ImageView editImageView = new ImageView(editImage);
-        ImageView deleteImageView = new ImageView(deleteImage);
-        ImageView addToTeamImageView = new ImageView(addToTeamImage);
-        ImageView removeFromTeamImageView = new ImageView(removeFromTeamImage);
-        addEmployeeImage.setFitWidth(25);
-        addEmployeeImage.setFitHeight(25);
-        editImageView.setFitWidth(25);
-        editImageView.setFitHeight(25);
-        deleteImageView.setFitWidth(25);
-        deleteImageView.setFitHeight(25);
-        addToTeamImageView.setFitWidth(25);
-        addToTeamImageView.setFitHeight(25);
-        removeFromTeamImageView.setFitWidth(25);
-        removeFromTeamImageView.setFitHeight(25);
-        addEmployeeBtn.setGraphic(addEmployeeImage);
-        editEmployeeBtn.setGraphic(editImageView);
-        deleteEmployeeBtn.setGraphic(deleteImageView);
-        addToTeamBtn.setGraphic(addToTeamImageView);
-        removeFromTeamBtn.setGraphic(removeFromTeamImageView);
-        ImageView newTeamImageView = new ImageView(addToTeamImage);
-        ImageView editTeamImageView = new ImageView(editImage);
-        ImageView deleteTeamImageView = new ImageView(deleteImage);
-
-        newTeamImageView.setFitWidth(25);
-        newTeamImageView.setFitHeight(25);
-        editTeamImageView.setFitWidth(25);
-        editTeamImageView.setFitHeight(25);
-        deleteTeamImageView.setFitWidth(25);
-        deleteTeamImageView.setFitHeight(25);
-
-        newTeamBtn.setGraphic(newTeamImageView);
-        editTeamBtn.setGraphic(editTeamImageView);
-        deleteTeamBtn.setGraphic(deleteTeamImageView);
     }
 
     private void updateEmployeeLabels(Employee employee) throws SQLException {

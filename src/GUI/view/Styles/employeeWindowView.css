@@ -4,23 +4,59 @@
     -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
 }
 
+/*
 .button {
     -fx-background-color: #4caf50;
     -fx-text-fill: #ffffff;
-    -fx-background-radius: 20;
+    -fx-background-radius: 120;
     -fx-padding: 8 16;
     -fx-font-size: 14px;
+}
+*/
+
+.new-employee-btn,
+.new-team-btn,
+.edit-btn,
+.delete-btn,
+.calculate-btn,
+.search-btn {
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}
+
+.new-employee-btn {
+    -fx-background-image: url('./../Images/addEmployee_icon.png');
+}
+
+.new-team-btn {
+    -fx-background-image: url('./../Images/team-28.png');
+}
+
+.edit-btn {
+    -fx-background-image: url('./../Images/edit_icon.png');
+    -fx-pref-width: 31;
+    -fx-pref-height: 31;
+}
+
+.delete-btn {
+    -fx-background-image: url('./../Images/delete_icon.png');
+}
+
+.calculate-btn {
+    -fx-background-image: url('./../Images/calculateButton.png');
+}
+
+.search-btn {
+    -fx-background-image: url('./../Images/searchicon.png');
 }
 
 .label {
     -fx-text-fill: #000000;
     -fx-font-size: 16px;
-}
-
-#employeeNameLbl {
-    -fx-font-size: 30px;
-    -fx-fit-to-width: true;
-    -fx-font-weight: bold;
 }
 
 .text-field {
@@ -49,13 +85,20 @@
 }
 
 .employee-name-title {
-    -fx-text-alignment: center;
+    -fx-font-size: 25px;
+    -fx-fit-to-width: true;
+    -fx-font-weight: bold;
+}
+.team-name-title {
+    -fx-font-size: 25px;
+    -fx-fit-to-width: true;
+    -fx-font-weight: bold;
 }
 
 .employee-info-table .label{
     -fx-padding: 10 20 0 5;
-
 }
+
 .vertical-header.label {
     -fx-font-weight: 700;
     -fx-padding: 0 20 0 5;
