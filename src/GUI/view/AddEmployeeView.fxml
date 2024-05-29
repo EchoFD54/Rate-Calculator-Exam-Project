@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="527.0" prefWidth="671.0" stylesheets="@Styles/addEmployeeView.css" xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
+<AnchorPane prefHeight="527.0" prefWidth="671.0" stylesheets="@Styles/addEmployeeView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
    <children>
       <TextField fx:id="empNameField" layoutX="316.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" />
       <TextField fx:id="empAnnSalaryField" layoutX="316.0" layoutY="90.0" prefHeight="36.0" prefWidth="166.0" />
@@ -61,18 +61,18 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button fx:id="addEmployeeBtn" layoutX="523.0" layoutY="170.0" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee" />
-      <ImageView fitHeight="132.0" fitWidth="122.0" layoutX="523.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="addEmployeeBtn" layoutX="524.0" layoutY="238.0" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee" />
+      <ImageView fitHeight="88.0" fitWidth="101.0" layoutX="535.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/1144760.png" />
+            <Image url="@../../../../Iconos%20Scheneider/addemployee2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="67.0" layoutX="551.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="67.0" layoutX="551.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Logo_S_2_.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="88.0" fitWidth="143.0" layoutX="518.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="88.0" fitWidth="143.0" layoutX="518.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
