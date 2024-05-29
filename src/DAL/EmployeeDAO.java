@@ -20,7 +20,7 @@ public class EmployeeDAO {
 
     public int createEmployee(Employee employee) throws SQLException {
         String sql = "INSERT INTO Employee (name, annualSalary, overheadMultPercent, fixedAnnualAmount, country, annualWorkingHours, utilizationPercentage, isOverHeadCost, dailyHours) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {

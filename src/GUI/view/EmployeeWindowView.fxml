@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane gridLinesVisible="true" hgap="10" vgap="10" VBox.vgrow="ALWAYS">
         <VBox.margin>
             <Insets bottom="20" left="20" right="20" top="20" />
@@ -30,7 +30,7 @@
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="ALWAYS" />
-            <RowConstraints vgrow="NEVER" prefHeight="100" />
+            <RowConstraints prefHeight="100" vgrow="NEVER" />
         </rowConstraints>
 
         <!-- Schneider logo -->
@@ -53,18 +53,18 @@
         </VBox>
 
         <!-- Buttons Add/Edit/Delete Team -->
-        <HBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
-            <Button fx:id="newTeamBtn" styleClass="new-team-btn" mnemonicParsing="false" onAction="#openAddTeam">
+        <HBox alignment="CENTER" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <Button fx:id="newTeamBtn" mnemonicParsing="false" onAction="#openAddTeam" styleClass="new-team-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-           <Button fx:id="editTeamBtn" styleClass="edit-btn" mnemonicParsing="false" onAction="#openEditTeam">
+           <Button fx:id="editTeamBtn" mnemonicParsing="false" onAction="#openEditTeam" styleClass="edit-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
            </Button>
-           <Button fx:id="deleteTeamBtn" styleClass="delete-btn" mnemonicParsing="false" onAction="#deleteTeam">
+           <Button fx:id="deleteTeamBtn" mnemonicParsing="false" onAction="#deleteTeam" styleClass="delete-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -93,14 +93,14 @@
                 </rowConstraints>
 
                 <!-- Vertical headers -->
-                <HBox GridPane.valignment="CENTER"  GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                     <Label styleClass="vertical-header" text="Team" />
                     <HBox prefWidth="25" />
-                    <Button fx:id="addToTeamBtn" styleClass="new-employee-btn" alignment="CENTER" mnemonicParsing="false" onAction="#addToTeamBtn">
+                    <Button fx:id="addToTeamBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addToTeamBtn" styleClass="new-employee-btn">
                   <cursor>
                      <Cursor fx:constant="HAND" />
                   </cursor></Button>
-                    <Button fx:id="removeFromTeamBtn" styleClass="delete-btn" alignment="CENTER" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">
+                    <Button fx:id="removeFromTeamBtn" alignment="CENTER" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" styleClass="delete-btn">
                   <cursor>
                      <Cursor fx:constant="HAND" />
                   </cursor></Button>
@@ -115,7 +115,7 @@
                 <Label styleClass="vertical-header" text="Cost With Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="7" />
                 <Label styleClass="vertical-header" text="Revenue With Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="8" />
                 <Label styleClass="vertical-header" text="Daily Hours" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-                <Label styleClass="vertical-header" text="Annual Hours" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                <Label styleClass="vertical-header" text="Countries" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
                 <!-- Data column -->
                 <Label fx:id="teamNameLbl" styleClass="team-name-title" text="Select Team to View Info" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -127,13 +127,13 @@
                 <Label fx:id="teamRevenueLbl" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label fx:id="teamCostWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label fx:id="teamRevenueWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <Label fx:id="teamDailyHoursLbl" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label fx:id="teamCountriesLbl" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             </GridPane>
         </VBox>
 
         <!-- Markup + GM calculator -->
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="CENTER" spacing="20.0">
+        <HBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <Label alignment="CENTER" styleClass="vertical-header" text="Markup" />
             <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
             <HBox prefWidth="10" />
@@ -141,7 +141,7 @@
             <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
 
                 <!-- Calculator Button -->
-            <Button styleClass="calculate-btn" onAction="#calculateCostAndRevenue">
+            <Button onAction="#calculateCostAndRevenue" styleClass="calculate-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -198,11 +198,11 @@
         </VBox>
 
         <!-- Employee search -->
-            <HBox GridPane.columnIndex="3" GridPane.rowIndex="1" alignment="CENTER_RIGHT">
+            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
                 <HBox prefWidth="5" />
                 <TextField fx:id="searchTextField" />
                 <HBox prefWidth="5" />
-                <Button styleClass="search-btn" fx:id="searchBtn" onAction="#toggleFilter">
+                <Button fx:id="searchBtn" onAction="#toggleFilter" styleClass="search-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -218,19 +218,19 @@
         </VBox>
 
         <!-- Employee Table Buttons -->
-        <HBox spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="3" alignment="CENTER">
+        <HBox alignment="CENTER" spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="3">
             <HBox prefWidth="5" />
-            <Button fx:id="addEmployeeBtn" styleClass="new-employee-btn" mnemonicParsing="false" onAction="#openAddEmployee">
+            <Button fx:id="addEmployeeBtn" mnemonicParsing="false" onAction="#openAddEmployee" styleClass="new-employee-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="editEmployeeBtn" styleClass="edit-btn" mnemonicParsing="false" onAction="#openEditEmployee">
+            <Button fx:id="editEmployeeBtn" mnemonicParsing="false" onAction="#openEditEmployee" styleClass="edit-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="deleteEmployeeBtn" styleClass="delete-btn" mnemonicParsing="false" onAction="#deleteEmployee">
+            <Button fx:id="deleteEmployeeBtn" mnemonicParsing="false" onAction="#deleteEmployee" styleClass="delete-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
