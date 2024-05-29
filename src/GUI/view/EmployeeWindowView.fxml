@@ -171,7 +171,6 @@
 
                 <!-- Vertical headers -->
                 <Label styleClass="vertical-header" text="Employee" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label styleClass="vertical-header" text="Boolean" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label styleClass="vertical-header" text="Teams" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label styleClass="vertical-header" text="Country" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label styleClass="vertical-header" text="Hourly Rate" GridPane.columnIndex="0" GridPane.rowIndex="4" />
