@@ -43,11 +43,11 @@
         </VBox>
 
         <!-- Teams table -->
-        <VBox minHeight="400" minWidth="400" GridPane.rowIndex="2">
+        <VBox minHeight="600" minWidth="430" GridPane.rowIndex="2">
             <TableView fx:id="teamsTableView" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="teamNameColumn" minWidth="200" text="Teams" />
-                    <TableColumn fx:id="teamEmployeesColumn" minWidth="200" prefWidth="267.0" text="Employees" />
+                    <TableColumn fx:id="teamNameColumn" minWidth="150" prefWidth="151" text="Teams" />
+                    <TableColumn fx:id="teamEmployeesColumn" minWidth="250" prefWidth="329" text="Employees" />
                 </columns>
             </TableView>
         </VBox>
@@ -71,12 +71,12 @@
            </Button>
         </HBox>
 
-        <!-- Team Information Table-->
-        <VBox minWidth="500" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <!-- Employee on Team Information Table-->
+        <VBox minWidth="255" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="NEVER" minWidth="250" />
-                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="214" />
+                    <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" />
