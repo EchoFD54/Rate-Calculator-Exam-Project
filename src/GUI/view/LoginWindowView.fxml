@@ -8,11 +8,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.HBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/loginWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
+
     <!-- Header Logo -->
     <ImageView fitHeight="220.0" fitWidth="224.0" layoutX="1050.0" layoutY="96.0" opacity="0.3">
             <Image url="@Images/hrc.png" />
@@ -20,60 +21,43 @@
       <ImageView fitHeight="477.0" fitWidth="1021.0" layoutX="484.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
       </ImageView>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-    <HBox layoutX="971.0" layoutY="355.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RATE" fill="gray">
-            <font>
-                <Font name="Roboto" size="34.0" />
-            </font>
-        </Text>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" CALCULATOR">
-            <font>
-                <Font name="Roboto" size="34.0" />
-            </font>
-        </Text>
-    </HBox>
+
+    <!-- Rate Calculator Text -->
+    <Text  styleClass="rate-text" fill="gray" layoutX="840" layoutY="360" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" text="RATE" wrappingWidth="112.0"/>
+    <Text layoutX="920" layoutY="370" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="calculator-text" text=" CALCULATOR"/>
 
     <!-- Username Text -->
-    <Label layoutX="697.0" layoutY="467.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="553.0" text="Username/Email">
-        <font>
-            <Font name="System Italic SemiBold" size="32.0" />
-        </font>
-    </Label>
+    <Label layoutX="706.0" layoutY="461.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="553.0" styleClass="text-title" text="Username/Email" />
 
     <!-- Username Text field -->
-    <TextField fx:id="usernameField" layoutX="750" layoutY="515.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="m.schneider@s.electric.dk">
+    <TextField styleClass="text-field" fx:id="usernameField" layoutX="750" layoutY="515.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="m.schneider@s.electric.dk">
          <font>
-            <Font name="System Italic" size="20.0" />
+            <Font name="Roboto" size="20.0" />
          </font>
-      </TextField>
+    </TextField>
 
     <!-- Username Image -->
-    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="705.0" layoutY="521.0">
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="702.0" layoutY="521.0">
         <Image url="@Images/team-28.png" />
     </ImageView>
 
     <!-- Password Text -->
-    <Label layoutX="697.0" layoutY="586.0" minHeight="50" minWidth="500" prefHeight="50.0" prefWidth="553.0" text="Password">
-        <font>
-            <Font name="System Italic SemiBold" size="32.0" />
-        </font>
-    </Label>
+    <Label layoutX="703.0" layoutY="600.0" minHeight="50" minWidth="500" prefHeight="50.0" prefWidth="553.0" styleClass="text-title" text="Password" />
 
     <!-- Password Text field -->
-    <PasswordField fx:id="passwordField" layoutX="750" layoutY="632.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="********">
+    <PasswordField styleClass="text-field" fx:id="passwordField" layoutX="750.0" layoutY="650.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="********">
         <font>
             <Font size="34.0" />
         </font>
     </PasswordField>
 
     <!-- Password Image -->
-    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="698.0" layoutY="638.0">
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="699.0" layoutY="657.0">
         <Image url="@Images/passwordIcon.png" />
     </ImageView>
 
     <!-- Login Button -->
-    <Button accessibleRole="IMAGE_VIEW" layoutX="960" layoutY="800" mnemonicParsing="false" onAction="#clickLogin" styleClass="login-btn">
+    <Button accessibleRole="IMAGE_VIEW" layoutX="937.0" layoutY="777.0" mnemonicParsing="false" onAction="#clickLogin" styleClass="login-btn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

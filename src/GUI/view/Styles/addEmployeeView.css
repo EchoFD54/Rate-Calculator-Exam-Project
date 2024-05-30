@@ -1,7 +1,7 @@
 .root {
     -fx-border-width: 1px;
     -fx-border-color: #FFF;
-    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
+    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(4, 220, 8, 0.5) 100%);
 }
 
 .button:hover {
@@ -14,13 +14,20 @@
     -fx-background-repeat: no-repeat;
     -fx-background-image: url('./../Images/buttonBase.png');
     -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-pref-width: 140;
-    -fx-pref-height: 60;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Michroma';
+    -fx-font-weight: Bold;
+    -fx-stroke: #000000;
+    -fx-stroke-width: 2px;
+    -fx-fill: transparent;
+    -fx-pref-width: 300;
+    -fx-pref-height: 100;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
 }
 
 .input-label {
     -fx-font-weight: 800;
+    -fx-font-family: 'Michroma';
 }
 
 .label {
@@ -33,11 +40,19 @@
     -fx-border-color: #4caf50;
     -fx-border-radius: 5;
     -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
 }
 
+.background {
+    -fx-border-color: #000;
+    -fx-border-width: 2px;
+    -fx-background-color: rgba(0, 255, 126, 0.5);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 3, 4);
+}
 .text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #4caf50;
     -fx-border-radius: 5;
     -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
 }

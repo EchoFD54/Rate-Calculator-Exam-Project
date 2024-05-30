@@ -13,7 +13,6 @@
 <?import javafx.scene.Cursor?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/addEmployeeView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
-   <children>
       <TextField fx:id="empNameField" layoutX="1022.0" layoutY="271.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
       <TextField fx:id="empAnnSalaryField" layoutX="1022.0" layoutY="321.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
       <TextField fx:id="empMultPerField" layoutX="1022.0" layoutY="371.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
@@ -81,5 +80,4 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-   </children>
 </AnchorPane>

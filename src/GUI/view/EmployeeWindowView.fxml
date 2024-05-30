@@ -43,7 +43,7 @@
         </VBox>
 
         <!-- Teams table -->
-        <VBox GridPane.rowIndex="2">
+        <VBox styleClass="background" GridPane.rowIndex="2">
             <TableView fx:id="teamsTableView" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="teamNameColumn" minWidth="150" prefWidth="150" text="Teams" />
@@ -53,7 +53,7 @@
         </VBox>
 
         <!-- Buttons Add/Edit/Delete Team -->
-        <HBox spacing="70" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
+        <HBox styleClass="background" spacing="70" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
             <Button fx:id="newTeamBtn" styleClass="new-team-btn" mnemonicParsing="false" onAction="#openAddTeam">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -72,7 +72,7 @@
         </HBox>
 
         <!-- Team Information Table-->
-        <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <VBox styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS" >
                 <columnConstraints>
                     <ColumnConstraints hgrow="NEVER" minWidth="250"  prefWidth="250"/>
@@ -94,7 +94,7 @@
 
                 <!-- Team Info Header -->
                 <HBox GridPane.valignment="CENTER"  GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_LEFT">
-                    <Label styleClass="vertical-header" text="Team" />
+                    <Label styleClass="vertical-header"  text="Team" />
                     <HBox alignment="CENTER" spacing="5">
                         <Button fx:id="addToTeamBtn" styleClass="new-employee-team-btn" alignment="CENTER" mnemonicParsing="false" onAction="#addToTeamBtn">
                           <cursor>
@@ -137,7 +137,7 @@
         </VBox>
 
         <!-- Markup + GM calculator -->
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="60">
+        <HBox styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="60">
             <HBox alignment="CENTER_LEFT">
                 <Label  styleClass="vertical-header" text="Markup" />
                 <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="40" prefWidth="100" />
@@ -157,7 +157,7 @@
         </HBox>
 
         <!-- Employee Information table -->
-        <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <VBox styleClass="background" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS">
                 <columnConstraints>
                     <ColumnConstraints hgrow="NEVER" minWidth="180" prefWidth="180" />
@@ -216,7 +216,7 @@
             </HBox>
 
         <!-- Employee table view -->
-        <VBox GridPane.columnIndex="3" GridPane.rowIndex="2">
+        <VBox styleClass="background" GridPane.columnIndex="3" GridPane.rowIndex="2">
             <TableView fx:id="employeeTableView" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="employeeNameColumn" minWidth="260" prefWidth="260" text="Employees" />
@@ -225,7 +225,7 @@
         </VBox>
 
         <!-- Employee Table Buttons -->
-        <HBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="3" alignment="CENTER">
+        <HBox styleClass="background" spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="3" alignment="CENTER">
             <Button fx:id="addEmployeeBtn" styleClass="new-employee-btn" mnemonicParsing="false" onAction="#openAddEmployee">
                <cursor>
                   <Cursor fx:constant="HAND" />

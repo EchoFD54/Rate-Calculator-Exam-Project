@@ -1,7 +1,7 @@
 .root {
     -fx-border-width: 1px;
     -fx-border-color: #FFF;
-    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
+    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(5, 145, 8, 0.5) 100%);
 }
 
 .button:hover {
@@ -20,8 +20,9 @@
     -fx-background-position: center;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-pref-width: 60;
-    -fx-pref-height: 60;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
 }
 
 .new-employee-btn {
@@ -34,8 +35,8 @@
 
 .edit-btn {
     -fx-background-image: url('./../Images/edit_icon.png');
-    -fx-pref-width: 62;
-    -fx-pref-height: 63;
+    -fx-pref-width: 52;
+    -fx-pref-height: 53;
 }
 
 .delete-btn {
@@ -75,6 +76,7 @@
     -fx-border-color: #4caf50;
     -fx-border-radius: 5;
     -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
 }
 
 .choice-box {
@@ -91,28 +93,42 @@
 }
 
 .table-column {
+    -fx-font-family: 'Roboto';
     -fx-text-fill: #000000;
     -fx-font-size: 16px;
 }
 
 .employee-name-title {
+    -fx-font-family: 'Michroma';
+    -fx-font-size: 28px;
+    -fx-fit-to-width: true;
+    -fx-font-weight: 600;
+}
+
+.team-name-title {
+    -fx-font-family: 'Michroma';
     -fx-font-size: 32px;
     -fx-fit-to-width: true;
-    -fx-font-weight: bold;
-}
-.team-name-title {
--fx-font-size: 32px;
-    -fx-fit-to-width: true;
-    -fx-font-weight: bold;
+    -fx-font-weight: 600;
 }
 
 .employee-info-table .label{
     -fx-padding: 10 20 0 5;
 }
 
+.background {
+    -fx-border-color: #000;
+    -fx-border-width: 2px;
+    -fx-background-color: rgba(225, 234, 225, 0.98);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 3, 4);
+}
+
 .vertical-header.label {
     -fx-font-weight: bold;
     -fx-padding: 0 20 0 5;
+}
 
+.background-titles{
+    -fx-background-color: rgba(0, 255, 126, 0.28);
 }
 

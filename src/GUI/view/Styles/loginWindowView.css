@@ -1,7 +1,7 @@
 .root {
-    fx-border-width: 1px;
+    -fx-border-width: 1px;
     -fx-border-color: #FFF;
-    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
+    -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(5, 145, 8, 0.5) 100%);
 }
 
 .login-btn {
@@ -12,9 +12,27 @@
     -fx-pref-width: 90;
     -fx-pref-height: 90;
     -fx-background-image: url('./../Images/loginButton.png');
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 4, 6);
+}
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
-.gray-text {
-    -fx-text-fill: red;
+.text-title{
+    -fx-font-family: 'Michroma';
+    -fx-font-size: 28;
+}
+
+.calculator-text{
+    -fx-font-family: 'Michroma';
+    -fx-font-size: 36;
+}
+.rate-text {
+    -fx-font-family: 'Michroma';
+    -fx-font-size: 20;
+}
+
+.text-field {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.80), 10, 0, 3, 4);
 }
 
