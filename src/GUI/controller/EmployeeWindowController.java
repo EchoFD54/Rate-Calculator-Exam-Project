@@ -34,11 +34,13 @@ public class EmployeeWindowController {
     private TableColumn<Team, String> teamNameColumn;
     @FXML
     private TableColumn<Team, String> teamEmployeesColumn;
-    //Team labels
     @FXML
-    private Label teamNameLbl, teamDailyRateLbl, teamCostLbl, teamHourlyRateLbl, teamRevenueLbl, teamHourRateWithMultLbl, teamDayRateWithMultLbl, teamCostWithMultiLbl, teamRevenueWithMultiLbl;
-    //Employee labels
-    public Label booleanLbl, nameLbl, teamsLbl, countryLbl, hourlyRateLbl, dailyRateLbl, annualSalaryLbl, overheadMultiLbl, fixedAmountLbl, annualHoursLbl, utilizationLbl;
+    private Label teamNameLbl, teamDailyRateLbl, teamCostLbl, teamHourlyRateLbl, teamRevenueLbl,
+            teamHourRateWithMultLbl, teamDayRateWithMultLbl, teamCostWithMultiLbl,
+            teamRevenueWithMultiLbl, teamDailyHoursLbl, teamCountriesLbl;
+    @FXML
+    private Label booleanLbl, nameLbl, teamsLbl, countryLbl, hourlyRateLbl, dailyRateLbl,
+            annualSalaryLbl, overheadMultiLbl, fixedAmountLbl, annualHoursLbl, utilizationLbl;
 
     @FXML
     private TextField searchTextField, markupTextField, gmTextField;
@@ -145,7 +147,11 @@ public class EmployeeWindowController {
     private void updateEmployeeLabels(Employee employee) throws SQLException {
         List<String> employeeInTeams = model.getTeamsFromDBUsingEmployee(employee.getId());
         nameLbl.setText(employee.getName());
-        booleanLbl.setText(String.valueOf(employee.isOverHeadCost()));
+        if (employee.isOverHeadCost()){
+            booleanLbl.setText("Overhead Cost");
+        }else {
+            booleanLbl.setText("Production Resource");
+        }
         teamsLbl.setText(String.valueOf(employeeInTeams));
         countryLbl.setText(employee.getCountry());
         String hourlyRate = String.valueOf(rateCalculator.calculateHourlyRate(employee));
@@ -183,6 +189,14 @@ public class EmployeeWindowController {
         markupTextField.setText(markup);
         String gm = String.valueOf(team.getTeamGm());
         gmTextField.setText(gm);
+
+        //Display Team Daily hours and the countries that a team has
+        String dailyHours = String.valueOf(model.getTeamDailyHours(team.getTeamId()));
+        teamDailyHoursLbl.setText(dailyHours);
+
+        //Display the countries that a team has
+        Set<String> countries = model.getCountriesOfEmployeesInTeam(team.getTeamId());
+        teamCountriesLbl.setText(countries.toString());
     }
 
     private void resetFields() {
@@ -462,6 +476,8 @@ public class EmployeeWindowController {
             stage.show();
             if (title.equals("Edit Team")) {
                 addTeamController.addTeamBtn.setText("Edit Team");
+            } else {
+                addTeamController.employeeTableView.setVisible(false);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

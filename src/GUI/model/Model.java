@@ -9,7 +9,9 @@ import BLL.TeamManager;
 import BLL.UserManager;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Model {
@@ -105,6 +107,26 @@ public class Model {
         } else {
             teamManager.addEmployeeToTeam(teamId, employeeInTeam.getEmployee().getId(), employeeInTeam.getHours(), employeeInTeam.getCostPercentage());
         }
+    }
+
+    public double getTeamDailyHours(int teamId) throws SQLException {
+        List<EmployeeInTeam> employeesInTeam = teamManager.getEmployeesInTeam(teamId);
+        double dailyTotalHours = 0;
+        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
+            double dailyHours = employeeInTeam.getHours();
+            dailyTotalHours += dailyHours;
+        }
+        return dailyTotalHours;
+    }
+
+    public Set<String> getCountriesOfEmployeesInTeam(int teamId) throws SQLException {
+        List<EmployeeInTeam> employeesInTeam = teamManager.getEmployeesInTeam(teamId);
+        Set<String> countries = new HashSet<>();
+        for (EmployeeInTeam employeeInTeam : employeesInTeam) {
+            Employee employee = employeeInTeam.getEmployee();
+            countries.add(employee.getCountry());
+        }
+        return countries;
     }
 
 }

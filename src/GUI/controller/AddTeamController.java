@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddTeamController {
-    @FXML
-    private TableView<EmployeeInTeam> employeeTableView;
+    public TableView<EmployeeInTeam> employeeTableView;
     @FXML
     private TableColumn<EmployeeInTeam, String> employeeNameColumn;
     @FXML

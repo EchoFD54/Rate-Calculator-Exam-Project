@@ -12,7 +12,6 @@ public class Employee {
     private double annualWorkingHours;
     private double utilizationPercentage;
     private boolean isOverHeadCost;
-
     private int dailyHours;
 
     public Employee(String name, String annSalary, String multPer, String fixedAnnAmt, String country,  String workHours, String utilization, Boolean isOverHeadCost, String dailyHours) {

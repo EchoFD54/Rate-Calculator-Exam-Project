@@ -48,7 +48,7 @@ __Add/Edit employee view__
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="ALWAYS" />
-            <RowConstraints vgrow="NEVER" prefHeight="100" />
+            <RowConstraints prefHeight="100" vgrow="NEVER" />
         </rowConstraints>
 
         <!-- Schneider logo -->
@@ -77,12 +77,12 @@ __Add/Edit employee view__
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-           <Button fx:id="editTeamBtn" styleClass="edit-btn" mnemonicParsing="false" onAction="#openEditTeam">
+           <Button fx:id="editTeamBtn" mnemonicParsing="false" onAction="#openEditTeam" styleClass="edit-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
            </Button>
-           <Button fx:id="deleteTeamBtn" styleClass="delete-btn" mnemonicParsing="false" onAction="#deleteTeam">
+           <Button fx:id="deleteTeamBtn" mnemonicParsing="false" onAction="#deleteTeam" styleClass="delete-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -137,7 +137,7 @@ __Add/Edit employee view__
                 <Label styleClass="vertical-header" text="Cost With Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="7" />
                 <Label styleClass="vertical-header" text="Revenue With Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="8" />
                 <Label styleClass="vertical-header" text="Daily Hours" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-                <Label styleClass="vertical-header" text="Annual Hours" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                <Label styleClass="vertical-header" text="Countries" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
                 <!-- Data column -->
                 <Label fx:id="teamNameLbl" styleClass="team-name-title" text="Select A Team" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -149,8 +149,8 @@ __Add/Edit employee view__
                 <Label fx:id="teamRevenueLbl" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label fx:id="teamCostWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label fx:id="teamRevenueWithMultiLbl" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <Label fx:id="teamDailyHoursLbl" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label fx:id="teamCountriesLbl" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             </GridPane>
         </VBox>
 
@@ -197,7 +197,6 @@ __Add/Edit employee view__
 
                 <!-- Vertical headers -->
                 <Label styleClass="vertical-header" text="Employee" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label styleClass="vertical-header" text="Boolean" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label styleClass="vertical-header" text="Teams" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label styleClass="vertical-header" text="Country" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label styleClass="vertical-header" text="Hourly Rate" GridPane.columnIndex="0" GridPane.rowIndex="4" />
@@ -224,11 +223,11 @@ __Add/Edit employee view__
         </VBox>
 
         <!-- Employee search -->
-            <HBox GridPane.columnIndex="3" GridPane.rowIndex="1" alignment="CENTER_RIGHT">
+            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
                 <HBox prefWidth="5" />
                 <TextField fx:id="searchTextField" />
                 <HBox prefWidth="5" />
-                <Button styleClass="search-btn" fx:id="searchBtn" onAction="#toggleFilter">
+                <Button fx:id="searchBtn" onAction="#toggleFilter" styleClass="search-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -250,12 +249,12 @@ __Add/Edit employee view__
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="editEmployeeBtn" styleClass="edit-btn" mnemonicParsing="false" onAction="#openEditEmployee">
+            <Button fx:id="editEmployeeBtn" mnemonicParsing="false" onAction="#openEditEmployee" styleClass="edit-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="deleteEmployeeBtn" styleClass="delete-btn" mnemonicParsing="false" onAction="#deleteEmployee">
+            <Button fx:id="deleteEmployeeBtn" mnemonicParsing="false" onAction="#deleteEmployee" styleClass="delete-btn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
