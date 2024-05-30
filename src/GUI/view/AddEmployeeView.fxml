@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.Cursor?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/addEmployeeView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddEmployeeController">
    <children>
@@ -19,37 +20,37 @@
       <TextField fx:id="empFixedAnnAmtField" layoutX="1022.0" layoutY="421.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
       <TextField fx:id="empWorkHoursField" layoutX="1022.0" layoutY="521.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
       <TextField fx:id="empUtilizationField" layoutX="1022.0" layoutY="621.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
-      <Label layoutX="747.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Name">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Name">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="747.0" layoutY="320.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Annual Salary">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="320.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Annual Salary">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="747.0" layoutY="370.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Overhead Multiplier Percentage">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="370.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Overhead Multiplier Percentage">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="747.0" layoutY="420.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Fixed Annual Amount">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="420.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Fixed Annual Amount">
          <font>
             <Font size="24.0" />
          </font></Label>
       <ChoiceBox fx:id="empCountryChoiceBox" layoutX="1022.0" layoutY="471.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
-      <Label layoutX="747.0" layoutY="470.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Country">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="470.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Country">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="747.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Annual Effective Working Hours">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Annual Effective Working Hours">
          <font>
             <Font size="24.0" />
          </font></Label>
       <TextField fx:id="empDayHoursField" layoutX="1022.0" layoutY="571.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" />
-      <Label layoutX="747.0" layoutY="620.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Utilization Percentage">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="620.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Utilization Percentage">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="747.0" layoutY="670.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Overhead Cost / Prod. Resource">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="670.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Overhead Cost / Prod. Resource">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -61,7 +62,11 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button fx:id="addEmployeeBtn" layoutX="842.0" layoutY="795.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addEmployeeBtn" prefHeight="100.0" prefWidth="250.0" text="Add Employee" />
+      <Button fx:id="addEmployeeBtn" layoutX="842.0" layoutY="795.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addEmployeeBtn" text="Add Employee">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <ImageView fitHeight="146.0" fitWidth="242.0" layoutX="700.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Logo_S_2_.png" />
@@ -72,7 +77,7 @@
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
          </image>
       </ImageView>
-      <Label layoutX="747.0" layoutY="570.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Daily Working Hours">
+      <Label styleClass="input-label" layoutX="747.0" layoutY="570.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Daily Working Hours">
          <font>
             <Font size="24.0" />
          </font></Label>

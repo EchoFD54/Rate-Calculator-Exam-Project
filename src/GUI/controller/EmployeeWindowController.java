@@ -280,6 +280,7 @@ public class EmployeeWindowController {
             addEmployeeController.setEmployeeWindowController(this);
             addEmployeeController.setEmployee(employee);
             Stage stage = createStage(title, root);
+            stage.setMaximized(true);
             stage.show();
             if (title.equals("Edit Employee")) {
                 addEmployeeController.addEmployeeBtn.setText("Edit Employee");
@@ -473,6 +474,7 @@ public class EmployeeWindowController {
             addTeamController.setEmployeeWindowController(this);
             addTeamController.setTeam(team);
             Stage stage = createStage(title, root);
+            stage.setMaximized(true);
             stage.show();
             if (title.equals("Edit Team")) {
                 addTeamController.addTeamBtn.setText("Edit Team");

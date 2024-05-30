@@ -15,24 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<!--
-__Login view__
-1. Modificar color de parte del subtitulo.
-2. Fondo verde para los iconos de los text inputs.
-3. Borde para elementos de texto.
-4. Merge branches.
-
-__AddTeam view__
-1. Cambiar dimensiones de la ventana.
-2. Ajustar tamaño del texto.
-3. Merge branches.
-
-__Add/Edit employee view__
-1. Ajustar tamaño del texto dentro de los text inputs.
-2. Mejorar visualmente el boton de abajo.
-3. Merge branches.
--->
-
 <VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
     <GridPane gridLinesVisible="false" hgap="10" vgap="10" VBox.vgrow="ALWAYS">
         <VBox.margin>

@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.HBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/loginWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
     <!-- Header Logo -->
     <ImageView fitHeight="220.0" fitWidth="224.0" layoutX="1050.0" layoutY="96.0" opacity="0.3">
@@ -20,11 +21,18 @@
             <Image url="@Images/Schneider_Electric-Logo.wine.png" />
       </ImageView>
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-    <Text layoutX="971.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RATE CALCULATOR">
-        <font>
-            <Font name="Roboto" size="34.0" />
-        </font>
-    </Text>
+    <HBox layoutX="971.0" layoutY="355.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RATE" fill="gray">
+            <font>
+                <Font name="Roboto" size="34.0" />
+            </font>
+        </Text>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" CALCULATOR">
+            <font>
+                <Font name="Roboto" size="34.0" />
+            </font>
+        </Text>
+    </HBox>
 
     <!-- Username Text -->
     <Label layoutX="697.0" layoutY="467.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="553.0" text="Username/Email">

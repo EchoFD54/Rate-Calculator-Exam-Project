@@ -12,6 +12,9 @@
     -fx-pref-width: 90;
     -fx-pref-height: 90;
     -fx-background-image: url('./../Images/loginButton.png');
+}
 
+.gray-text {
+    -fx-text-fill: red;
 }
 

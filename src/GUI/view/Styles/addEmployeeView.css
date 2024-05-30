@@ -4,12 +4,23 @@
     -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
 }
 
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
 .button {
-    -fx-background-color: #4caf50;
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url('./../Images/buttonBase.png');
     -fx-text-fill: #ffffff;
-    -fx-background-radius: 20;
-    -fx-padding: 8 16;
     -fx-font-size: 14px;
+    -fx-pref-width: 140;
+    -fx-pref-height: 60;
+}
+
+.input-label {
+    -fx-font-weight: 800;
 }
 
 .label {
