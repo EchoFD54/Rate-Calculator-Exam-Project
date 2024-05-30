@@ -22,10 +22,8 @@
          <effect>
             <DropShadow radius="4.75" width="0.0" />
          </effect></Button>
-      <Label layoutX="640.0" layoutY="376.0" prefHeight="58.0" prefWidth="113.0" text="Team">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
+      <Label styleClass="input-label" layoutX="640.0" layoutY="376.0" prefHeight="58.0" prefWidth="113.0" text="Team">
+      </Label>
       <ImageView fitHeight="254.0" fitWidth="488.0" layoutX="730.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Images/Logo_S_2_.png" />
          <effect>
@@ -37,9 +35,9 @@
       </ImageView>
       <TableView fx:id="employeeTableView" layoutX="541.0" layoutY="494.0" prefHeight="345.0" prefWidth="811.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="394.0" text="Employee" />
-          <TableColumn fx:id="employeeHoursColumn" prefWidth="249.0" text="Daily Hours" />
-            <TableColumn fx:id="employeeCostColumn" prefWidth="167.0" text="Cost %" />
+            <TableColumn styleClass="table-header" fx:id="employeeNameColumn" prefWidth="394.0" text="Employee" />
+            <TableColumn styleClass="table-header" fx:id="employeeHoursColumn" prefWidth="249.0" text="Daily Hours" />
+            <TableColumn styleClass="table-header" fx:id="employeeCostColumn" prefWidth="167.0" text="Cost %" />
         </columns>
       </TableView>
    </children>
