@@ -4,25 +4,14 @@
     -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
 }
 
-.button {
-    -fx-background-color: #4caf50;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 20;
-    -fx-font-size: 14px;
-}
+.login-btn {
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 90;
+    -fx-pref-height: 90;
+    -fx-background-image: url('./../Images/loginButton.png');
 
-.label {
-    -fx-text-fill: #000000;
-    -fx-font-size: 16px;
-}
-
-.text-field,
-.password-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #4caf50;
-    -fx-border-radius: 5;
-    -fx-padding: 5;
-    -fx-pref-height: 33px;
-    -fx-pref-width: 181px;
 }
 
