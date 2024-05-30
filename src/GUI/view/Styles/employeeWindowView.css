@@ -4,28 +4,24 @@
     -fx-background-color: linear-gradient(to bottom, #FFF 0%, #CECECE 40.19%, rgba(150, 181, 151, 0.80) 64.11%, rgba(38, 136, 42, 0.50) 100%);
 }
 
-/*
-.button {
-    -fx-background-color: #4caf50;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 120;
-    -fx-padding: 8 16;
-    -fx-font-size: 14px;
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
-*/
 
 .new-employee-btn,
 .new-team-btn,
 .edit-btn,
 .delete-btn,
 .calculate-btn,
-.search-btn {
+.search-btn,
+.new-employee-team-btn,
+.delete-from-team-btn {
     -fx-background-size: contain;
     -fx-background-position: center;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-pref-width: 30;
-    -fx-pref-height: 30;
+    -fx-pref-width: 60;
+    -fx-pref-height: 60;
 }
 
 .new-employee-btn {
@@ -38,20 +34,35 @@
 
 .edit-btn {
     -fx-background-image: url('./../Images/edit_icon.png');
-    -fx-pref-width: 31;
-    -fx-pref-height: 31;
+    -fx-pref-width: 62;
+    -fx-pref-height: 63;
 }
 
 .delete-btn {
     -fx-background-image: url('./../Images/delete_icon.png');
 }
 
+.new-employee-team-btn {
+    -fx-background-image: url('./../Images/addEmployee_icon.png');
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+}
+.delete-from-team-btn {
+    -fx-background-image: url('./../Images/delete_icon.png');
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+}
+
 .calculate-btn {
     -fx-background-image: url('./../Images/calculateButton.png');
+    -fx-pref-height: 70;
+    -fx-pref-width: 70;
 }
 
 .search-btn {
     -fx-background-image: url('./../Images/searchicon.png');
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
 }
 
 .label {
@@ -85,12 +96,12 @@
 }
 
 .employee-name-title {
-    -fx-font-size: 25px;
+    -fx-font-size: 32px;
     -fx-fit-to-width: true;
     -fx-font-weight: bold;
 }
 .team-name-title {
-    -fx-font-size: 25px;
+-fx-font-size: 32px;
     -fx-fit-to-width: true;
     -fx-font-weight: bold;
 }
@@ -100,7 +111,7 @@
 }
 
 .vertical-header.label {
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
     -fx-padding: 0 20 0 5;
 
 }

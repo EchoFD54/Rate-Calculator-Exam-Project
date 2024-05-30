@@ -15,8 +15,26 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
-    <GridPane gridLinesVisible="true" hgap="10" vgap="10" VBox.vgrow="ALWAYS">
+<!--
+__Login view__
+1. Modificar color de parte del subtitulo.
+2. Fondo verde para los iconos de los text inputs.
+3. Borde para elementos de texto.
+4. Merge branches.
+
+__AddTeam view__
+1. Cambiar dimensiones de la ventana.
+2. Ajustar tamaño del texto.
+3. Merge branches.
+
+__Add/Edit employee view__
+1. Ajustar tamaño del texto dentro de los text inputs.
+2. Mejorar visualmente el boton de abajo.
+3. Merge branches.
+-->
+
+<VBox stylesheets="@Styles/employeeWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EmployeeWindowController">
+    <GridPane gridLinesVisible="false" hgap="10" vgap="10" VBox.vgrow="ALWAYS">
         <VBox.margin>
             <Insets bottom="20" left="20" right="20" top="20" />
         </VBox.margin>
@@ -24,7 +42,7 @@
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="250" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="100" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints vgrow="NEVER" />
@@ -36,25 +54,25 @@
         <!-- Schneider logo -->
         <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
             <HBox>
-                <ImageView fitHeight="140.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="100" pickOnBounds="true" preserveRatio="true">
                     <Image url="@Images/FullLogo.png" />
                 </ImageView>
             </HBox>
         </VBox>
 
         <!-- Teams table -->
-        <VBox minHeight="600" minWidth="430" GridPane.rowIndex="2">
+        <VBox GridPane.rowIndex="2">
             <TableView fx:id="teamsTableView" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="teamNameColumn" minWidth="150" prefWidth="151" text="Teams" />
-                    <TableColumn fx:id="teamEmployeesColumn" minWidth="250" prefWidth="329" text="Employees" />
+                    <TableColumn fx:id="teamNameColumn" minWidth="150" prefWidth="150" text="Teams" />
+                    <TableColumn fx:id="teamEmployeesColumn" minWidth="320" prefWidth="320" text="Employees" />
                 </columns>
             </TableView>
         </VBox>
 
         <!-- Buttons Add/Edit/Delete Team -->
-        <HBox alignment="CENTER" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
-            <Button fx:id="newTeamBtn" mnemonicParsing="false" onAction="#openAddTeam" styleClass="new-team-btn">
+        <HBox spacing="70" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER">
+            <Button fx:id="newTeamBtn" styleClass="new-team-btn" mnemonicParsing="false" onAction="#openAddTeam">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -71,12 +89,12 @@
            </Button>
         </HBox>
 
-        <!-- Employee on Team Information Table-->
-        <VBox minWidth="255" GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS">
+        <!-- Team Information Table-->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS" >
                 <columnConstraints>
-                    <ColumnConstraints hgrow="NEVER" minWidth="214" />
-                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints hgrow="NEVER" minWidth="250"  prefWidth="250"/>
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="350" prefWidth="350" halignment="CENTER"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" />
@@ -92,20 +110,24 @@
                     <RowConstraints vgrow="ALWAYS" />
                 </rowConstraints>
 
-                <!-- Vertical headers -->
-                <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <!-- Team Info Header -->
+                <HBox GridPane.valignment="CENTER"  GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_LEFT">
                     <Label styleClass="vertical-header" text="Team" />
-                    <HBox prefWidth="25" />
-                    <Button fx:id="addToTeamBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addToTeamBtn" styleClass="new-employee-btn">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor></Button>
-                    <Button fx:id="removeFromTeamBtn" alignment="CENTER" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn" styleClass="delete-btn">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor></Button>
+                    <HBox alignment="CENTER" spacing="5">
+                        <Button fx:id="addToTeamBtn" styleClass="new-employee-team-btn" alignment="CENTER" mnemonicParsing="false" onAction="#addToTeamBtn">
+                          <cursor>
+                             <Cursor fx:constant="HAND" />
+                          </cursor>
+                        </Button>
+                        <Button fx:id="removeFromTeamBtn" styleClass="delete-from-team-btn" alignment="CENTER" mnemonicParsing="false" onAction="#removeEmployeeFromTeamBtn">
+                          <cursor>
+                             <Cursor fx:constant="HAND" />
+                          </cursor>
+                        </Button>
+                    </HBox>
                 </HBox>
 
+                <!-- Team Information Columns -->
                 <Label styleClass="vertical-header" text="Hourly Rate" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label styleClass="vertical-header" text="Daily Rate" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label styleClass="vertical-header" text="Hourly Rate With Multipliers" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -118,7 +140,7 @@
                 <Label styleClass="vertical-header" text="Countries" GridPane.columnIndex="0" GridPane.rowIndex="10" />
 
                 <!-- Data column -->
-                <Label fx:id="teamNameLbl" styleClass="team-name-title" text="Select Team to View Info" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label fx:id="teamNameLbl" styleClass="team-name-title" text="Select A Team" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label fx:id="teamHourlyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="teamDailyRateLbl" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label fx:id="teamHourRateWithMultLbl" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -133,27 +155,31 @@
         </VBox>
 
         <!-- Markup + GM calculator -->
-        <HBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <Label alignment="CENTER" styleClass="vertical-header" text="Markup" />
-            <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
-            <HBox prefWidth="10" />
-            <Label alignment="CENTER" styleClass="vertical-header" text="GM" />
-            <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="30.0" prefWidth="70.0" />
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="60">
+            <HBox alignment="CENTER_LEFT">
+                <Label  styleClass="vertical-header" text="Markup" />
+                <TextField fx:id="markupTextField" alignment="CENTER" prefHeight="40" prefWidth="100" />
+                <HBox prefWidth="60" />
+                <Label alignment="CENTER" styleClass="vertical-header" text="GM" />
+                <TextField fx:id="gmTextField" alignment="CENTER" prefHeight="40" prefWidth="100" />
+            </HBox>
 
-                <!-- Calculator Button -->
-            <Button onAction="#calculateCostAndRevenue" styleClass="calculate-btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <!-- Calculator Button -->
+            <HBox alignment="CENTER">
+                <Button styleClass="calculate-btn" onAction="#calculateCostAndRevenue">
+                   <cursor>
+                      <Cursor fx:constant="HAND" />
+                   </cursor>
+                </Button>
+            </HBox>
         </HBox>
 
         <!-- Employee Information table -->
-        <VBox minWidth="500" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
             <GridPane gridLinesVisible="true" styleClass="employee-info-table" VBox.vgrow="ALWAYS">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="NEVER" minWidth="250" />
-                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="180" prefWidth="180" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="340" prefWidth="340" halignment="CENTER" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" />
@@ -208,18 +234,17 @@
             </HBox>
 
         <!-- Employee table view -->
-        <VBox prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+        <VBox GridPane.columnIndex="3" GridPane.rowIndex="2">
             <TableView fx:id="employeeTableView" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="employeeNameColumn" minWidth="298.0" text="Employees" />
+                    <TableColumn fx:id="employeeNameColumn" minWidth="260" prefWidth="260" text="Employees" />
                 </columns>
             </TableView>
         </VBox>
 
         <!-- Employee Table Buttons -->
-        <HBox alignment="CENTER" spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="3">
-            <HBox prefWidth="5" />
-            <Button fx:id="addEmployeeBtn" mnemonicParsing="false" onAction="#openAddEmployee" styleClass="new-employee-btn">
+        <HBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="3" alignment="CENTER">
+            <Button fx:id="addEmployeeBtn" styleClass="new-employee-btn" mnemonicParsing="false" onAction="#openAddEmployee">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

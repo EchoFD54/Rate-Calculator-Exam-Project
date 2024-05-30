@@ -12,54 +12,62 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/loginWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.LoginWindowController">
-   <children>
-      <ImageView fitHeight="220.0" fitWidth="224.0" layoutX="1050.0" layoutY="96.0" opacity="0.5">
-         <image>
+    <!-- Header Logo -->
+    <ImageView fitHeight="220.0" fitWidth="224.0" layoutX="1050.0" layoutY="96.0" opacity="0.3">
             <Image url="@Images/hrc.png" />
-         </image></ImageView>
-      <ImageView fitHeight="477.0" fitWidth="1021.0" layoutX="484.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Schneider_Electric-Logo.wine.png" />
-         </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="767.0" layoutY="515.0" minHeight="50.0" minWidth="400.0" prefHeight="33.0" prefWidth="181.0" promptText="m.schneider@s.electric.dk">
+      <ImageView fitHeight="477.0" fitWidth="1021.0" layoutX="484.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@Images/Schneider_Electric-Logo.wine.png" />
+      </ImageView>
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+    <Text layoutX="971.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RATE CALCULATOR">
+        <font>
+            <Font name="Roboto" size="34.0" />
+        </font>
+    </Text>
+
+    <!-- Username Text -->
+    <Label layoutX="697.0" layoutY="467.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="553.0" text="Username/Email">
+        <font>
+            <Font name="System Italic SemiBold" size="32.0" />
+        </font>
+    </Label>
+
+    <!-- Username Text field -->
+    <TextField fx:id="usernameField" layoutX="750" layoutY="515.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="m.schneider@s.electric.dk">
          <font>
             <Font name="System Italic" size="20.0" />
-         </font></TextField>
-      <PasswordField fx:id="passwordField" layoutX="765.0" layoutY="632.0" minHeight="50.0" minWidth="400.0" prefHeight="300.0" prefWidth="700.0" promptText="********">
-         <font>
-            <Font size="34.0" />
-         </font></PasswordField>
-      <Label layoutX="773.0" layoutY="475.0" text="Username/Email">
-         <font>
-            <Font name="System Italic SemiBold" size="32.0" />
-         </font></Label>
-      <Button accessibleRole="IMAGE_VIEW" layoutX="861.0" layoutY="782.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="71.0" prefWidth="213.0" text="Login">
-         <font>
-            <Font size="32.0" />
          </font>
+      </TextField>
+
+    <!-- Username Image -->
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="705.0" layoutY="521.0">
+        <Image url="@Images/team-28.png" />
+    </ImageView>
+
+    <!-- Password Text -->
+    <Label layoutX="697.0" layoutY="586.0" minHeight="50" minWidth="500" prefHeight="50.0" prefWidth="553.0" text="Password">
+        <font>
+            <Font name="System Italic SemiBold" size="32.0" />
+        </font>
+    </Label>
+
+    <!-- Password Text field -->
+    <PasswordField fx:id="passwordField" layoutX="750" layoutY="632.0" minHeight="50" minWidth="500" prefHeight="50" prefWidth="500" promptText="********">
+        <font>
+            <Font size="34.0" />
+        </font>
+    </PasswordField>
+
+    <!-- Password Image -->
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="698.0" layoutY="638.0">
+        <Image url="@Images/passwordIcon.png" />
+    </ImageView>
+
+    <!-- Login Button -->
+    <Button accessibleRole="IMAGE_VIEW" layoutX="960" layoutY="800" mnemonicParsing="false" onAction="#clickLogin" styleClass="login-btn">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Label layoutX="774.0" layoutY="592.0" prefHeight="25.0" prefWidth="128.0" text="Password">
-         <font>
-            <Font name="System Italic SemiBold" size="32.0" />
-         </font></Label>
-      <ImageView fitHeight="75.0" fitWidth="94.0" layoutX="671.0" layoutY="620.0">
-         <image>
-            <Image url="@Images/Passwordicon.png" />
-         </image>
-      </ImageView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="971.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RATE CALCULATOR">
-         <font>
-            <Font name="Roboto" size="34.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="75.0" fitWidth="85.0" layoutX="676.0" layoutY="503.0">
-         <image>
-            <Image url="@Images/team-28.png" />
-         </image>
-      </ImageView>
-   </children>
+         </cursor>
+      </Button>
 </AnchorPane>

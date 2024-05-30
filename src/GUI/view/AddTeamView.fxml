@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/addTeamView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddTeamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Styles/addTeamView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddTeamController">
    <children>
       <TextField fx:id="teamNameField" layoutX="757.0" layoutY="373.0" prefHeight="50.0" prefWidth="400.0">
          <cursor>
@@ -22,24 +22,24 @@
          <effect>
             <DropShadow radius="4.75" width="0.0" />
          </effect></Button>
-      <Label layoutX="629.0" layoutY="375.0" prefHeight="58.0" prefWidth="113.0" text="Team">
+      <Label layoutX="640.0" layoutY="376.0" prefHeight="58.0" prefWidth="113.0" text="Team">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <ImageView fitHeight="254.0" fitWidth="488.0" layoutX="732.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="254.0" fitWidth="488.0" layoutX="730.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Images/Logo_S_2_.png" />
          <effect>
             <DropShadow height="12.81" radius="6.1975" width="13.98" />
          </effect>
       </ImageView>
-      <ImageView fitHeight="87.0" fitWidth="96.0" layoutX="1156.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="61.0" fitWidth="73.0" layoutX="1169.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Images/team-28.png" />
       </ImageView>
-      <TableView fx:id="employeeTableView" layoutX="637.0" layoutY="494.0" prefHeight="345.0" prefWidth="617.0">
+      <TableView fx:id="employeeTableView" layoutX="541.0" layoutY="494.0" prefHeight="345.0" prefWidth="811.0">
         <columns>
-          <TableColumn fx:id="employeeNameColumn" prefWidth="236.0" text="Employee" />
-          <TableColumn fx:id="employeeHoursColumn" prefWidth="245.0" text="Daily Hours" />
-            <TableColumn fx:id="employeeCostColumn" prefWidth="135.0" text="Cost %" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="394.0" text="Employee" />
+          <TableColumn fx:id="employeeHoursColumn" prefWidth="249.0" text="Daily Hours" />
+            <TableColumn fx:id="employeeCostColumn" prefWidth="167.0" text="Cost %" />
         </columns>
       </TableView>
    </children>
